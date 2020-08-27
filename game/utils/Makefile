@@ -5,51 +5,46 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/08/27 18:17:36 by nelisabe         ###   ########.fr        #
+#    Created: 2020/08/25 13:56:56 by nelisabe          #+#    #+#              #
+#    Updated: 2020/08/27 18:03:35 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
+NAME = libutils.a
 
-COMP = gcc
+COMP = clang
+
+HEADER = ./get_next_line/get_next_line.h
 
 FLAGS = -Wall -Wextra -Werror
 
-HEADER = 			cub3D.h
+SRC =	get_next_line.c \
+		get_next_line_utils.c
 
-PARS_HEADER = 		parser.h
+SRCDIR = get_next_line/
 
-SRC =				cub3D.c
+OBJDIR = ../temp/get_next_line/
 
-SRC_DIR =			game/core/
-
-PARS_SRC =			parser.c \
-					parser_utils\params.c
-
-PARS_DIR =			game/parser/
-
-OBJ_DIR =			game/temp/game/
-
-OBJ =				$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-
-PARS_OBJ =			$(addprefix $(OBJ_DIR), $(PARS_SRC:.c=.o))
-
-LIBUTILS =			game/utils/libutils.a
+OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
-	$(COMP) main.c $(LIBUTILS) $(OBJ) $(PARS_OBJ) -o $@
+	@cd ./libft && make
+	@cp ./libft/libft.a $(NAME)
+	@ar -rcs $(NAME) $(OBJ)
 
-$(addprefix $(OBJ_DIR), %.o): %.c
-
-
-%.o: %.c
-
+$(addprefix $(OBJDIR), %.o): $(addprefix $(SRCDIR), %.c)
+	@$(COMP) $(FLAGS) -c $< -o $@
 
 clean:
+	@rm -rf $(OBJ)
+	@cd libft && make clean
 
 fclean: clean
+	@rm -rf $(NAME)
+	@cd libft && make fclean
 
 re: fclean all
+
+.PHONY: all, re, clean, fclean

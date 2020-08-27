@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
+#    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/20 23:10:45 by nelisabe          #+#    #+#              #
-#    Updated: 2020/05/24 20:58:27 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/08/27 16:57:01 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,11 @@ SRC =	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 BNSRC = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 		ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c
 
-OBJECTS = $(SRC:.c=.o)
+OBJDIR = ../../temp/libft/
 
-BNSRCOBJ = $(BNSRC:.c=.o)
+OBJECTS = $(addprefix $(OBJDIR), $(SRC:.c=.o))
+
+BNSRCOBJ = $(addprefix $(OBJDIR), $(BNSRC:.c=.o))
 
 ifdef ADD_BONUS
 OBJECTS += $(BNSRCOBJ)
@@ -46,11 +48,11 @@ $(NAME): $(OBJECTS) $(HEADER)
 bonus:
 	@$(MAKE) ADD_BONUS=1 all
 
-%.o: %.c
+$(addprefix $(OBJDIR), %.o): %.c
 	@gcc $(FLAGS) -c $< -o $@
 
 clean:
-	@/bin/rm -f *.o
+	@/bin/rm -f $(OBJECTS)
 
 fclean: clean
 	@/bin/rm -f $(NAME)

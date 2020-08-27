@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 13:51:15 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/07/06 20:32:58 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:43:01 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+size_t	ft_strlen_m(const char *str)
 {
 	unsigned long int index;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (index);
 }
 
-char	*ft_strchr(const char *str_in, int symbol)
+char	*ft_strchr_m(const char *str_in, int symbol)
 {
 	size_t	index;
 	char	*str;
@@ -37,7 +37,7 @@ char	*ft_strchr(const char *str_in, int symbol)
 	return (NULL);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup_m(const char *str)
 {
 	char	*pointer;
 	long	index;
@@ -54,7 +54,7 @@ char	*ft_strdup(const char *str)
 	return (pointer);
 }
 
-size_t	ft_strcpy(char *dst, const char *src)
+size_t	ft_strcpy_m(char *dst, const char *src)
 {
 	size_t index;
 
@@ -71,7 +71,7 @@ size_t	ft_strcpy(char *dst, const char *src)
 	return (index);
 }
 
-char	*ft_strjoin(char *str1, char *str2)
+char	*ft_strjoin_m(char *str1, char *str2)
 {
 	unsigned long	len_joinstr;
 	char			*joinstr;
@@ -82,7 +82,7 @@ char	*ft_strjoin(char *str1, char *str2)
 	sindex = 0;
 	if (!(str1 && str2))
 		return (NULL);
-	len_joinstr = ft_strlen(str1) + ft_strlen(str2);
+	len_joinstr = ft_strlen_m(str1) + ft_strlen_m(str2);
 	if (!(joinstr = (char*)malloc(sizeof(char) * (len_joinstr + 1))))
 		return (NULL);
 	while (str1[index] != '\0')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/04 13:51:02 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/07/07 11:02:15 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/08/26 16:45:46 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	swap_mem(char **line, char *temp)
 	char *swap;
 
 	swap = *line;
-	if (!(*line = ft_strjoin(*line, temp)))
+	if (!(*line = ft_strjoin_m(*line, temp)))
 	{
 		free(swap);
 		return (1);
@@ -28,7 +28,7 @@ static int	swap_mem(char **line, char *temp)
 
 static int	clr_mem(char **memory, int mod, int bytes)
 {
-	if (mod == 1 && *memory && !ft_strlen(*memory))
+	if (mod == 1 && *memory && !ft_strlen_m(*memory))
 	{
 		free(*memory);
 		*memory = NULL;
@@ -53,23 +53,23 @@ static int	clr_mem(char **memory, int mod, int bytes)
 static int	chk_buffer(char **line, char **buffer, char **sl_n)
 {
 	*sl_n = NULL;
-	if (*buffer && ft_strlen(*buffer))
-		if ((*sl_n = ft_strchr(*buffer, '\n')))
+	if (*buffer && ft_strlen_m(*buffer))
+		if ((*sl_n = ft_strchr_m(*buffer, '\n')))
 		{
 			**sl_n = '\0';
-			if (!(*line = ft_strdup(*buffer)))
+			if (!(*line = ft_strdup_m(*buffer)))
 				return (clr_mem(buffer, 3, 0));
-			ft_strcpy(*buffer, ++(*sl_n));
+			ft_strcpy_m(*buffer, ++(*sl_n));
 		}
 		else
 		{
-			if (!(*line = ft_strdup(*buffer)))
+			if (!(*line = ft_strdup_m(*buffer)))
 				return (clr_mem(buffer, 3, 0));
 			(*buffer)[0] = '\0';
 		}
 	else
 	{
-		if (!(*line = ft_strdup("")))
+		if (!(*line = ft_strdup_m("")))
 			return (clr_mem(buffer, 3, 0));
 	}
 	clr_mem(buffer, 1, 0);
@@ -93,10 +93,10 @@ int			get_next_line(int fd, char **line)
 		if (clr_mem(line, 2, bytes_read))
 			return (clr_mem(&buffer, 3, 0));
 		temp[bytes_read] = '\0';
-		if ((sl_n = ft_strchr(temp, '\n')))
+		if ((sl_n = ft_strchr_m(temp, '\n')))
 		{
 			*sl_n++ = '\0';
-			if (clr_mem(&buffer, 3, 0) == -1 && !(buffer = ft_strdup(sl_n)))
+			if (clr_mem(&buffer, 3, 0) == -1 && !(buffer = ft_strdup_m(sl_n)))
 				return (-1);
 		}
 		if (swap_mem(line, temp))
