@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/08/27 18:17:36 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/08/27 20:57:10 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ PARS_SRC =			parser.c \
 
 PARS_DIR =			game/parser/
 
-OBJ_DIR =			game/temp/game/
+OBJ_CORE_DIR =		game/temp/game/core
+
+OBJ_PARS_DIR =		gmae/temp/dame/parser
 
 OBJ =				$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
@@ -39,17 +41,22 @@ LIBUTILS =			game/utils/libutils.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
+$(NAME): $(OBJ) $(PARS_OBJ) $(HEADER)
 	$(COMP) main.c $(LIBUTILS) $(OBJ) $(PARS_OBJ) -o $@
 
-$(addprefix $(OBJ_DIR), %.o): %.c
+$(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(SRC_DIR), %.c)
+	$(COMP) -c $< -o $@
 
-
-%.o: %.c
-
+$(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c)
+	$(COMP) -c $< -o $@
 
 clean:
+	rm -rf $(OBJ_CORE_DIR)
+	rm -rf $(OBJ_PARS_DIR)
+	cd game/utils && make clean
 
 fclean: clean
+	rm -rf $(NAME)
+	cd game/utils && make fclean
 
 re: fclean all
