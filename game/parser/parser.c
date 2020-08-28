@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/08/26 16:37:44 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/08/27 21:04:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				parser(char *path, t_pars *params)
 	{
 		if (error == -1)
 			return (1);
-		get_pars(line, &params);
+		get_pars(line, params);
 		free(line);
 	}
 	free (line);

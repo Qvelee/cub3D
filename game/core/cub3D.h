@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 14:04:44 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/08/26 14:29:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/08/27 21:07:56 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "../utils/libft/libft.h"
 #include "../utils/get_next_line/get_next_line.h"
+#include <fcntl.h>
 
 typedef	struct	s_pars
 {
@@ -35,6 +36,7 @@ typedef	struct	s_map
 	struct s_map	*next;
 }				t_map;
 
+int 	cud3D(char *path);
 int		parser(char *path, t_pars *params);
 
 #endif
