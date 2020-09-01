@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/01 11:54:04 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/01 16:08:48 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ CORE_SRC =			cub3D.c
 
 PARS_SRC =			parser.c
 
-PARS_UTIL_SRC =		params.c
+PARS_UTIL_SRC =		params.c \
+					map_solve.c
 
 CORE_SRC_DIR =		game/core/
 
@@ -52,26 +53,26 @@ all: $(NAME)
 
 #add flags!
 $(NAME): $(HEADER) $(OBJ) $(PARS_OBJ) $(PARS_UTIL_OBJ)
-	cd game/utils/ && make
-	$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
+	@cd game/utils/ && make
+	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c)
-	$(COMP) -c $< -o $@
+	@$(COMP) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c)
-	$(COMP) -c $< -o $@
+	@$(COMP) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_UTIL_DIR), %.o): $(addprefix $(PARS_UTIL_DIR), %.c)
-	$(COMP) -c $< -o $@
+	@$(COMP) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ)
-	rm -rf $(PARS_OBJ)
-	rm -rf $(PARS_UTIL_OBJ)
-	cd game/utils/ && make clean
+	@rm -rf $(OBJ)
+	@rm -rf $(PARS_OBJ)
+	@rm -rf $(PARS_UTIL_OBJ)
+	@cd game/utils/ && make clean
 
 fclean: clean
-	rm -rf $(NAME)
-	cd game/utils/ && make fclean
+	@rm -rf $(NAME)
+	@cd game/utils/ && make fclean
 
 re: fclean all

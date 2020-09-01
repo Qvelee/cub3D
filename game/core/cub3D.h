@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 14:04:44 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/01 13:45:05 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/01 16:19:40 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef	struct	s_pars
 	char	*s;
 	int		f[3];
 	int		c[3];
-	char	*map;
+	char	**map;
 }				t_pars;
 
 typedef	struct	s_map
@@ -40,5 +40,6 @@ typedef	struct	s_map
 
 int 	cub3d(char *path);
 int		parser(char *path, t_pars *params);
+int		map_solve(int fd, char *last_line, t_pars *params);
 
 #endif

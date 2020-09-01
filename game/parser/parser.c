@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/01 14:03:15 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/01 16:19:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int parser(char *path, t_pars *params)
 	{
 		if (error == -1)
 			return (1);
-		if (get_pars(line, params) == 2)
-			map_solve(fd, line);
-		else
-			printf("error in params file\n");
+		if (!get_pars(line, params))
+			return (2);
+		if (!map_solve(fd, line, params))
+			return (3);
 		free(line);
 	}
 	print_struct(params);
