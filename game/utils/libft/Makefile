@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/20 23:10:45 by nelisabe          #+#    #+#              #
-#    Updated: 2020/08/27 16:57:01 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/01 10:49:39 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJECTS) $(HEADER)
-	@ar rc $(NAME) $(OBJECTS)
+	@ar rc $(NAME) $(HEADER) $(OBJECTS)
 	@ar -s $(NAME)
 
 bonus:

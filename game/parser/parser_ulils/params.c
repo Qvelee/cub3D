@@ -6,10 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:24:55 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/08/26 16:29:29 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/08/29 17:43:18 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//#include "../parser.h"
 #include "../../core/cub3D.h"
 
 //add correct input check (no simbols, no alnums)

@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 13:56:56 by nelisabe          #+#    #+#              #
-#    Updated: 2020/08/27 18:03:35 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/01 10:49:33 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ COMP = clang
 
 HEADER = ./get_next_line/get_next_line.h
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fPIC
 
 SRC =	get_next_line.c \
 		get_next_line_utils.c
@@ -32,7 +32,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(HEADER)
 	@cd ./libft && make
 	@cp ./libft/libft.a $(NAME)
-	@ar -rcs $(NAME) $(OBJ)
+	@ar -rcs $(NAME) $(HEADER) $(OBJ)
 
 $(addprefix $(OBJDIR), %.o): $(addprefix $(SRCDIR), %.c)
 	@$(COMP) $(FLAGS) -c $< -o $@

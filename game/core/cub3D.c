@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 14:02:27 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/08/26 16:35:25 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/01 11:58:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int 	cud3D(char *path)
+int 	cub3d(char *path)
 {
 	t_pars params;
 
