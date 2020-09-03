@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/02 16:59:16 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:39:57 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int			parser(char *path, t_pars *params)
 	int temp;
 	char *line;
 
-	fd = open(path, O_RDONLY);
+	if ((fd = open(path, O_RDONLY)) == -1)
+		perror("cub3D");
 	line = NULL;
 	while ((temp = get_next_line(fd, &line)))
 	{

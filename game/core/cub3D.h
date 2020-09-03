@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 14:04:44 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/02 11:51:25 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:38:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
 
 typedef	struct	s_pars
 {

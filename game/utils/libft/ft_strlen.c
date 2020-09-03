@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/12 12:32:52 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/05/20 14:41:58 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/03 14:17:57 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ size_t	ft_strlen(const char *str)
 	unsigned long int index;
 
 	index = 0;
-	while (str[index] != '\0')
-		index++;
+	if (str)
+		while (str[index] != '\0')
+			index++;
 	return (index);
 }

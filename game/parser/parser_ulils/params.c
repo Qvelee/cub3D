@@ -6,12 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:24:55 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/08/29 17:43:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/02 21:13:28 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../parser.h"
-#include "../../core/cub3D.h"
+#include "../parser.h"
 
 //add correct input check (no simbols, no alnums)
 //add mallocs protect and error managment

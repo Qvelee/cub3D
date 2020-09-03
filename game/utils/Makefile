@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 13:56:56 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/02 11:56:51 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 14:07:38 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,10 @@ OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
+libcomp:
 	@cd ./libft && make bonus
+
+$(NAME): libcomp $(OBJ) $(HEADER)
 	@cp ./libft/libft.a $(NAME)
 	@ar -rcs $(NAME) $(HEADER) $(OBJ)
 

@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/02 11:56:40 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 15:19:49 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,10 @@ MAIN =				game/main.c
 all: $(NAME)
 
 #add flags!
+
+test:
+	@echo mem;
+
 $(NAME): $(HEADER) $(OBJ) $(PARS_OBJ) $(PARS_UTIL_OBJ)
 	@cd game/utils/ && make
 	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
