@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 13:56:56 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 14:07:38 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 16:06:58 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,22 +30,22 @@ OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 all: $(NAME)
 
 libcomp:
-	@cd ./libft && make bonus
+	@$(MAKE) bonus -C ./libft
 
-$(NAME): libcomp $(OBJ) $(HEADER)
+$(NAME): $(HEADER) libcomp $(OBJ)
 	@cp ./libft/libft.a $(NAME)
-	@ar -rcs $(NAME) $(HEADER) $(OBJ)
+	@ar -rcs $(NAME) $(OBJ)
 
 $(addprefix $(OBJDIR), %.o): $(addprefix $(SRCDIR), %.c)
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ)
-	@cd libft && make clean
+	@$(MAKE) clean -C ./libft
 
 fclean: clean
 	@rm -rf $(NAME)
-	@cd libft && make fclean
+	@$(MAKE) fclean -C ./libft
 
 re: fclean all
 

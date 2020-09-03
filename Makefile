@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 15:19:49 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 16:14:27 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,15 +49,13 @@ LIBUTILS =			-Lgame/utils/ -lutils
 
 MAIN =				game/main.c
 
-all: $(NAME)
+all: lib $(NAME)
 
 #add flags!
-
-test:
-	@echo mem;
+lib:
+	@$(MAKE) -C game/utils/
 
 $(NAME): $(HEADER) $(OBJ) $(PARS_OBJ) $(PARS_UTIL_OBJ)
-	@cd game/utils/ && make
 	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c)
@@ -73,10 +71,10 @@ clean:
 	@rm -rf $(OBJ)
 	@rm -rf $(PARS_OBJ)
 	@rm -rf $(PARS_UTIL_OBJ)
-	@cd game/utils/ && make clean
+	@$(MAKE) clean -C game/utils/
 
 fclean: clean
 	@rm -rf $(NAME)
-	@cd game/utils/ && make fclean
+	@$(MAKE) fclean -C game/utils/
 
 re: fclean all

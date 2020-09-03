@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/20 23:10:45 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 15:28:31 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 15:57:23 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,15 +41,15 @@ endif
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(HEADER)
-	@ar rc $(NAME) $(HEADER) $(OBJECTS)
+$(NAME): $(HEADER) $(OBJECTS)
+	@ar rc $(NAME) $(OBJECTS)
 	@ar -s $(NAME)
 
 bonus:
 	@$(MAKE) ADD_BONUS=1 all
 
 $(addprefix $(OBJDIR), %.o): %.c
-	@gcc $(FLAGS) -c $< -o $@
+	@clang $(FLAGS) -c $< -o $@
 
 clean:
 	@/bin/rm -f $(OBJECTS) $(BNSRCOBJ)
