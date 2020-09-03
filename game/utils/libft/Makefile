@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/20 23:10:45 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/01 10:49:39 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 15:28:31 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ $(addprefix $(OBJDIR), %.o): %.c
 	@gcc $(FLAGS) -c $< -o $@
 
 clean:
-	@/bin/rm -f $(OBJECTS)
+	@/bin/rm -f $(OBJECTS) $(BNSRCOBJ)
 
 fclean: clean
 	@/bin/rm -f $(NAME)
