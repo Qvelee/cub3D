@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 14:04:44 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/03 15:53:05 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/03 19:31:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ typedef	struct	s_pars
 
 int 	cub3d(char *path);
 int		parser(char *path, t_pars *params);
-int		map_solve(int fd, char *last_line, t_pars *params);
+int		free_struct(t_pars *params);
 
 #endif

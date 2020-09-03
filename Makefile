@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 16:14:27 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/03 20:16:39 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,9 @@ CORE_SRC =			cub3D.c
 PARS_SRC =			parser.c
 
 PARS_UTIL_SRC =		params.c \
-					map_solve.c
+					map_solve.c \
+					errors_managment.c \
+					errors_managment_2.c
 
 CORE_SRC_DIR =		game/core/
 
@@ -55,7 +57,7 @@ all: lib $(NAME)
 lib:
 	@$(MAKE) -C game/utils/
 
-$(NAME): $(HEADER) $(OBJ) $(PARS_OBJ) $(PARS_UTIL_OBJ)
+$(NAME): $(HEADER) $(OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
 	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c)

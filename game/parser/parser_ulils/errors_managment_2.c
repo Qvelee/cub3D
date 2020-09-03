@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.c                                            :+:      :+:    :+:   */
+/*   errors_managment_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 14:02:27 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/03 19:34:32 by nelisabe         ###   ########.fr       */
+/*   Created: 2020/09/03 20:16:15 by nelisabe          #+#    #+#             */
+/*   Updated: 2020/09/03 20:38:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../parser.h"
 
-int 	cub3d(char *path)
+int		error_color_par_not_correct(char *line, t_pars *params)
 {
-	t_pars params;
+	free_struct(params);
+	ft_putstr_fd("cub3D: This line \"", 1);
+	ft_putstr_fd(line, 1);
+	ft_putendl_fd("\" is not correct", 1);
+	return (0);
+}
 
-	parser(path, &params);
+int		error_r_par_not_correct(char *line)
+{
+	ft_putstr_fd("cub3D: This line \"", 1);
+	ft_putstr_fd(line, 1);
+	ft_putendl_fd("\" is not correct", 1);
 	return (0);
 }

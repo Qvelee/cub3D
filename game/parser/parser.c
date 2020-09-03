@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/03 14:39:57 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/03 19:47:59 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,17 @@ static void print_struct(t_pars *params)
 		printf("%s\n", params->map[index]);
 }
 
+static void	init(char **line, t_pars *params)
+{
+	*line = NULL;
+	params->no = NULL;
+	params->so = NULL;
+	params->we = NULL;
+	params->ea = NULL;
+	params->s = NULL;
+	params->map = NULL;
+}
+
 static int get_pars(char *line, t_pars *params)
 {
 	const char *vpars[8] = {"R ", "NO ", "SO ", "WE ", "EA ", "S ", "F ", "C "};
@@ -37,9 +48,11 @@ static int get_pars(char *line, t_pars *params)
 	while (++index < 8)
 		if (ft_strnstr(line, vpars[index], 3))
 			return (upd_pars(index, ft_strchr(line, ' ') + 1, params));
-	if (*line == '1' || *line == ' ' || *line == '0' || *line == '\0')
+	if (*line == '\0')
+		return (1);
+	if (*line == '1' || *line == ' ')
 		return (2);
-	return (0);
+	return (error_invalid_params(params));
 }
 
 int			parser(char *path, t_pars *params)
@@ -50,14 +63,14 @@ int			parser(char *path, t_pars *params)
 
 	if ((fd = open(path, O_RDONLY)) == -1)
 		perror("cub3D");
-	line = NULL;
+	init(&line, params);
 	while ((temp = get_next_line(fd, &line)))
 	{
 		if (temp == -1)
-			return (1);
+			return (error_reading_file(&line, fd, params));
 		if (!(temp = get_pars(line, params)))
-			return (2);
-		else if (temp == 2)
+			return (error_get_pars(&line, fd));
+		if (temp == 2)
 			if (!map_solve(fd, line, params))
 				return (3);
 		free(line);
