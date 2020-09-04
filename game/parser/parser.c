@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/03 19:47:59 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 15:42:14 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int			parser(char *path, t_pars *params)
 	while ((temp = get_next_line(fd, &line)))
 	{
 		if (temp == -1)
-			return (error_reading_file(&line, fd, params));
+			return (error_read_file_pars(fd, params));
 		if (!(temp = get_pars(line, params)))
 			return (error_get_pars(&line, fd));
 		if (temp == 2)
-			if (!map_solve(fd, line, params))
-				return (3);
+			if (!(temp = get_map(fd, line, params)) || temp == -1)
+				return (error_get_map(&line, fd, temp));
 		free(line);
 	}
 	print_struct(params);

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 16:04:42 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/03 14:18:29 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 16:23:47 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,20 @@ static	int		is_valid_map(char **map)
 	return (1);
 }
 
-static	int		lst_to_matrix(t_pars *params, t_list *map)
+static	int		lst_to_matrix(t_pars *params, t_list **map)
 {
 	int index;
 	int size;
 
 	index = -1;
-	size = ft_lstsize(map);
-	params->map=(char**)malloc(sizeof(char*) * (size + 1));
+	size = ft_lstsize(*map);
+	if (!(params->map = (char**)malloc(sizeof(char*) * (size + 1))))
+		return (!error_malloc_ltm_map(map));
 	while (++index < size)
 	{
-		params->map[index] = ft_strdup(map->content);
-		map = map->next;
+		if (!(params->map[index] = ft_strdup((*map)->content)))
+			return (0);
+		(*map) = (*map)->next;
 	}
 	params->map[index] = NULL;
 	return (0);
@@ -84,28 +86,48 @@ static	int		lst_to_matrix(t_pars *params, t_list *map)
 
 static	int		get_lines(int fd, char *last_line, t_list **map)
 {
+	t_list	*tmplst;
+	char	*tmplastl;
+	char	*tmpdup;
 	char	*line;
 	int		temp;
 
-	*map = ft_lstnew(last_line);
+	if (!(tmplastl = ft_strdup(last_line)))
+		return (!error_malloc_tmplastl());
+	if (!(*map = ft_lstnew(tmplastl)))
+		return (!error_malloc_map(&tmplastl));
 	while ((temp = get_next_line(fd, &line)))
 	{
-		if (temp == -1)	
-			return (1);
-		ft_lstadd_back(map, ft_lstnew(ft_strdup(line)));
+		if (temp == -1)
+			return (error_read_file_get_lines(fd, map));
+		if (!(tmpdup = ft_strdup(line)))
+			return (!error_malloc_tmpdup(&line, map));
+		if (!(tmplst = ft_lstnew(tmpdup)))
+			return (!error_malloc_tmplst(&line, &tmpdup, map));
+		ft_lstadd_back(map, tmplst);
 		free(line);
 	}
 	free(line);
 	return (0);
 }
 
-int				map_solve(int fd, char *last_line, t_pars *params)
+int				get_map(int fd, char *last_line, t_pars *params)
 {
 	int		error;
 	t_list	*map;
 
-	get_lines(fd, last_line, &map);
-	lst_to_matrix(params, map);
+	if ((error = get_lines(fd, last_line, &map)))
+	{
+		if (error == 1)
+			return (error_get_lines(params));
+		if (error == -1)
+		{
+			error_get_lines(params);
+			return (error);
+		}
+	}
+	if (lst_to_matrix(params, &map))
+		return (error_get_lines(params));
 	if (is_valid_map(params->map))
 		printf("valid map\n");
 	else

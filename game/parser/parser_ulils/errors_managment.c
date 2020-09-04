@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:25:21 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/03 20:37:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 15:28:45 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ int		error_invalid_params(t_pars *params)
 	return (0);
 }
 
-int		error_reading_file(char **line, int fd, t_pars *params)
+int		error_read_file_pars(int fd, t_pars *params)
 {
-	free(*line);
 	close(fd);
 	free_struct(params);
 	ft_putendl_fd("cub3D: Error while reading from file", 1);

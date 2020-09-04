@@ -18,9 +18,9 @@ S ./path_to_the_sprite_texture
 
 
 
-F200,100,0
+F 200,100,0
 
-C 225300
+C 225,30,0
 
 
 
