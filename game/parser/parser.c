@@ -6,27 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 15:42:14 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 19:09:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-
-static void print_struct(t_pars *params)
-{
-	int index;
-
-	printf("resolution - %4d %4d\n", params->r[0], params->r[1]);
-	printf("north - %20s\n", params->no);
-	printf("south - %20s\n", params->so);
-	printf("west  - %20s\n", params->we);
-	printf("east  - %20s\n", params->ea);
-	printf("floor - %d,%d,%d\n", params->f[0], params->f[1], params->f[2]);
-	printf("ceiling - %d,%d,%d\n", params->c[0], params->c[1], params->c[2]);
-	index = -1;
-	while (params->map[++index])
-		printf("%s\n", params->map[index]);
-}
 
 static void	init(char **line, t_pars *params)
 {
@@ -37,6 +21,8 @@ static void	init(char **line, t_pars *params)
 	params->ea = NULL;
 	params->s = NULL;
 	params->map = NULL;
+	params->f[0] = 666;
+	params->c[0] = 666;
 }
 
 static int get_pars(char *line, t_pars *params)
@@ -67,15 +53,14 @@ int			parser(char *path, t_pars *params)
 	while ((temp = get_next_line(fd, &line)))
 	{
 		if (temp == -1)
-			return (error_read_file_pars(fd, params));
+			return (!error_read_file_pars(fd, params));
 		if (!(temp = get_pars(line, params)))
-			return (error_get_pars(&line, fd));
+			return (!error_get_pars(&line, fd));
 		if (temp == 2)
 			if (!(temp = get_map(fd, line, params)) || temp == -1)
-				return (error_get_map(&line, fd, temp));
+				return (!error_get_map(&line, fd, temp));
 		free(line);
 	}
-	print_struct(params);
 	free(line);
 	close(fd);
 	return (0);

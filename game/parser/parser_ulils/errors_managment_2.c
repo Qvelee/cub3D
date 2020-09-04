@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 20:16:15 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 16:21:30 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 20:23:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,51 @@ int		error_r_par_not_correct(char *line)
 	ft_putstr_fd("cub3D: This line \"", 1);
 	ft_putstr_fd(line, 1);
 	ft_putendl_fd("\" is not correct", 1);
+	return (0);
+}
+
+int		check_color_valid(t_pars *params, int type)
+{
+	if (type == 6 && \
+		(params->f[0] > 255 || params->f[1] > 255 || params->f[2] > 255))
+	{
+		free_struct(params);
+		ft_putendl_fd("cub3D: Floor color not valid", 1);
+		return (1);
+	}
+	if (type == 7 && \
+		(params->c[0] > 255 || params->c[1] > 255 || params->c[2] > 255))
+	{
+		free_struct(params);
+		ft_putendl_fd("cub3D: Ceiling color not valid", 1);
+		return (1);
+	}
+	return (0);
+}
+
+int		error_not_valid_map(t_pars *params)
+{
+	int		index;
+	
+	index = -1;
+	free_struct(params);
+	while (params->map[++index])
+		free(params->map[index]);
+	free(params->map);
+	ft_putendl_fd("cub3D: Invalid map", 1);
+	return (0);
+}
+
+int		error_malloc_ltm_mindex(t_list **map, t_pars *params)
+{
+	int		index;
+	
+	index = -1;
+	ft_lstclear(map, free);
+	while (params->map[++index])
+		free(params->map[index]);
+	free(params->map);
+	ft_putendl_fd("cub3D: Memory allocation fail", 1);
 	return (0);
 }
 

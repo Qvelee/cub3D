@@ -2,32 +2,21 @@ R 1920 1080
 
 NO ./path_to_the_north_texture
 
-
 SO ./path_to_the_south_texture
 
-
-
 WE ./path_to_the_west_texture
-
-
-
 
 EA ./path_to_the_east_texture
 
 S ./path_to_the_sprite_texture
 
+F 20,100,0
 
-
-F 200,100,0
-
-C 225,30,0
-
-
-
+C 22,30,0
 
 
 1111111
-1000001
-1N01001
-101 101
+1000011
+1001001
+101 1E1
 1111111

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 18:25:21 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 15:28:45 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 18:45:13 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ int		error_get_pars(char **line, int fd)
 	return (0);
 }
 
-int		error_nswes_malloc(t_pars *params)
+int		error_nswes_malloc(t_pars *params, int error)
 {
 	free_struct(params);
-	ft_putendl_fd("cub3D: Memory allocation fail", 1);
+	if (!error)
+		ft_putendl_fd("cub3D: Memory allocation fail", 1);
+	else
+		ft_putendl_fd("cub3D: Too many parameters", 1);
 	return (0);
 }

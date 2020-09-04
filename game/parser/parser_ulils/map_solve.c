@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 16:04:42 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 16:23:47 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/04 20:48:00 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static	int		is_valid_map(char **map)
 			{
 				if (!check(map[index], sindex, 1))
 					return (0);
+				if (!(index && map[index + 1]))
+					return (0);
 				if ((index && map[index + 1]) && \
 					(!check(map[index - 1], sindex, 2) || \
 					!check(map[index + 1], sindex, 2)))
@@ -67,20 +69,23 @@ static	int		is_valid_map(char **map)
 
 static	int		lst_to_matrix(t_pars *params, t_list **map)
 {
-	int index;
-	int size;
+	t_list	*lst_to_free;
+	int 	index;
+	int 	size;
 
 	index = -1;
+	lst_to_free = *map;
 	size = ft_lstsize(*map);
 	if (!(params->map = (char**)malloc(sizeof(char*) * (size + 1))))
 		return (!error_malloc_ltm_map(map));
 	while (++index < size)
 	{
 		if (!(params->map[index] = ft_strdup((*map)->content)))
-			return (0);
+			return (!error_malloc_ltm_mindex(map, params));
 		(*map) = (*map)->next;
 	}
 	params->map[index] = NULL;
+	ft_lstclear(&lst_to_free, free);
 	return (0);
 }
 
@@ -128,9 +133,7 @@ int				get_map(int fd, char *last_line, t_pars *params)
 	}
 	if (lst_to_matrix(params, &map))
 		return (error_get_lines(params));
-	if (is_valid_map(params->map))
-		printf("valid map\n");
-	else
-		printf("not valid map\n");
+	if (!is_valid_map(params->map))
+		return (error_not_valid_map(params));
 	return (1);
 }
