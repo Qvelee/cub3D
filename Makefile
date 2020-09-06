@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/06 18:34:02 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/06 19:02:08 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ COMP =				clang
 
 FLAGS =				-Wall -Wextra -Werror
 
-HEADER = 			game/core/cub3D.h
+HEADER = 			game/core/cub3d.h
 
 PARS_HEADER = 		parser.h
 
@@ -32,7 +32,7 @@ PARS_ERRORS_DIR =	game/parser/errors_managment/
 
 #SRC
 
-CORE_SRC =			cub3D.c
+CORE_SRC =			cub3d.c
 
 PARS_SRC =			parser.c
 

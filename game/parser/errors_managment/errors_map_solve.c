@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:42:25 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 14:56:32 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:15:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		error_malloc_tmplastl(void)
 int		error_not_valid_map(t_pars *params)
 {
 	int		index;
-	
+
 	index = -1;
 	free_struct(params);
 	while (params->map[++index])

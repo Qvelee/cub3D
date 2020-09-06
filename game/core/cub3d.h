@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 14:04:44 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 17:02:29 by nelisabe         ###   ########.fr       */
+/*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
+/*   Updated: 2020/09/06 19:05:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "../utils/libft/libft.h"
-#include "../utils/get_next_line/get_next_line.h"
-#include <fcntl.h>
-#include <string.h>
-#include <stdio.h>
-#include <errno.h>
+# include "../utils/libft/libft.h"
+# include "../utils/get_next_line/get_next_line.h"
+# include <fcntl.h>
+# include <string.h>
+# include <stdio.h>
+# include <errno.h>
 
 typedef	struct	s_pars
 {
@@ -33,7 +33,7 @@ typedef	struct	s_pars
 	char	**map;
 }				t_pars;
 
-int 	cub3d(char *path);
-int		parser(char *path, t_pars *params);
+int				cub3d(char *path);
+int				parser(char *path, t_pars *params);
 
 #endif

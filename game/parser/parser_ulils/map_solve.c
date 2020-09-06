@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 16:04:42 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 17:53:32 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:13:53 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ static	int		check(char *line, int pos, int mod)
 {
 	static int	player;
 	const int	len = ft_strlen(line);
-	
+
 	if (mod == 1)
-		if (pos >= len - 1 || pos == 0 || line[pos - 1] == ' ' || line[pos + 1] == ' ')
+		if (pos >= len - 1 || pos == 0 || \
+			line[pos - 1] == ' ' || line[pos + 1] == ' ')
 			return (0);
 	if (mod == 2)
 		if (pos >= len || line[pos] == ' ')
@@ -28,7 +29,7 @@ static	int		check(char *line, int pos, int mod)
 		{
 			if ((line[pos] == 'N' || line[pos] == 'S' || line[pos] == 'W' || \
 				line[pos] == 'E') && !player)
-					player = 1;
+				player = 1;
 			else
 				return (0);
 		}
@@ -41,7 +42,7 @@ static	int		check(char *line, int pos, int mod)
 static	int		is_valid_map(char **map)
 {
 	int		index;
-	int 	sindex;
+	int		sindex;
 
 	index = -1;
 	while (map[++index])
@@ -70,8 +71,8 @@ static	int		is_valid_map(char **map)
 static	int		lst_to_matrix(t_pars *params, t_list **map)
 {
 	t_list	*lst_to_free;
-	int 	index;
-	int 	size;
+	int		index;
+	int		size;
 
 	index = -1;
 	lst_to_free = *map;

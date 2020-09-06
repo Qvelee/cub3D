@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 21:07:13 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 18:03:00 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:07:16 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core/cub3D.h"
+#include "core/cub3d.h"
 
 int		main(int argc, char **argv)
 {

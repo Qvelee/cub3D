@@ -6,16 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:24:55 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 18:01:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:14:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
-
-/*
-**fix error when parameter enters second time
-**fix error when int parameter enters second time after other parameters
-*/
 
 static int	check_color_par_correct(char *component)
 {
@@ -120,7 +115,7 @@ static int	nswes_pars(int type, char *component, t_pars *params)
 	return (1);
 }
 
-int		upd_pars(int type, char *component, t_pars *params)
+int			upd_pars(int type, char *component, t_pars *params)
 {
 	static int	resolution;
 	int			temp;

@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 17:58:31 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:10:18 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-static void	init(char **line, t_pars *params)
+static void		init(char **line, t_pars *params)
 {
 	*line = NULL;
 	params->r[0] = 0;
@@ -27,10 +27,11 @@ static void	init(char **line, t_pars *params)
 	params->c[0] = 666;
 }
 
-static int get_pars(char *line, t_pars *params)
+static int		get_pars(char *line, t_pars *params)
 {
-	const char *vpars[8] = {"R ", "NO ", "SO ", "WE ", "EA ", "S ", "F ", "C "};
-	int index;
+	const char	*vpars[8] = {"R ", "NO ", "SO ", \
+				"WE ", "EA ", "S ", "F ", "C "};
+	int			index;
 
 	index = -1;
 	while (++index < 8)
@@ -43,11 +44,11 @@ static int get_pars(char *line, t_pars *params)
 	return (error_invalid_params(params));
 }
 
-int			parser(char *path, t_pars *params)
+int				parser(char *path, t_pars *params)
 {
-	int fd;
-	int temp;
-	char *line;
+	int		fd;
+	int		temp;
+	char	*line;
 
 	if ((fd = open(path, O_RDONLY)) == -1)
 		perror("cub3D");

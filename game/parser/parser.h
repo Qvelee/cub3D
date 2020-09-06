@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:30:20 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 17:05:01 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:07:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "../core/cub3D.h"
+# include "../core/cub3d.h"
 
 int		upd_pars(int type, char *component, t_pars *params);
 int		get_map(int fd, char *last_line, t_pars *params);

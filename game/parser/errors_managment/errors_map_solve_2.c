@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:56:22 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 14:59:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 19:15:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		error_malloc_ltm_mindex(t_list **map, t_pars *params)
 {
 	int		index;
-	
+
 	index = -1;
 	ft_lstclear(map, free);
 	while (params->map[++index])
