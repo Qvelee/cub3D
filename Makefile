@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 20:16:39 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/06 18:34:02 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,7 @@ HEADER = 			game/core/cub3D.h
 
 PARS_HEADER = 		parser.h
 
-CORE_SRC =			cub3D.c
-
-PARS_SRC =			parser.c
-
-PARS_UTIL_SRC =		params.c \
-					map_solve.c \
-					errors_managment.c \
-					errors_managment_2.c
+#SRC DIRS
 
 CORE_SRC_DIR =		game/core/
 
@@ -35,17 +28,44 @@ PARS_DIR =			game/parser/
 
 PARS_UTIL_DIR =		game/parser/parser_ulils/
 
+PARS_ERRORS_DIR =	game/parser/errors_managment/
+
+#SRC
+
+CORE_SRC =			cub3D.c
+
+PARS_SRC =			parser.c
+
+PARS_UTIL_SRC =		params.c \
+					map_solve.c
+
+PARS_ERRORS_SRC =	free_struct.c \
+					errors_parser.c \
+					errors_params.c \
+					errors_map_solve.c \
+					errors_map_solve_2.c
+
+#OBJ DIRS
+
 OBJ_CORE_DIR =		game/temp/game/core/
 
 OBJ_PARS_DIR =		game/temp/game/parser/
 
 OBJ_PARS_UTIL_DIR =	game/temp/game/parser/parser_utils/
 
+OBJ_PARS_ERR_DIR =	game/temp/game/parser/errors_managment/
+
+#OBJ
+
 OBJ =				$(addprefix $(OBJ_CORE_DIR), $(CORE_SRC:.c=.o))
 
 PARS_OBJ =			$(addprefix $(OBJ_PARS_DIR), $(PARS_SRC:.c=.o))
 
 PARS_UTIL_OBJ =		$(addprefix $(OBJ_PARS_UTIL_DIR), $(PARS_UTIL_SRC:.c=.o))
+
+PARS_ERRORS_OBJ =	$(addprefix $(OBJ_PARS_ERR_DIR), $(PARS_ERRORS_SRC:.c=.o))
+
+###
 
 LIBUTILS =			-Lgame/utils/ -lutils
 
@@ -57,7 +77,7 @@ all: lib $(NAME)
 lib:
 	@$(MAKE) -C game/utils/
 
-$(NAME): $(HEADER) $(OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
+$(NAME): $(HEADER) $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
 	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c)
@@ -69,10 +89,14 @@ $(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c)
 $(addprefix $(OBJ_PARS_UTIL_DIR), %.o): $(addprefix $(PARS_UTIL_DIR), %.c)
 	@$(COMP) -c $< -o $@
 
+$(addprefix $(OBJ_PARS_ERR_DIR), %.o): $(addprefix $(PARS_ERRORS_DIR), %.c)
+	@$(COMP) -c $< -o $@
+
 clean:
 	@rm -rf $(OBJ)
 	@rm -rf $(PARS_OBJ)
 	@rm -rf $(PARS_UTIL_OBJ)
+	@rm -rf $(PARS_ERRORS_OBJ)
 	@$(MAKE) clean -C game/utils/
 
 fclean: clean

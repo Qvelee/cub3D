@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:30:20 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 20:15:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 17:05:01 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		error_malloc_ltm_map(t_list **map);
 int		error_malloc_ltm_mindex(t_list **map, t_pars *params);
 int		error_not_valid_map(t_pars *params);
 int		check_color_valid(t_pars *params, int type);
+int		error_in_params(t_pars *params);
 int		free_struct(t_pars *params);
 
 #endif

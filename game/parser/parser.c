@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 19:09:26 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 17:58:31 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	init(char **line, t_pars *params)
 {
 	*line = NULL;
+	params->r[0] = 0;
+	params->r[1] = 0;
 	params->no = NULL;
 	params->so = NULL;
 	params->we = NULL;
@@ -56,9 +58,9 @@ int			parser(char *path, t_pars *params)
 			return (!error_read_file_pars(fd, params));
 		if (!(temp = get_pars(line, params)))
 			return (!error_get_pars(&line, fd));
-		if (temp == 2)
-			if (!(temp = get_map(fd, line, params)) || temp == -1)
-				return (!error_get_map(&line, fd, temp));
+		if (temp == 2 && (error_in_params(params) || \
+			!(temp = get_map(fd, line, params)) || temp == -1))
+			return (!error_get_map(&line, fd, temp));
 		free(line);
 	}
 	free(line);

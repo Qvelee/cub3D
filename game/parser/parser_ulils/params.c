@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:24:55 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 20:21:17 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/06 18:01:39 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,4 @@ int		upd_pars(int type, char *component, t_pars *params)
 	}
 	else
 		return (nswes_pars(type, component, params));
-	return (0);
 }

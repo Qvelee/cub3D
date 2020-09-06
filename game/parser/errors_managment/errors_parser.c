@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors_managment.c                                 :+:      :+:    :+:   */
+/*   errors_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/03 18:25:21 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/04 18:45:13 by nelisabe         ###   ########.fr       */
+/*   Created: 2020/09/06 14:32:37 by nelisabe          #+#    #+#             */
+/*   Updated: 2020/09/06 18:33:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
 
-int		free_struct(t_pars *params)
+int		error_in_params(t_pars *params)
 {
-	free(params->no);
-	free(params->so);
-	free(params->we);
-	free(params->ea);
-	free(params->s);
+	if (params->r[0] == 0 || params->r[1] == 0 || \
+		params->no == NULL || params->so == NULL || params->we == NULL || \
+		params->ea == NULL || params->s == NULL || \
+		params->f[0] == 666 || params->c[0] == 666)
+	{
+		free_struct(params);
+		ft_putendl_fd("cub3D: Not all parameters", 1);
+		return (1);
+	}
 	return (0);
 }
 
@@ -29,11 +33,24 @@ int		error_invalid_params(t_pars *params)
 	return (0);
 }
 
-int		error_read_file_pars(int fd, t_pars *params)
+int		error_get_map(char **line, int fd, int error)
 {
+	int temp;
+
+	if (error == -1)
+	{
+		free(*line);
+		return (0);
+	}
+	free(*line);
+	while ((temp = get_next_line(fd, line)))
+	{
+		if (temp == -1)
+			break ;
+		free(*line);
+	}
+	free(*line);
 	close(fd);
-	free_struct(params);
-	ft_putendl_fd("cub3D: Error while reading from file", 1);
 	return (0);
 }
 
@@ -53,12 +70,10 @@ int		error_get_pars(char **line, int fd)
 	return (0);
 }
 
-int		error_nswes_malloc(t_pars *params, int error)
+int		error_read_file_pars(int fd, t_pars *params)
 {
+	close(fd);
 	free_struct(params);
-	if (!error)
-		ft_putendl_fd("cub3D: Memory allocation fail", 1);
-	else
-		ft_putendl_fd("cub3D: Too many parameters", 1);
+	ft_putendl_fd("cub3D: Error while reading from file", 1);
 	return (0);
 }

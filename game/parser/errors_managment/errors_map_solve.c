@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors_map_solve.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/06 14:42:25 by nelisabe          #+#    #+#             */
+/*   Updated: 2020/09/06 14:56:32 by nelisabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../parser.h"
+
+int		error_read_file_get_lines(int fd, t_list **map)
+{
+	close(fd);
+	ft_lstclear(map, free);
+	ft_putendl_fd("cub3D: Error while reading from file", 1);
+	return (-1);
+}
+
+int		error_malloc_map(char **tmplastl)
+{
+	free(*tmplastl);
+	ft_putendl_fd("cub3D: Memory allocation fail", 1);
+	return (0);
+}
+
+int		error_malloc_tmplastl(void)
+{
+	ft_putendl_fd("cub3D: Memory allocation fail", 1);
+	return (0);
+}
+
+int		error_not_valid_map(t_pars *params)
+{
+	int		index;
+	
+	index = -1;
+	free_struct(params);
+	while (params->map[++index])
+		free(params->map[index]);
+	free(params->map);
+	ft_putendl_fd("cub3D: Invalid map", 1);
+	return (0);
+}
+
+int		error_get_lines(t_pars *params)
+{
+	free_struct(params);
+	return (0);
+}
