@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 19:22:54 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/08 16:01:55 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			free_structer(t_pars *params)
+static	int		free_structer(t_pars *params)
 {
 	int index;
 
@@ -28,7 +28,7 @@ int			free_structer(t_pars *params)
 	return (0);
 }
 
-static void	print_struct(t_pars *params)
+static void		print_struct(t_pars *params)
 {
 	int index;
 
@@ -44,13 +44,14 @@ static void	print_struct(t_pars *params)
 		printf("%s\n", params->map[index]);
 }
 
-int			cub3d(char *path)
+int				cub3d(char *path)
 {
 	t_pars params;
 
 	if (parser(path, &params))
 		return (0);
 	print_struct(&params);
+	init_lib(&params);
 	free_structer(&params);
 	return (0);
 }

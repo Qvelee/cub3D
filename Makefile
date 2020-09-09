@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/06 19:02:08 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/08 15:19:42 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ PARS_ERRORS_DIR =	game/parser/errors_managment/
 
 #SRC
 
-CORE_SRC =			cub3d.c
+CORE_SRC =			cub3d.c \
+					minlib.c
 
 PARS_SRC =			parser.c
 
@@ -67,15 +68,18 @@ PARS_ERRORS_OBJ =	$(addprefix $(OBJ_PARS_ERR_DIR), $(PARS_ERRORS_SRC:.c=.o))
 
 ###
 
-LIBUTILS =			-Lgame/utils/ -lutils
+LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -lXext -lX11 -lm
 
 MAIN =				game/main.c
 
-all: lib $(NAME)
+all: libutil minlib $(NAME)
 
 #add flags!
-lib:
+libutil:
 	@$(MAKE) -C game/utils/
+
+minlib:
+	@$(MAKE) -C minilibx/
 
 $(NAME): $(HEADER) $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
 	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
