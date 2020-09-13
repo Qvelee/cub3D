@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 14:02:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/13 15:55:48 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/13 18:18:25 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		draw_map(t_core *game)
 		x = 99;
 	}
 	mlx_put_image_to_window(game->mlx, game->window, game->map.image, 0, 0);
+	mlx_do_sync(game->mlx);
 	return (0);
 }
 
@@ -96,6 +97,7 @@ void	draw_player(t_core *game)
 	game->player.pl_img.img_addr = mlx_get_data_addr(game->player.pl_img.image, &game->player.pl_img.bpp, &game->player.pl_img.size_line, &game->player.pl_img.endian);
 	draw_block(game->player.pl_img, &x, 0, 0x33FFFF);
 	mlx_put_image_to_window(game->mlx, game->window, game->player.pl_img.image, game->player.x, game->player.y);
+	mlx_do_sync(game->mlx);
 }
 
 int		key_hook(int keycode, t_core *game)
@@ -132,6 +134,14 @@ int		key_hook(int keycode, t_core *game)
 		draw_map(game);
 		draw_player(game);
 	}
+	if (keycode == 0xff1b) //esc
+	{
+		mlx_destroy_image(game->mlx, game->map.image);
+		mlx_destroy_image(game->mlx, game->player.pl_img.image);
+		mlx_clear_window(game->mlx, game->window);
+		mlx_destroy_window(game->mlx, game->window);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -145,6 +155,7 @@ int		init_lib(t_pars *pars)
 	draw_map(&game);
 	get_player_pos(&game);
 	draw_player(&game);
+	mlx_do_key_autorepeaton(game.mlx);
 	mlx_key_hook(game.window, key_hook, &game);
 	mlx_loop(game.mlx);
 	return (0);
