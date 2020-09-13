@@ -6,14 +6,21 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 14:02:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/09 17:25:31 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/13 15:55:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	pixel_put(t_img image, int x, int y, int color)
+{
+	char *dst;
+	
+	dst = image.img_addr + (y * image.size_line + x * (image.bpp / 8));
+	*(unsigned int*)dst = color;
+}
 
-int		draw_block(t_mlx *mlx, int *x, int y, int color)
+int		draw_block(t_img image, int *x, int y, int color)
 {
 	int xc;
 	int yc;
@@ -23,13 +30,13 @@ int		draw_block(t_mlx *mlx, int *x, int y, int color)
 	{
 		xc = *x - 1;
 		while (++xc < (*x) + 50)
-			mlx_pixel_put(mlx->mlx_init, mlx->window, xc, yc, color);
+			pixel_put(image, xc, yc, color);
 	}
 	(*x) += 50;
 	return (0);
 }
 
-int		draw_map(t_pars *params, t_mlx *mlx)
+int		draw_map(t_core *game)
 {
 	int index;
 	int sindex;
@@ -39,58 +46,106 @@ int		draw_map(t_pars *params, t_mlx *mlx)
 	index = -1;
 	x = 99;
 	y = 99;
-	while (params->map[++index])
+	game->map.image = mlx_new_image(game->mlx, game->params->r[0], game->params->r[1]);
+	game->map.img_addr = mlx_get_data_addr(game->map.image, &game->map.bpp, &game->map.size_line, &game->map.endian);
+	while (game->params->map[++index])
 	{
 		sindex = -1;
-		while (params->map[index][++sindex] != '\0')
-			if (params->map[index][sindex] == '1')
-				draw_block(mlx, &x, y, 0xBBBBBB);
-			else if (params->map[index][sindex] == ' ')
-				draw_block(mlx, &x, y, 0x002200);
+		while (game->params->map[index][++sindex] != '\0')
+			if (game->params->map[index][sindex] == '1')
+				draw_block(game->map, &x, y, 0xBBBBBB);
+			else if (game->params->map[index][sindex] == ' ')
+				draw_block(game->map, &x, y, 0x002200);
 			else //if (params->map[index][sindex] == '0')
-				draw_block(mlx, &x, y, 0xEEEEEE);
+				draw_block(game->map, &x, y, 0xEEEEEE);
 		y += 49;
 		x = 99;
 	}
+	mlx_put_image_to_window(game->mlx, game->window, game->map.image, 0, 0);
 	return (0);
 }
 
-void	get_player_pos(t_player *player, t_pars *params)
+void	get_player_pos(t_core *game)
 {
 	int index;
 	int sindex;
 
-	player->x = 99;
-	player->y = 99;
+	game->player.x = 99;
+	game->player.y = 99;
 	index = -1;
-	while (params->map[++index])
+	while (game->params->map[++index])
 	{
 		sindex = -1;
-		while (params->map[index][++sindex] != '\0')
+		while (game->params->map[index][++sindex] != '\0')
 		{
-			if (params->map[index][sindex] == 'N')
+			if (game->params->map[index][sindex] == 'N')
 				return ;
-			player->x += 50;
+			game->player.x += 50;
 		}
-		player->x = 99;
-		player->y += 50;
+		game->player.x = 99;
+		game->player.y += 50;
 	}
 }
 
-int		init_lib(t_pars *params)
+void	draw_player(t_core *game)
 {
-	t_mlx		mlx;
-	t_player	player;
-	int			index = -1;
-	
-	mlx.mlx_init = mlx_init();
-	mlx.window = mlx_new_window(mlx.mlx_init, params->r[0], params->r[1], "cub3D");
-	get_player_pos(&player, params);
-	while (1)
+	int x;
+
+	x = 0;
+	game->player.pl_img.image = mlx_new_image(game->mlx, 50, 50);
+	game->player.pl_img.img_addr = mlx_get_data_addr(game->player.pl_img.image, &game->player.pl_img.bpp, &game->player.pl_img.size_line, &game->player.pl_img.endian);
+	draw_block(game->player.pl_img, &x, 0, 0x33FFFF);
+	mlx_put_image_to_window(game->mlx, game->window, game->player.pl_img.image, game->player.x, game->player.y);
+}
+
+int		key_hook(int keycode, t_core *game)
+{
+	if (keycode == 0x0061) //a
 	{
-		draw_map(params, &mlx);
-		draw_block(&mlx, &(player.x), player.y, 0xFF3300);
-		mlx_loop(mlx.mlx_init);
+		mlx_destroy_image(game->mlx, game->map.image);
+		mlx_destroy_image(game->mlx, game->player.pl_img.image);
+		game->player.x -= 10;
+		draw_map(game);
+		draw_player(game);
 	}
+	if (keycode == 0x0077) //w
+	{
+		mlx_destroy_image(game->mlx, game->map.image);
+		mlx_destroy_image(game->mlx, game->player.pl_img.image);
+		game->player.y -= 10;
+		draw_map(game);
+		draw_player(game);
+	}
+	if (keycode == 0x0064) //d
+	{
+		mlx_destroy_image(game->mlx, game->map.image);
+		mlx_destroy_image(game->mlx, game->player.pl_img.image);
+		game->player.x += 10;
+		draw_map(game);
+		draw_player(game);
+	}
+	if (keycode == 0x0073) //s
+	{
+		mlx_destroy_image(game->mlx, game->map.image);
+		mlx_destroy_image(game->mlx, game->player.pl_img.image);
+		game->player.y += 10;
+		draw_map(game);
+		draw_player(game);
+	}
+	return (0);
+}
+
+int		init_lib(t_pars *pars)
+{
+	t_core game;
+	
+	game.params = pars;
+	game.mlx = mlx_init();
+	game.window = mlx_new_window(game.mlx, game.params->r[0], game.params->r[1], "cub3D");
+	draw_map(&game);
+	get_player_pos(&game);
+	draw_player(&game);
+	mlx_key_hook(game.window, key_hook, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }

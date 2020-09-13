@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/08 16:01:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/13 14:52:08 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				cub3d(char *path)
 
 	if (parser(path, &params))
 		return (0);
-	print_struct(&params);
+	//print_struct(&params);
 	init_lib(&params);
 	free_structer(&params);
 	return (0);

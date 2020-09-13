@@ -6,11 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 19:10:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/12 15:37:53 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+//add no file oi dir in filepathes in params
 
 static void		init(char **line, t_pars *params)
 {
