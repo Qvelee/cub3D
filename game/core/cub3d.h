@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/13 18:17:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/18 21:05:22 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,28 @@ typedef	struct	s_img
 typedef	struct	s_player
 {
 	t_img	pl_img;
-	int		x;
-	int		y;
+	double	angle;
+	double	speed;
+	double	x;
+	double	y;
 }				t_player;
+
+typedef	struct	s_buttons
+{
+	int a;
+	int s;
+	int d;
+	int w;
+	int left;
+	int right;
+}				t_buttons;
 
 typedef	struct	s_core
 {
 	t_pars		*params;
 	void		*mlx;
 	void		*window;
+	t_buttons	button;
 	t_img		map;
 	t_player	player;
 }				t_core;
@@ -63,5 +76,9 @@ typedef	struct	s_core
 int				cub3d(char *path);
 int				parser(char *path, t_pars *params);
 int				init_lib(t_pars *params);
+int				engine(t_pars *pars);
+void			draw_circle(t_core *game, int x0, int y0, int radius);
+void			draw_line(t_core *game, int x1, int y1, int x2, int y2);
+int				player(t_core *game);
 
 #endif

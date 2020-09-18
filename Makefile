@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/08 15:19:42 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/18 17:58:53 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ PARS_ERRORS_DIR =	game/parser/errors_managment/
 #SRC
 
 CORE_SRC =			cub3d.c \
-					minlib.c
+					engine.c \
+					draw_obj.c \
+					player.c
 
 PARS_SRC =			parser.c
 
@@ -101,6 +103,7 @@ clean:
 	@rm -rf $(PARS_OBJ)
 	@rm -rf $(PARS_UTIL_OBJ)
 	@rm -rf $(PARS_ERRORS_OBJ)
+	@$(MAKE) clean -C minilibx/
 	@$(MAKE) clean -C game/utils/
 
 fclean: clean
