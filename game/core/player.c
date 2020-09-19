@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/19 13:41:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 01:06:18 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				movement(t_core *game)
+static	int		movement(t_core *game)
 {
 	if (game->button.left) //left
 		game->player.angle -= game->player.angle_speed;
@@ -41,50 +41,113 @@ int				movement(t_core *game)
 	return (0);
 }
 
-static	void	get_player_pos(t_core *game)
+int				wall_check(t_core *game, double x, double y)
 {
-	static int	temp;
-	int 		index;
-	int 		sindex;
+	int x_in_map;
+	int	y_in_map;
 
-	if (temp)
-		return ;
-	game->player.x = 99;
-	game->player.y = 99;
-	index = -1;
-	while (game->params->map[++index])
+	// printf("x = %f ", x);
+	// printf("y = %f\n", y);
+	x_in_map = x / game->map.block_size;
+	y_in_map = y / game->map.block_size;
+	// printf("x = %d ", x_in_map);
+	// printf("y = %d\n", y_in_map);
+	if (y_in_map > game->map.map_lines - 1 || \
+		x_in_map > game->map.map_colunms - 1)
+		return (1);
+	if (y_in_map < 0 || x_in_map < 0)
+		return (1);	
+	if (game->params->map[y_in_map][x_in_map] == '1' || \
+		game->params->map[y_in_map][x_in_map] == '\0')
+		return (1);
+	return (0);
+}
+
+static	int		rays(t_core *game)
+{
+	t_ray_cast	ray;
+	int			blocks;
+	int			index = 0;
+	
+	ray.num_rays = game->player.num_rays;
+	ray.current_angle = game->player.angle - game->player.fov / 2;
+	ray.xm = (int)game->player.x / game->map.block_size * game->map.block_size;
+	ray.ym = (int)game->player.y / game->map.block_size * game->map.block_size;
+	//printf("xm = %f ym = %f\n", ray.xm, ray.ym);
+	while (ray.num_rays--)
 	{
-		sindex = -1;
-		while (game->params->map[index][++sindex] != '\0')
+		ray.x = cos(ray.current_angle) >= 0 ? \
+			ray.xm + game->map.block_size : ray.xm;
+		ray.dx = cos(ray.current_angle) >= 0 ? 1.0 : -1.0;
+		blocks = game->map.map_colunms;
+		while (blocks)
 		{
-			if (game->params->map[index][sindex] == 'N')
+			ray.depth_v = (ray.x - game->player.x) / cos(ray.current_angle);
+			ray.y = game->player.y + ray.depth_v * sin(ray.current_angle);
+			if (wall_check(game, ray.x + ray.dx, ray.y))
 			{
-				game->player.angle = 0;
-				game->player.speed = 0.8;
-				game->player.angle_speed = 0.005;
-				temp = 1;
-				return ;
+				//ft_putendl_fd("break 1!!!", 1);
+				break ;
 			}
-			game->player.x += 50;
+			ray.x += ray.dx * game->map.block_size;
+			blocks--;
 		}
-		game->player.x = 99;
-		game->player.y += 50;
+		ray.y = sin(ray.current_angle) >= 0 ? \
+			ray.ym + game->map.block_size : ray.ym;
+		ray.dy = sin(ray.current_angle) >= 0 ? 1.0 : -1.0;
+		blocks = game->map.map_lines;
+		while (blocks)
+		{
+			ray.depth_h = (ray.y - game->player.y) / sin(ray.current_angle);
+			ray.x = game->player.x + ray.depth_h * cos(ray.current_angle);
+			if (wall_check(game, ray.x, ray.y + ray.dy))
+			{
+				//ft_putendl_fd("break!!!", 1);
+				break ;
+			}
+			ray.y += ray.dy * game->map.block_size;
+			blocks--;
+		}
+		//printf("dv = %f dh = %f\n", ray.depth_v, ray.depth_h);
+		ray.depth = ray.depth_v > ray.depth_h ? ray.depth_h : ray.depth_v;
+		ray.x = game->player.x + ray.depth * cos(ray.current_angle);
+		ray.y = game->player.y + ray.depth * sin(ray.current_angle);
+		draw_line(game, game->player.x, game->player.y, ray.x, ray.y);
+		ray.current_angle += game->player.delta_angle;
+		//printf("--------------------------\n");
 	}
+	draw_circle(game, game->player.x, game->player.y, 10);
+	return (0);
+}
+
+void		old_rays(t_core *game)
+{
+	t_ray_cast	ray;
+	
+	ray.num_rays = game->player.num_rays;
+	ray.current_angle = game->player.angle - game->player.fov / 2;
+	while (ray.num_rays--)
+	{
+		ray.depth = -1;
+		while (++ray.depth < game->map.map_colunms * 50)
+		{
+			ray.x = game->player.x + ray.depth * cos(ray.current_angle);
+			ray.y = game->player.y + ray.depth * sin(ray.current_angle);
+			draw_line(game, game->player.x, game->player.y, ray.x, ray.y);
+			if (wall_check(game, ray.x, ray.y))
+			{
+				break ;
+			}
+		}
+		ray.current_angle += game->player.delta_angle;
+	}
+	draw_circle(game, game->player.x, game->player.y, 10);
 }
 
 int				player(t_core *game)
 {
-	get_player_pos(game);
-	game->player.pl_img.image = mlx_new_image(game->mlx, \
-		game->params->r[0], game->params->r[1]);
-	game->player.pl_img.img_addr = mlx_get_data_addr(game->player.pl_img.image, \
-		&game->player.pl_img.bpp, &game->player.pl_img.size_line, \
-		&game->player.pl_img.endian);
-	draw_circle(game, game->player.x, game->player.y, 10);
-	draw_line(game, game->player.x, game->player.y, \
-			game->player.x + /*game->params->r[0]*/200 * cos(game->player.angle), \
-			game->player.y + /*game->params->r[0]*/200 * sin(game->player.angle));
-	mlx_do_sync(game->mlx);
-	mlx_put_image_to_window(game->mlx, game->window, game->player.pl_img.image, 0, 0);
+	movement(game);
+	//old_rays(game);
+	rays(game);
 	return (0);
 }

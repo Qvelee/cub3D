@@ -6,11 +6,9 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 14:02:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/18 15:44:36 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/19 16:49:05 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "cub3d.h"
 
 void	pixel_put(t_img image, int x, int y, int color)
 {
