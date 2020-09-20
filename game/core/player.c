@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 15:33:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 16:40:00 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ int				wall_check(t_core *game, double x, double y)
 	return (0);
 }
 
+int				rgb(t_ray_cast *ray, int r, int g, int b)
+{
+	int		result;
+	
+	r /= (1 + ray->depth * ray->depth * 0.00001);
+	g /= (1 + ray->depth * ray->depth * 0.00001);
+	b /= (1 + ray->depth * ray->depth * 0.00001);
+	result = (r << 16) + (g << 8) + b;
+	return (result);
+}
+
 void			to3d(t_core *game, t_ray_cast *ray)
 {
 	double	dist = game->player.num_rays / (2 * tan(game->player.fov / 2));
@@ -68,8 +79,9 @@ void			to3d(t_core *game, t_ray_cast *ray)
 	ray->depth *= cos(game->player.angle - ray->current_angle);
 	double	proj_hate = coef / ray->depth;
 	int color;
-	//color = 255 / (1 + ray->depth * ray->depth * 0.0001);
-	color = 0x005500;
+
+	color = rgb(ray, 250, 250, 250);
+	
 	if (proj_hate > game->params->r[1])
 		proj_hate = game->params->r[1];
 	draw_rect(game, ray->num_rays * scale, \
@@ -124,36 +136,11 @@ static	int		rays(t_core *game)
 	return (0);
 }
 
-void		old_rays(t_core *game)
-{
-	t_ray_cast	ray;
-	
-	ray.num_rays = game->player.num_rays;
-	ray.current_angle = game->player.angle - game->player.fov / 2;
-	while (ray.num_rays--)
-	{
-		ray.depth = -1;
-		while (++ray.depth < game->map.map_colunms * 50)
-		{
-			ray.x = game->player.x + ray.depth * cos(ray.current_angle);
-			ray.y = game->player.y + ray.depth * sin(ray.current_angle);
-			//draw_line(game, game->player.x, game->player.y, ray.x, ray.y);
-			if (wall_check(game, ray.x, ray.y))
-			{
-				break ;
-			}
-		}
-		ray.current_angle += game->player.delta_angle;
-	}
-	//draw_circle(game, game->player.x, game->player.y, 10);
-}
-
 int				player(t_core *game)
 {
 	movement(game);
-	//old_rays(game);
-	//draw_rect(game, 0, 0, game->params->r[0], game->params->r[1] / 2, 0x66CCFF);
-	draw_rect(game, 0, game->params->r[1] / 2, game->params->r[0], game->params->r[1] / 2, 0x996666);
+	draw_rect(game, 0, 0, game->params->r[0], game->params->r[1] / 2, 0x66CCFF);
+	draw_rect(game, 0, game->params->r[1] / 2, game->params->r[0], game->params->r[1] / 2, 0xBBBBBB);
 	rays(game);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/19 16:52:07 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/20 16:51:54 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,8 @@ PARS_ERRORS_DIR =	game/parser/errors_managment/
 #SRC
 
 CORE_SRC =			cub3d.c \
-					engine.c \
-					draw_obj.c \
+					handler.c \
+					draw_tools.c \
 					player.c \
 					map.c
 
