@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 17:48:22 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:00:52 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_block(t_core *game, int x, int y, int color)
 	}
 }
 
-void	draw_rect(t_core *game, int x, int y, int a, int b, int color)
+void	draw_rect(t_core *game, int x, int y, int a, int b)
 {
 	int xc;
 	int yc;
@@ -48,18 +48,22 @@ void	draw_rect(t_core *game, int x, int y, int a, int b, int color)
 	{
 		xc = x;
 		while (xc < x + a)
-			pixel_put(game->frame, xc++, yc, color);
+			pixel_put(game->frame, xc++, yc, game->color);
 		yc++;
 	}
 }
 
 void	draw_circle(t_core *game, int x0, int y0, int radius)
 {
-	int x = 0;
-	int y = radius;
-	int delta = 1 - 2 * radius;
-	int error = 0;
+	int	x;
+	int	y;
+	int	delta;
+	int	error;
 	
+	x = 0;
+	y = radius;
+	delta = 1 - 2 * radius;
+	error = 0;
 	while(y >= 0)
 	{
 		pixel_put(game->frame, x0 + x, y0 + y, 0x0033FF);
@@ -67,47 +71,42 @@ void	draw_circle(t_core *game, int x0, int y0, int radius)
 		pixel_put(game->frame, x0 - x, y0 + y, 0x0033FF);
 		pixel_put(game->frame, x0 - x, y0 - y, 0x0033FF);
 		error = 2 * (delta + y) - 1;
-		if(delta < 0 && error <= 0)
+		if (delta < 0 && error <= 0)
+			delta += 2 * ++x + 1;
+		else
 		{
-			++x;
-			delta += 2 * x + 1;
-			continue;
+			error = 2 * (delta - x) - 1;
+			if (delta > 0 && error > 0)
+				delta += 1 - 2 * --y;
+			else
+				delta += 2 * (++x - --y);
 		}
-		error = 2 * (delta - x) - 1;
-		if(delta > 0 && error > 0)
-		{
-			--y;
-			delta += 1 - 2 * y;
-			continue;
-		}
-		++x;
-		delta += 2 * (x - y);
-		--y;
 	}
 }
 
-void	draw_line(t_core *game, int x1, int y1, int x2, int y2)
-{
-	const int deltaX = abs(x2 - x1);
-    const int deltaY = abs(y2 - y1);
-    const int signX = x1 < x2 ? 1 : -1;
-    const int signY = y1 < y2 ? 1 : -1;
+// void	draw_line(t_core *game, int x1, int y1, int x2, int y2)
+// {
+// 	const int	deltaX = abs(x2 - x1);
+//     const int	deltaY = abs(y2 - y1);
+//     const int	signX = x1 < x2 ? 1 : -1;
+//     const int	signY = y1 < y2 ? 1 : -1;
+// 	int			error;
 
-	int error = deltaX - deltaY;
-    pixel_put(game->frame, x2, y2, 0x0033FF);
-    while(x1 != x2 || y1 != y2) 
-   {
-		pixel_put(game->frame, x1, y1, 0x0033FF);
-        const int error2 = error * 2;
-        if(error2 > -deltaY) 
-        {
-            error -= deltaY;
-            x1 += signX;
-        }
-        if(error2 < deltaX) 
-        {
-            error += deltaX;
-            y1 += signY;
-        }
-    }
-}
+// 	error = deltaX - deltaY;
+//     pixel_put(game->frame, x2, y2, 0x0033FF);
+//     while(x1 != x2 || y1 != y2) 
+//    {
+// 		pixel_put(game->frame, x1, y1, 0x0033FF);
+//         const int error2 = error * 2;
+//         if(error2 > -deltaY) 
+//         {
+//             error -= deltaY;
+//             x1 += signX;
+//         }
+//         if(error2 < deltaX) 
+//         {
+//             error += deltaX;
+//             y1 += signY;
+//         }
+//     }
+// }

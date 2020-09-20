@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 18:02:42 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:03:09 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,17 @@ static	void	ray_to_rectangle(t_core *game, t_ray_cast *ray)
 	double	coef;
 	int		scale;
 	double	proj_hate;
-	int		color;
 
 	dist = game->player.num_rays / (2 * tan(game->player.fov / 2));
 	coef = dist * game->map.block_size;
 	scale = game->params->r[0] / game->player.num_rays;
 	ray->depth *= cos(game->player.angle - ray->current_angle);
 	proj_hate = coef / ray->depth;
-	color = rgb_to_num(ray, 250, 250, 250);
+	game->color = rgb_to_num(ray, 250, 250, 250);
 	if (proj_hate > game->params->r[1])
 		proj_hate = game->params->r[1];
 	draw_rect(game, ray->num_rays * scale, \
-		game->params->r[1] / 2 - proj_hate / 2, scale, proj_hate, color);
+		game->params->r[1] / 2 - proj_hate / 2, scale, proj_hate);
 }
 
 static	void	verticals(t_core *game, t_ray_cast *ray)
@@ -92,10 +91,12 @@ int				ray_casting(t_core *game)
 {
 	t_ray_cast	ray;
 
+	game->color = 0x66CCFF;
 	draw_rect(game, 0, 0, game->params->r[0], \
-		game->params->r[1] / 2, 0x66CCFF);
+		game->params->r[1] / 2);
+	game->color = 0xBBBBBB;
 	draw_rect(game, 0, game->params->r[1] / 2, \
-		game->params->r[0], game->params->r[1] / 2, 0xBBBBBB);
+		game->params->r[0], game->params->r[1] / 2);
 	ray.num_rays = -1;
 	ray.current_angle = game->player.angle - game->player.fov / 2;
 	ray.xm = (int)game->player.x / game->map.block_size * game->map.block_size;

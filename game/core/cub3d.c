@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 17:28:51 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 21:06:15 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static	void	init_game_settings(t_core *game)
 	
 	game->map.block_size = 50;
 	game->player.angle = 0;
-	game->player.speed = 0.6;
-	game->player.angle_speed = 0.0159;
+	game->player.speed = 0.8;
+	game->player.angle_speed = 0.015;
 	game->player.fov = M_PI / 3;
 	game->player.num_rays = game->params->r[0] / 2;
 	game->player.delta_angle = game->player.fov / game->player.num_rays;

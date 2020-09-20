@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 17:53:22 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:49:55 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	esc_pressed(t_core *game)
 void	pixel_put(t_img image, int x, int y, int color)
 {
 	char			*dst;
-	
+
 	if (y < 0 || x < 0)
 		return ;
 	dst = image.img_addr + (y * image.size_line + x * (image.bpp / 8));
