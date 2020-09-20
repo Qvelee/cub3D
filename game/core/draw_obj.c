@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/19 23:31:12 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 14:26:17 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,28 @@ void	draw_block(t_core *game, int x, int y, int color)
 	}
 }
 
+void	draw_rect(t_core *game, int x, int y, int a, int b, int color)
+{
+	int xc;
+	int yc;
+
+	yc = y;
+	while (yc < y + b)
+	{
+		xc = x;
+		while (xc < x + a)
+			pixel_put(game->frame, xc++, yc, color);
+		yc++;
+	}
+}
+
 void	draw_circle(t_core *game, int x0, int y0, int radius)
 {
 	int x = 0;
 	int y = radius;
 	int delta = 1 - 2 * radius;
 	int error = 0;
+	
 	while(y >= 0)
 	{
 		pixel_put(game->frame, x0 + x, y0 + y, 0x0033FF);
