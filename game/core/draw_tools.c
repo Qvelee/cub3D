@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_obj.c                                         :+:      :+:    :+:   */
+/*   draw_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 14:26:17 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 17:48:22 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	pixel_put(t_img image, int x, int y, int color)
+int				rgb_to_num(t_ray_cast *ray, int r, int g, int b)
 {
-	char			*dst;
+	int		result;
 	
-	if (y < 0 || x < 0)
-		return ;
-	dst = image.img_addr + (y * image.size_line + x * (image.bpp / 8));
-	*(unsigned int*)dst = color;
+	r /= (1 + ray->depth * ray->depth * 0.00001);
+	g /= (1 + ray->depth * ray->depth * 0.00001);
+	b /= (1 + ray->depth * ray->depth * 0.00001);
+	result = (r << 16) + (g << 8) + b;
+	return (result);
 }
 
 void	draw_block(t_core *game, int x, int y, int color)

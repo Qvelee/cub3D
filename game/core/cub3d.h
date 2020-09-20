@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 16:52:51 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/20 17:48:16 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,12 @@ typedef	struct	s_core
 }				t_core;
 
 int				cub3d(char *path);
+int				free_structer(t_pars *params);
 int				parser(char *path, t_pars *params);
-int				handler(t_pars *pars);
+int				render(t_core *game);
+void			pixel_put(t_img image, int x, int y, int color);
+void			esc_pressed(t_core *game);
+int				handler(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
 void			draw_circle(t_core *game, int x0, int y0, int radius);
 void			draw_line(t_core *game, int x1, int y1, int x2, int y2);
@@ -109,5 +113,7 @@ void			draw_block(t_core *game, int x, int y, int color);
 void			draw_rect(t_core *game, int x, int y, int a, int b, int color);
 int				map(t_core *game);
 int				player(t_core *game);
+int				ray_casting(t_core *game);
+int				rgb_to_num(t_ray_cast *ray, int r, int g, int b);
 
 #endif
