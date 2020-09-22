@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 20:49:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/22 18:56:07 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,35 @@ void	pixel_put(t_img image, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+void	images(t_core *game)
+{
+	static	int	temp;
+	static	int t2;
+	
+	if (!t2)
+	{
+		game->west.img.image = mlx_xpm_file_to_image(game->mlx, \
+			game->params->we, &game->west.width, &game->west.height);
+		game->west.img.img_addr = mlx_get_data_addr(game->west.img.image, \
+			&game->west.img.bpp, &game->west.img.size_line, &game->west.img.endian);
+		t2 = 1;
+	}
+	if (!temp)
+	{
+		if (game->frame.image)
+			mlx_destroy_image(game->mlx, game->frame.image);
+		game->frame.image = mlx_new_image(game->mlx, \
+			game->params->r[0], game->params->r[1]);
+		game->frame.img_addr = mlx_get_data_addr(game->frame.image, \
+			&game->frame.bpp, &game->frame.size_line, \
+			&game->frame.endian);
+			temp = 1;
+	}
+}
+
 int		render(t_core *game)
 {
-	if (game->frame.image)
-		mlx_destroy_image(game->mlx, game->frame.image);
-	game->frame.image = mlx_new_image(game->mlx, \
-		game->params->r[0], game->params->r[1]);
-	game->frame.img_addr = mlx_get_data_addr(game->frame.image, \
-		&game->frame.bpp, &game->frame.size_line, \
-		&game->frame.endian);
+	images(game);
 	//map(game);
 	player(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->frame.image, 0, 0);
