@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 22:19:40 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/23 17:34:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,9 @@ typedef	struct	s_core
 	int			color;
 	t_img		frame;
 	t_textures	west;
+	t_textures	north;
+	t_textures	south;
+	t_textures	east;
 	t_buttons	button;
 	t_map		map;
 	t_player	player;

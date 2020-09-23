@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/22 20:11:04 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/23 17:40:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,45 @@ static	int		wall_check(t_core *game, double x, double y)
 void			texture(t_core *game, t_ray_cast *ray, int scale, double proj_height)
 {
 	double	step;
-	int		x_screen;
-	int		y_screen;
+	double	x_screen;
+	double	y_screen;
 	double	x_texture;
 	double	y_texture;
+	t_textures	texture;
 
 	ray->offset = ray->depth_v > ray->depth_h ? ray->xh : ray->yv;
+	texture = ray->depth_v > ray->depth_h ? game->south : game->east;
 	ray->offset = ray->offset / game->map.block_size;
 	while (ray->offset > 1)
 		ray->offset--;
-	step = game->west.height / proj_height;
+	step = texture.height / proj_height;
 	x_screen = ray->num_rays * scale;
-	x_texture = ray->offset * game->west.width - 1;
-	int		proj_copy;
+	x_texture = ray->offset * (texture.width - 1);
+	int		proj_copy = proj_height;
 	char	*dst;
 	char	*tex;
 	while (scale)
 	{
-		y_screen = game->params->r[1] / 2 - proj_height / 2;
-		y_texture = 0.0;
 		proj_copy = (int)proj_height;
+		if (proj_copy > game->params->r[1])
+			proj_copy = game->params->r[1];
+		y_screen = game->params->r[1] / 2 - proj_copy / 2;
+		y_texture = (y_screen - game->params->r[1] / 2 + proj_height / 2) * step;
+		if (y_texture >= texture.height)
+			y_texture = texture.height - 1;
 		while (proj_copy)
 		{
-			dst = game->frame.img_addr + (y_screen * game->frame.size_line + \
-				x_screen * (game->frame.bpp / 8));
-			//printf("y_tex -> %f\nx_tex -> %f\n", y_texture, x_texture);
-			tex = game->west.img.img_addr + ((int)y_texture * game->west.img.size_line + \
-				(int)x_texture * (game->west.img.bpp / 8));
+			dst = game->frame.img_addr + ((int)y_screen * game->frame.size_line + \
+				(int)x_screen * (game->frame.bpp / 8));
+			tex = texture.img.img_addr + ((int)y_texture * texture.img.size_line + \
+				(int)x_texture * (texture.img.bpp / 8));
+			// *(unsigned int*)dst = rgb_to_num(ray, *(unsigned int*)tex >> 16, \
+			// *(unsigned int*)tex >> 8, *(unsigned int*)tex);
+			//*(unsigned int*)dst = *(unsigned int*)tex / (1 + ray->depth * ray->depth * 0.00001);
 			*(unsigned int*)dst = *(unsigned int*)tex;
-			//printf("que? %u\n", *(unsigned int*)tex);
 			y_texture += step;
 			y_screen++;
 			proj_copy--;
-			//printf("que????\n");
 		}
 		x_texture++;
 		x_screen++;
@@ -87,8 +93,8 @@ static	void	ray_to_rectangle(t_core *game, t_ray_cast *ray)
 		ray->depth = 0.00001;
 	proj_height = coef / ray->depth;
 	game->color = rgb_to_num(ray, 250, 250, 250);
-	if (proj_height > game->params->r[1])
-		proj_height = game->params->r[1];	
+	// if (proj_height > game->params->r[1])
+	// 	proj_height = game->params->r[1];
 	// draw_rect(game, ray->num_rays * scale, \
 	// 	game->params->r[1] / 2 - proj_height / 2, scale, proj_height);
 	texture(game, ray, scale, proj_height);

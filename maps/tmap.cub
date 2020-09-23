@@ -1,13 +1,13 @@
 
 R 1200 800
 
-NO ./path_to_the_north_texture
+NO ./textures/popug.xpm
 
-SO ./path_to_the_south_texture
+SO ./textures/miner.xpm
 
-WE ./textures/popug.xpm
+WE ./textures/pig.xpm
 
-EA ./path_to_the_east_texture
+EA ./textures/wall.xpm
 
 S ./path_to_the_sprite_texture
 
