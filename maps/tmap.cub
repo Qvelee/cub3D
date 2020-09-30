@@ -1,13 +1,13 @@
 
 R 1200 800
 
-NO ./textures/popug.xpm
+NO ./textures/1.xpm
 
-SO ./textures/miner.xpm
+SO ./textures/2.xpm
 
-WE ./textures/pig.xpm
+WE ./textures/3.xpm
 
-EA ./textures/wall.xpm
+EA ./textures/4.xpm
 
 S ./path_to_the_sprite_texture
 

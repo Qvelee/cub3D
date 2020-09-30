@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 18:02:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/25 20:19:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ static	void	movement(t_core *game)
 int				player(t_core *game)
 {
 	movement(game);
-	ray_casting(game);
 	return (0);
 }

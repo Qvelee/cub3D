@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/20 17:44:04 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/09/26 17:27:40 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,9 @@ CORE_SRC =			cub3d.c \
 					errors_managment.c \
 					player.c \
 					map.c \
-					ray_casting.c
+					ray_casting.c \
+					texture.c \
+					background.c
 
 PARS_SRC =			parser.c
 

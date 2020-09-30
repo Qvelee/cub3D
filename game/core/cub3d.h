@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/23 17:34:38 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/27 15:30:12 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,22 @@ typedef	struct	s_buttons
 }				t_buttons;
 
 
-typedef	struct	s_textures
+typedef	struct	s_tex
 {
 	t_img	img;
 	char	*path;
 	int		width;
 	int		height;
-	int		scale;
-}				t_textures;
+	double	offset;
+	int		proj_copy;
+	char	*frame;
+	char	*tex_image;
+	double	step;
+	double	x_screen;
+	double	y_screen;
+	double	x_texture;
+	double	y_texture;
+}				t_tex;
 
 typedef	struct	s_ray_cast
 {
@@ -76,7 +84,6 @@ typedef	struct	s_ray_cast
 	double	dy;
 	double	xm;
 	double	ym;
-	double	offset;
 	double	depth;
 	double	depth_v;
 	double	depth_h;
@@ -108,10 +115,12 @@ typedef	struct	s_core
 	void		*window;
 	int			color;
 	t_img		frame;
-	t_textures	west;
-	t_textures	north;
-	t_textures	south;
-	t_textures	east;
+	t_tex		west;
+	t_tex		north;
+	t_tex		south;
+	t_tex		east;
+	t_tex		sky;
+	t_tex		floor;
 	t_buttons	button;
 	t_map		map;
 	t_player	player;
@@ -132,6 +141,11 @@ void			draw_rect(t_core *game, int x, int y, int a, int b);
 int				map(t_core *game);
 int				player(t_core *game);
 int				ray_casting(t_core *game);
+int				wall_check(t_core *game, double x, double y);
+void			texture(t_core *game, t_ray_cast *ray, int scale, double proj_height);
+void			set_background(t_core *game, t_ray_cast *ray);
 int				rgb_to_num(t_ray_cast *ray, int r, int g, int b);
 
+
+void			set_floor(t_core *game, t_ray_cast *ray, int proj_height);
 #endif

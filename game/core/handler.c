@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/20 20:50:01 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/25 20:24:32 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,41 @@ static	int		init_handler(t_core *game)
 	game->button.w = 0;
 	game->button.left = 0;
 	game->button.right = 0;
-	game->frame.image = NULL;
 	return (0);
 }
 
 int				key_pressed(int keycode, t_core *game)
 {
-	if (keycode == 0xff1b) //esc
+	if (keycode == 0xff1b)
 		esc_pressed(game);
-	if (keycode == 0xff51) //left
+	if (keycode == 0xff51)
 		game->button.left = 1;
-	if (keycode == 0xff53) //right
+	if (keycode == 0xff53)
 		game->button.right = 1;
-	if (keycode == 0x0061) //a
+	if (keycode == 0x0061)
 		game->button.a = 1;
-	if (keycode == 0x0077) //w
+	if (keycode == 0x0077)
 		game->button.w = 1;
-	if (keycode == 0x0064) //d
+	if (keycode == 0x0064)
 		game->button.d = 1;
-	if (keycode == 0x0073) //s
+	if (keycode == 0x0073)
 		game->button.s = 1;
 	return (0);
 }
 
 int				key_realised(int keycode, t_core *game)
 {
-	if (keycode == 0xff51) //left
+	if (keycode == 0xff51)
 		game->button.left = 0;
-	if (keycode == 0xff53) //right
+	if (keycode == 0xff53)
 		game->button.right = 0;
-	if (keycode == 0x0061) //a
+	if (keycode == 0x0061)
 		game->button.a = 0;
-	if (keycode == 0x0077) //w
+	if (keycode == 0x0077)
 		game->button.w = 0;
-	if (keycode == 0x0064) //d
+	if (keycode == 0x0064)
 		game->button.d = 0;
-	if (keycode == 0x0073) //s
+	if (keycode == 0x0073)
 		game->button.s = 0;
 	return (0);
 }
