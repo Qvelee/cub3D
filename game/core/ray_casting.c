@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/26 17:29:16 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/01 16:30:30 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static	void	ray_to_rectangle(t_core *game, t_ray_cast *ray)
 		ray->depth = 0.00001;
 	proj_height = coef / ray->depth;
 	game->color = rgb_to_num(ray, 250, 250, 250);
+	//set_floor(game, ray, proj_height);
 	texture(game, ray, scale, proj_height);
 }
 
@@ -52,7 +53,7 @@ static	void	verticals(t_core *game, t_ray_cast *ray)
 	int blocks;
 
 	ray->x = cos(ray->current_angle) >= 0 ? \
-			ray->xm + game->map.block_size : ray->xm;
+		ray->xm + game->map.block_size : ray->xm;
 	ray->dx = cos(ray->current_angle) >= 0 ? 1.0 : -1.0;
 	blocks = game->map.map_colunms;
 	while (blocks)
@@ -91,9 +92,9 @@ int				ray_casting(t_core *game)
 	
 	ray.num_rays = -1;
 	ray.current_angle = game->player.angle - game->player.fov / 2;
-	set_background(game, &ray);
 	ray.xm = (int)game->player.x / game->map.block_size * game->map.block_size;
 	ray.ym = (int)game->player.y / game->map.block_size * game->map.block_size;
+	set_background(game, &ray);
 	while (++ray.num_rays < game->player.num_rays)
 	{
 		verticals(game, &ray);

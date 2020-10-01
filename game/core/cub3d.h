@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/27 15:30:12 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:27:35 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ typedef	struct	s_buttons
 	int left;
 	int right;
 }				t_buttons;
-
 
 typedef	struct	s_tex
 {
@@ -145,7 +144,6 @@ int				wall_check(t_core *game, double x, double y);
 void			texture(t_core *game, t_ray_cast *ray, int scale, double proj_height);
 void			set_background(t_core *game, t_ray_cast *ray);
 int				rgb_to_num(t_ray_cast *ray, int r, int g, int b);
-
-
 void			set_floor(t_core *game, t_ray_cast *ray, int proj_height);
+
 #endif

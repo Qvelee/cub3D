@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:42:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/27 17:08:50 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:42:56 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ void			texture(t_core *game, t_ray_cast *ray, int scale, double p_height)
 	texture.step = texture.height / p_height;
 	texture.x_screen = ray->num_rays * scale;
 	texture.x_texture = texture.offset * (texture.width - 1);
-	//set_floor(game, ray, p_height);
 	tex_pixels(game, &texture, scale, p_height);
 }
