@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:42:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/30 19:42:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/02 13:27:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void			texture(t_core *game, t_ray_cast *ray, int scale, double p_height)
 
 	temp = ray->depth_v > ray->depth_h ? ray->xh : ray->yv;
 	if (temp == ray->xh)
-		texture = wall_check(game, ray->x, ray->y + 1) ? game->west : game->east;
+		texture = wall_check(game, ray->x, ray->y + 1) ? game->north : game->south;
 	else
-		texture = wall_check(game, ray->x + 1, ray->y) ? game->south : game->north;
+		texture = wall_check(game, ray->x + 1, ray->y) ? game->west : game->east;
 	texture.offset = temp / game->map.block_size - (int)temp / game->map.block_size;
 	texture.step = texture.height / p_height;
 	texture.x_screen = ray->num_rays * scale;

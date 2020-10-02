@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/01 16:30:30 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:31:44 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ static	void	ray_to_rectangle(t_core *game, t_ray_cast *ray)
 	coef = dist * game->map.block_size;
 	scale = game->params->r[0] / game->player.num_rays;
 	if ((ray->depth *= cos(game->player.angle - ray->current_angle)) == 0)
-		ray->depth = 0.00001;
-	proj_height = coef / ray->depth;
+		ray->depth = 0.00001;	
+	//proj_height = coef / ray->depth;
+	proj_height = (int)game->params->r[1] / (ray->depth / game->map.block_size);
 	game->color = rgb_to_num(ray, 250, 250, 250);
-	//set_floor(game, ray, proj_height);
+	set_floor(game, ray, proj_height, dist);
 	texture(game, ray, scale, proj_height);
 }
 
@@ -100,6 +101,9 @@ int				ray_casting(t_core *game)
 		verticals(game, &ray);
 		horisontals(game, &ray);
 		ray.depth = ray.depth_v > ray.depth_h ? ray.depth_h : ray.depth_v;
+		
+		//printf("depth_start -> %f\n", ray.depth);
+		
 		ray.x = game->player.x + ray.depth * cos(ray.current_angle);
 		ray.y = game->player.y + ray.depth * sin(ray.current_angle);
 		ray_to_rectangle(game, &ray);

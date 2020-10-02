@@ -6,11 +6,12 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/01 16:40:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:31:05 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //if last line not space map error why?
+//edd many spaces
 
 #include "cub3d.h"
 
@@ -37,7 +38,7 @@ static	void	init_images(t_core *game)
 	game->sky.img.img_addr = mlx_get_data_addr(game->sky.img.image, \
 		&game->sky.img.bpp, &game->sky.img.size_line, &game->sky.img.endian);
 	game->floor.img.image = mlx_xpm_file_to_image(game->mlx, \
-		"./textures/2.xpm", &game->floor.width, &game->floor.height);
+		"./textures/w.xpm", &game->floor.width, &game->floor.height);
 	game->floor.img.img_addr = mlx_get_data_addr(game->floor.img.image, \
 		&game->floor.img.bpp, &game->floor.img.size_line, &game->floor.img.endian);
 }
@@ -45,11 +46,11 @@ static	void	init_images(t_core *game)
 static	void	init_game_settings(t_core *game)
 {
 	int	temp;
-
+	
 	game->map.block_size = 50;
-	game->player.angle = 0;
-	game->player.speed = 1;
-	game->player.angle_speed = 0.018;
+	game->player.angle = 3 * M_PI / 2;
+	game->player.speed = 2;
+	game->player.angle_speed = 0.03;
 	game->player.fov = M_PI / 3;
 	game->player.num_rays = game->params->r[0]; // 2;
 	game->player.delta_angle = game->player.fov / game->player.num_rays;
