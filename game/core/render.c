@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 18:09:58 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 22:40:17 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		render(t_core *game)
 {
 	static int	temp;
 
+	mlx_mouse_move(game->mlx, game->window, game->centerX, \
+		game->centerY);
 	player(game);
 	ray_casting(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->frame.image, 0, 0);

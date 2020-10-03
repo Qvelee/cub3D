@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 17:54:06 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 22:34:33 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ typedef	struct	s_player
 	double	speed;
 	double	cur_speed;
 	double	fast_speed;
-	double	angle_speed;
+	double	button_angle_speed;
+	double	mouse_angle_speed;
 	double	radius;
 	double	fov;
 	int		num_rays;
@@ -129,6 +130,8 @@ typedef	struct	s_core
 	t_pars		*params;
 	void		*mlx;
 	void		*window;
+	int			centerX;
+	int			centerY;
 	int			color;
 	t_img		frame;
 	t_tex		west;

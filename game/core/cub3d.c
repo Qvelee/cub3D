@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 18:34:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 22:00:10 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int				cub3d(char *path)
 	init_bonus_images(&game);
 	get_player_pos(&game);
 	handler(&game);
-	mlx_mouse_hide(game.mlx, game.window);
 	mlx_loop_hook(game.mlx, render, &game);
 	mlx_loop(game.mlx);
 	free_structer(&params);

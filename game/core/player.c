@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 20:22:46 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 22:04:33 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static	void	collision(t_core *game, double x_move, double y_move)
 static	void	movement(t_core *game)
 {
 	if (game->button.left)
-		game->player.angle -= game->player.angle_speed;
+		game->player.angle -= game->player.button_angle_speed;
 	if (game->button.right)
-		game->player.angle += game->player.angle_speed;
+		game->player.angle += game->player.button_angle_speed;
 	if (game->button.a)
 		collision(game, game->player.cur_speed * sin(game->player.angle), \
 			-game->player.cur_speed * cos(game->player.angle));

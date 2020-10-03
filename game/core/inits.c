@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 17:53:25 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 22:34:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,16 @@ void	init_game_settings(t_core *game)
 {
 	int	temp;
 
+	game->centerX = game->params->r[0] / 2;
+	game->centerY = game->params->r[1] / 2;
 	game->player.x = 0;
 	game->player.y = 0;
 	game->map.block_size = 50;
 	game->player.angle = 3 * M_PI / 2;
 	game->player.speed = game->map.block_size * 0.06;
 	game->player.fast_speed = game->player.speed * 2;
-	game->player.angle_speed = 0.045;
+	game->player.button_angle_speed = 0.045;
+	game->player.mouse_angle_speed = 0.005;
 	game->player.radius = game->map.block_size * 0.2;
 	game->player.fov = M_PI / 3;
 	game->player.num_rays = game->params->r[0]; // 2;
