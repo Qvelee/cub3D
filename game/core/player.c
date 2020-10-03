@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 16:18:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 20:22:46 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,31 @@
 
 static	void	collision(t_core *game, double x_move, double y_move)
 {
-	const	int		y_dir = y_move < 0 ? -1 : 1;
-	const	int		x_dir = x_move < 0 ? -1 : 1;
-	
-	if (wall_check(game, game->player.x + x_dir * game->player.radius + \
-		x_move, game->player.y + y_dir * game->player.radius + y_move))
+	const	int	y_dir = y_move < 0 ? -1 : 1;
+	const	int	x_dir = x_move < 0 ? -1 : 1;
+	double		depth;
+	int			conflict;
+
+	depth = game->player.radius;
+	while (depth > 0)
 	{
-		return ; 
+		if ((conflict = wall_check(game, game->player.x + x_dir * depth + \
+			x_move, game->player.y + y_dir * depth + y_move)))
+			break ;
+		depth -= 0.001;
 	}
-	else
+	if (conflict)
 	{
-		game->player.x += x_move;
-		game->player.y += y_move;
+		if (!wall_check(game, game->player.x + x_dir * depth + \
+			x_move, game->player.y + y_dir * depth))
+			game->player.x += x_move;
+		if (!wall_check(game, game->player.x + x_dir * depth, \
+			game->player.y + y_dir * depth + y_move))
+			game->player.y += y_move;
+		return ;
 	}
+	game->player.x += x_move;
+	game->player.y += y_move;
 }
 
 static	void	movement(t_core *game)

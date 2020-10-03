@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 15:47:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 17:54:06 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,9 @@ typedef	struct	s_core
 }				t_core;
 
 int				cub3d(char *path);
+void			init_bonus_images(t_core *game);
+void			init_images(t_core *game);
+void			init_game_settings(t_core *game);
 int				free_structer(t_pars *params);
 int				parser(char *path, t_pars *params);
 int				render(t_core *game);
