@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/01 21:09:12 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 13:07:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@ int		render(t_core *game)
 {
 	static int	temp;
 
-	if (game->frame.image)
-		mlx_destroy_image(game->mlx, game->frame.image);
-	game->frame.image = mlx_new_image(game->mlx, \
-		game->params->r[0], game->params->r[1]);
-	game->frame.img_addr = mlx_get_data_addr(game->frame.image, \
-		&game->frame.bpp, &game->frame.size_line, \
-		&game->frame.endian);
 	player(game);
 	ray_casting(game);
 	mlx_put_image_to_window(game->mlx, game->window, game->frame.image, 0, 0);

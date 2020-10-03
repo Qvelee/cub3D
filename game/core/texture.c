@@ -6,56 +6,57 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:42:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/02 13:27:43 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 14:58:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	void	tex_pixels(t_core *game, t_tex *texture, int scale, double p_height)
+static	void	tex_pixels(t_core *game, t_tex *texture, t_ray_cast *ray)
 {
-	while (scale)
+	texture->proj_copy = (int)ray->wall_height;
+	if (texture->proj_copy > game->params->r[1])
+		texture->proj_copy = game->params->r[1];
+	texture->y_screen = game->params->r[1] / 2 - texture->proj_copy / 2;
+	texture->y_texture = (texture->y_screen - game->params->r[1] / 2 + \
+		ray->wall_height / 2) * texture->step;
+	if (texture->y_texture >= texture->height)
+		texture->y_texture = texture->height - 1;
+	while (texture->proj_copy)
 	{
-		texture->proj_copy = (int)p_height;
-		if (texture->proj_copy > game->params->r[1])
-			texture->proj_copy = game->params->r[1];
-		texture->y_screen = game->params->r[1] / 2 - texture->proj_copy / 2;
-		texture->y_texture = (texture->y_screen - game->params->r[1] / 2 + \
-			p_height / 2) * texture->step;
-		if (texture->y_texture >= texture->height)
-			texture->y_texture = texture->height - 1;
-		while (texture->proj_copy)
-		{
-			texture->frame = game->frame.img_addr + \
-				((int)texture->y_screen * game->frame.size_line + \
-				(int)texture->x_screen * (game->frame.bpp / 8));
-			texture->tex_image = texture->img.img_addr + \
-				((int)texture->y_texture * texture->img.size_line + \
-				(int)texture->x_texture * (texture->img.bpp / 8));
-			*(unsigned int*)texture->frame = *(unsigned int*)texture->tex_image;
-			texture->y_texture += texture->step;
-			texture->y_screen++;
-			texture->proj_copy--;
-		}
-		texture->x_texture++;
-		texture->x_screen++;
-		scale--;
+		game->color = ((int *)(texture->img.img_addr))\
+			[(int)texture->y_texture * texture->width + \
+			(int)texture->x_texture];
+		((int *)(game->frame.img_addr))\
+			[(int)texture->y_screen * game->params->r[0] + \
+			(int)texture->x_screen] = make_darker(ray->depth, \
+			(game->color & 0xFF0000) >> 16, (game->color & 0x00FF00) >> 8, \
+			game->color & 0x0000FF);
+		texture->y_texture += texture->step;
+		texture->y_screen++;
+		texture->proj_copy--;
 	}
+	texture->x_texture++;
+	texture->x_screen++;
 }
 
-void			texture(t_core *game, t_ray_cast *ray, int scale, double p_height)
+void			texture_wall(t_core *game, t_ray_cast *ray, int scale)
 {
 	t_tex	texture;
 	double	temp;
 
 	temp = ray->depth_v > ray->depth_h ? ray->xh : ray->yv;
 	if (temp == ray->xh)
-		texture = wall_check(game, ray->x, ray->y + 1) ? game->north : game->south;
+		texture = wall_check(game, ray->x, ray->y + 1) ? \
+			game->north : game->south;
 	else
-		texture = wall_check(game, ray->x + 1, ray->y) ? game->west : game->east;
-	texture.offset = temp / game->map.block_size - (int)temp / game->map.block_size;
-	texture.step = texture.height / p_height;
+		texture = wall_check(game, ray->x + 1, ray->y) ? \
+			game->west : game->east;
+	texture.offset = temp / game->map.block_size - (int)temp / \
+		game->map.block_size;
+	texture.step = texture.height / ray->wall_height;
 	texture.x_screen = ray->num_rays * scale;
 	texture.x_texture = texture.offset * (texture.width - 1);
-	tex_pixels(game, &texture, scale, p_height);
+	while (scale--)
+		tex_pixels(game, &texture, ray);
 }

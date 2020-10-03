@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/01 18:11:57 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:13:51 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int				key_realised(int keycode, t_core *game)
 int				handler(t_core *game)
 {
 	init_handler(game);
-	mlx_hook(game->window, 2, 1L<<0, key_pressed, game);
-	mlx_hook(game->window, 3, 1L<<1, key_realised, game);
+	mlx_hook(game->window, 2, 1L << 0, key_pressed, game);
+	mlx_hook(game->window, 3, 1L << 1, key_realised, game);
 	return (0);
 }

@@ -6,19 +6,19 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/01 16:20:51 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:31:51 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				rgb_to_num(t_ray_cast *ray, int r, int g, int b)
+int				make_darker(double depth, int r, int g, int b)
 {
 	int		result;
 	
-	r /= (1 + ray->depth * ray->depth * 0.00001);
-	g /= (1 + ray->depth * ray->depth * 0.00001);
-	b /= (1 + ray->depth * ray->depth * 0.00001);
+	r /= (1 + depth * depth * 0.000005);
+	g /= (1 + depth * depth * 0.000005);
+	b /= (1 + depth * depth * 0.000005);
 	result = (r << 16) + (g << 8) + b;
 	return (result);
 }

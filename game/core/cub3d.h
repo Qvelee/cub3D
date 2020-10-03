@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/01 20:18:30 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:47:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,18 @@ typedef	struct	s_buttons
 	int	shift;
 }				t_buttons;
 
+typedef	struct	s_flr_ceil
+{
+	double	floor_x;
+	double	floor_y;
+	double	dist_to_wall;
+	double	screen_dist;
+	int		lineheight;
+	double	weight;
+	double	screen_floor_x;
+	double	screen_floor_y;
+}				t_flr_ceil;
+
 typedef	struct	s_tex
 {
 	t_img	img;
@@ -76,6 +88,7 @@ typedef	struct	s_ray_cast
 {
 	double	current_angle;
 	int		num_rays;
+	double	wall_height;
 	double	x;
 	double	y;
 	double	xh;
@@ -100,7 +113,10 @@ typedef	struct	s_player
 {
 	double	angle;
 	double	speed;
+	double	cur_speed;
+	double	fast_speed;
 	double	angle_speed;
+	double	radius;
 	double	fov;
 	int		num_rays;
 	double	delta_angle;
@@ -142,9 +158,9 @@ int				map(t_core *game);
 int				player(t_core *game);
 int				ray_casting(t_core *game);
 int				wall_check(t_core *game, double x, double y);
-void			texture(t_core *game, t_ray_cast *ray, int scale, double proj_height);
-void			set_background(t_core *game, t_ray_cast *ray);
-int				rgb_to_num(t_ray_cast *ray, int r, int g, int b);
-void			set_floor(t_core *game, t_ray_cast *ray, int proj_height, double dist);
+void			texture_wall(t_core *game, t_ray_cast *ray, int scale);
+int				make_darker(double depth, int r, int g, int b);
+void			set_sky(t_core *game, t_ray_cast *ray);
+void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
 
 #endif

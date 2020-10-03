@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/02 20:31:44 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/03 15:00:02 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,29 @@ int				wall_check(t_core *game, double x, double y)
 		x_in_map > game->map.map_colunms - 1)
 		return (1);
 	if (y_in_map < 0 || x_in_map < 0)
-		return (1);	
+		return (1);
 	if (game->params->map[y_in_map][x_in_map] == '1' || \
 		game->params->map[y_in_map][x_in_map] == '\0')
 		return (1);
 	return (0);
 }
 
-static	void	ray_to_rectangle(t_core *game, t_ray_cast *ray)
+static	void	ray_treatment(t_core *game, t_ray_cast *ray)
 {
-	double	dist;
-	double	coef;
 	int		scale;
-	double	proj_height;
 
-	dist = game->player.num_rays / (2 * tan(game->player.fov / 2));
-	coef = dist * game->map.block_size;
 	scale = game->params->r[0] / game->player.num_rays;
 	if ((ray->depth *= cos(game->player.angle - ray->current_angle)) == 0)
-		ray->depth = 0.00001;	
-	//proj_height = coef / ray->depth;
-	proj_height = (int)game->params->r[1] / (ray->depth / game->map.block_size);
-	game->color = rgb_to_num(ray, 250, 250, 250);
-	set_floor(game, ray, proj_height, dist);
-	texture(game, ray, scale, proj_height);
+		ray->depth = 0.00001;
+	ray->wall_height = (int)game->params->r[1] / \
+		(ray->depth / game->map.block_size);
+	set_floor_ceiling(game, ray);
+	texture_wall(game, ray, scale);
 }
 
 static	void	verticals(t_core *game, t_ray_cast *ray)
 {
-	int blocks;
+	int	blocks;
 
 	ray->x = cos(ray->current_angle) >= 0 ? \
 		ray->xm + game->map.block_size : ray->xm;
@@ -90,23 +84,20 @@ static	void	horisontals(t_core *game, t_ray_cast *ray)
 int				ray_casting(t_core *game)
 {
 	t_ray_cast	ray;
-	
+
 	ray.num_rays = -1;
 	ray.current_angle = game->player.angle - game->player.fov / 2;
 	ray.xm = (int)game->player.x / game->map.block_size * game->map.block_size;
 	ray.ym = (int)game->player.y / game->map.block_size * game->map.block_size;
-	set_background(game, &ray);
+	set_sky(game, &ray);
 	while (++ray.num_rays < game->player.num_rays)
 	{
 		verticals(game, &ray);
 		horisontals(game, &ray);
 		ray.depth = ray.depth_v > ray.depth_h ? ray.depth_h : ray.depth_v;
-		
-		//printf("depth_start -> %f\n", ray.depth);
-		
 		ray.x = game->player.x + ray.depth * cos(ray.current_angle);
 		ray.y = game->player.y + ray.depth * sin(ray.current_angle);
-		ray_to_rectangle(game, &ray);
+		ray_treatment(game, &ray);
 		ray.current_angle += game->player.delta_angle;
 	}
 	return (0);
