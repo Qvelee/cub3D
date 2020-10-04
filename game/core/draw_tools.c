@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 18:14:45 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/04 18:59:28 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,6 @@ int				make_darker(double depth, int r, int g, int b)
 	b /= (1 + depth * depth * 0.000005);
 	result = (r << 16) + (g << 8) + b;
 	return (result);
-}
-
-void	draw_block(t_core *game, int x, int y, int color)
-{
-	int xc;
-	int yc;
-	
-	yc = y;
-	while (yc < y + game->map.block_size)
-	{
-		xc = x;
-		while (xc < x + game->map.block_size)
-			pixel_put(game->frame, xc++, yc, color);
-		yc++;
-	}
 }
 
 void	draw_rect(t_core *game, int x, int y, int a, int b)

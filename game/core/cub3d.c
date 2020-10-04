@@ -6,12 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 22:00:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/04 19:11:35 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //if last line not space map error why?
 //edd many spaces
+//i can walk through corners!!!!
 
 #include "cub3d.h"
 
@@ -68,6 +69,7 @@ int				cub3d(char *path)
 	init_game_settings(&game);
 	init_images(&game);
 	init_bonus_images(&game);
+	init_map(&game);
 	get_player_pos(&game);
 	handler(&game);
 	mlx_loop_hook(game.mlx, render, &game);

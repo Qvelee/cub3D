@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 22:34:33 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/04 19:04:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,19 @@ typedef	struct	s_ray_cast
 
 typedef	struct	s_map
 {
+	int	x_scale;
+	int	y_scale;
+	int	sizeX;
+	int	sizeY;
+	int	scale;
+	int	x_pos;
+	int	y_pos;
 	int	map_lines;
 	int	map_colunms;
 	int	block_size;
+	int	walls_color;
+	int	space_color;
+	int	player_color;
 }				t_map;
 
 typedef	struct	s_player
@@ -140,6 +150,7 @@ typedef	struct	s_core
 	t_tex		east;
 	t_tex		sky;
 	t_tex		floor;
+	t_tex		face;
 	t_buttons	button;
 	t_map		map;
 	t_player	player;
@@ -149,6 +160,7 @@ int				cub3d(char *path);
 void			init_bonus_images(t_core *game);
 void			init_images(t_core *game);
 void			init_game_settings(t_core *game);
+void			init_map(t_core *game);
 int				free_structer(t_pars *params);
 int				parser(char *path, t_pars *params);
 int				render(t_core *game);
@@ -158,7 +170,6 @@ int				handler(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
 void			draw_circle(t_core *game, int x0, int y0, int radius);
 void			draw_line(t_core *game, int x1, int y1, int x2, int y2);
-void			draw_block(t_core *game, int x, int y, int color);
 void			draw_rect(t_core *game, int x, int y, int a, int b);
 int				map(t_core *game);
 int				player(t_core *game);
