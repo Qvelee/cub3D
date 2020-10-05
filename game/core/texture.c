@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:42:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/03 21:19:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/05 18:15:01 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,22 @@ static	void	tex_pixels(t_core *game, t_tex *texture, t_ray_cast *ray)
 	texture->x_screen++;
 }
 
-void			texture_wall(t_core *game, t_ray_cast *ray, int scale)
+void			texture_wall(t_core *game, t_ray_cast *ray)
 {
 	t_tex	texture;
 	double	temp;
 
 	temp = ray->depth_v > ray->depth_h ? ray->xh : ray->yv;
 	if (temp == ray->xh)
-		texture = wall_check(game, ray->x, ray->y + 1) ? \
+		texture = object_check(game, ray->x, ray->y + 1, 'W') ? \
 			game->north : game->south;
 	else
-		texture = wall_check(game, ray->x + 1, ray->y) ? \
+		texture = object_check(game, ray->x + 1, ray->y, 'W') ? \
 			game->west : game->east;
 	texture.offset = temp / game->map.block_size - (int)temp / \
 		game->map.block_size;
 	texture.step = texture.height / ray->wall_height;
-	texture.x_screen = ray->num_rays * scale;
+	texture.x_screen = ray->num_rays;
 	texture.x_texture = texture.offset * (texture.width - 1);
-	while (scale--)
-		tex_pixels(game, &texture, ray);
+	tex_pixels(game, &texture, ray);
 }

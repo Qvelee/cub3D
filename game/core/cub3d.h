@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/04 19:04:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/05 22:54:40 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,46 @@ typedef	struct	s_player
 	double	y;
 }				t_player;
 
+typedef	struct	s_sprite
+{
+	char	type;
+	double	x;
+	double	y;
+	double	z;
+	double	depth;
+	int		heigth;
+	int		wigth;
+	double	scale;
+	double	angle;
+	double	dx;
+	double	dy;
+	double	gamma;
+	double	theta;
+	double	drays;
+	double	ray;
+	int		status;
+	int		condition;
+}				t_sprite;
+
+typedef	struct	s_object
+{
+	t_tex		*tex;
+	t_sprite	*pos;
+	int			quantity;
+}				t_object;
+
 typedef	struct	s_core
 {
 	t_pars		*params;
 	void		*mlx;
 	void		*window;
+	t_ray_cast	*buffer;
 	int			centerX;
 	int			centerY;
 	int			color;
+	t_buttons	button;
+	t_map		map;
+	t_player	player;
 	t_img		frame;
 	t_tex		west;
 	t_tex		north;
@@ -151,14 +183,13 @@ typedef	struct	s_core
 	t_tex		sky;
 	t_tex		floor;
 	t_tex		face;
-	t_buttons	button;
-	t_map		map;
-	t_player	player;
+	t_object	basic;
 }				t_core;
 
 int				cub3d(char *path);
-void			init_bonus_images(t_core *game);
-void			init_images(t_core *game);
+void			load_image(t_core *game, t_tex *texture, char *path);
+void			init_textures(t_core *game);
+void			init_sprites(t_core *game);
 void			init_game_settings(t_core *game);
 void			init_map(t_core *game);
 int				free_structer(t_pars *params);
@@ -174,10 +205,13 @@ void			draw_rect(t_core *game, int x, int y, int a, int b);
 int				map(t_core *game);
 int				player(t_core *game);
 int				ray_casting(t_core *game);
-int				wall_check(t_core *game, double x, double y);
-void			texture_wall(t_core *game, t_ray_cast *ray, int scale);
+int				object_check(t_core *game, double x, double y, char object);
+void			make_frame(t_core *game);
+void			texture_wall(t_core *game, t_ray_cast *ray);
 int				make_darker(double depth, int r, int g, int b);
 void			set_sky(t_core *game, t_ray_cast *ray);
 void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
+void			sprite(t_core *game, t_ray_cast *ray);
+
 
 #endif

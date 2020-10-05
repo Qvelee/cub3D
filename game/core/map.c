@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:32 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/04 20:04:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/05 11:52:00 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static	void	set_pixel(t_core *game, t_tex *texture)
 	if (color == 0)
 		return ;
 	if (texture == &game->floor)
-		color = make_darker(300, (color & 0xFF0000) >> 16, (color & 0x00FF00) >> 8, \
+		color = make_darker(300, (color & 0xFF0000) >> 16, \
+			(color & 0x00FF00) >> 8, \
 			(color & 0x0000FF));
 	((int *)(game->frame.img_addr))\
 			[(int)texture->y_screen * game->params->r[0] + \

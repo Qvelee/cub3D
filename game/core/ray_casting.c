@@ -6,41 +6,29 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/04 17:10:57 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/05 18:44:40 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				wall_check(t_core *game, double x, double y)
-{
-	int x_in_map;
-	int	y_in_map;
-
-	x_in_map = x / game->map.block_size;
-	y_in_map = y / game->map.block_size;
-	if (y_in_map > game->map.map_lines - 1 || \
-		x_in_map > game->map.map_colunms - 1)
-		return (1);
-	if (y_in_map < 0 || x_in_map < 0)
-		return (1);
-	if (game->params->map[y_in_map][x_in_map] == '1' || \
-		game->params->map[y_in_map][x_in_map] == '\0')
-		return (1);
-	return (0);
-}
-
 static	void	ray_treatment(t_core *game, t_ray_cast *ray)
 {
-	int		scale;
-
-	scale = game->params->r[0] / game->player.num_rays;
 	if ((ray->depth *= cos(game->player.angle - ray->current_angle)) == 0)
 		ray->depth = 0.00001;
 	ray->wall_height = (int)game->params->r[1] / \
 		(ray->depth / game->map.block_size);
-	set_floor_ceiling(game, ray);
-	texture_wall(game, ray, scale);
+	game->buffer[ray->num_rays].depth_h = ray->depth_h;
+	game->buffer[ray->num_rays].depth_v = ray->depth_v;
+	game->buffer[ray->num_rays].depth = ray->depth;
+	game->buffer[ray->num_rays].x = ray->x;
+	game->buffer[ray->num_rays].xh = ray->xh;
+	game->buffer[ray->num_rays].y = ray->y;
+	game->buffer[ray->num_rays].yv = ray->yv;
+	game->buffer[ray->num_rays].wall_height = ray->wall_height;
+	game->buffer[ray->num_rays].num_rays = ray->num_rays;
+	// set_floor_ceiling(game, ray);
+	// texture_wall(game, ray);
 }
 
 static	void	verticals(t_core *game, t_ray_cast *ray)
@@ -55,7 +43,7 @@ static	void	verticals(t_core *game, t_ray_cast *ray)
 	{
 		ray->depth_v = (ray->x - game->player.x) / cos(ray->current_angle);
 		ray->yv = game->player.y + ray->depth_v * sin(ray->current_angle);
-		if (wall_check(game, ray->x + ray->dx, ray->yv))
+		if (object_check(game, ray->x + ray->dx, ray->yv, 'W'))
 			break ;
 		ray->x += ray->dx * game->map.block_size;
 		blocks--;
@@ -74,7 +62,7 @@ static	void	horisontals(t_core *game, t_ray_cast *ray)
 	{
 		ray->depth_h = (ray->y - game->player.y) / sin(ray->current_angle);
 		ray->xh = game->player.x + ray->depth_h * cos(ray->current_angle);
-		if (wall_check(game, ray->xh, ray->y + ray->dy))
+		if (object_check(game, ray->xh, ray->y + ray->dy, 'W'))
 			break ;
 		ray->y += ray->dy * game->map.block_size;
 		blocks--;
