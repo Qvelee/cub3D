@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 22:54:40 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/06 22:15:18 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef	struct	s_tex
 	char	*frame;
 	char	*tex_image;
 	double	step;
+	double	step_x;
 	double	x_screen;
 	double	y_screen;
 	double	x_texture;
@@ -86,6 +87,7 @@ typedef	struct	s_tex
 
 typedef	struct	s_ray_cast
 {
+	char	type;
 	double	current_angle;
 	int		num_rays;
 	double	wall_height;
@@ -142,8 +144,10 @@ typedef	struct	s_sprite
 	double	y;
 	double	z;
 	double	depth;
-	int		heigth;
-	int		wigth;
+	double	heigth;
+	double	width;
+	double	ch;
+	double	cw;
 	double	scale;
 	double	angle;
 	double	dx;
@@ -199,9 +203,7 @@ void			pixel_put(t_img image, int x, int y, int color);
 void			esc_pressed(t_core *game);
 int				handler(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
-void			draw_circle(t_core *game, int x0, int y0, int radius);
-void			draw_line(t_core *game, int x1, int y1, int x2, int y2);
-void			draw_rect(t_core *game, int x, int y, int a, int b);
+void			free_lst(t_list **lst);
 int				map(t_core *game);
 int				player(t_core *game);
 int				ray_casting(t_core *game);
@@ -212,6 +214,6 @@ int				make_darker(double depth, int r, int g, int b);
 void			set_sky(t_core *game, t_ray_cast *ray);
 void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
 void			sprite(t_core *game, t_ray_cast *ray);
-
+void			set_sprite(t_core *game, t_sprite *sprite);
 
 #endif
