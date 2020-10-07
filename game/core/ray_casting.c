@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 18:44:40 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/06 19:35:16 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static	void	ray_treatment(t_core *game, t_ray_cast *ray)
 	game->buffer[ray->num_rays].yv = ray->yv;
 	game->buffer[ray->num_rays].wall_height = ray->wall_height;
 	game->buffer[ray->num_rays].num_rays = ray->num_rays;
+	game->buffer[ray->num_rays].type = ray->type;
 	// set_floor_ceiling(game, ray);
 	// texture_wall(game, ray);
 }
@@ -80,6 +81,7 @@ int				ray_casting(t_core *game)
 	set_sky(game, &ray);
 	while (++ray.num_rays < game->player.num_rays)
 	{
+		ray.type = '1';
 		verticals(game, &ray);
 		horisontals(game, &ray);
 		ray.depth = ray.depth_v > ray.depth_h ? ray.depth_h : ray.depth_v;

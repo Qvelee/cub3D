@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 18:38:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/06 00:55:04 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/06 22:42:16 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,27 @@
 
 //add malloc protect
 
-void	add_to_list(t_list **sprites, t_sprite *sprite, t_list *tmplst)
+void	add_sprite_to_list(t_list **sprites, t_sprite *sprite, t_list *tmplst)
 {
 	t_sprite	*temp;
 	t_list		*first;
 
 	first = *sprites;
-	// printf("ray-> %f\n", sprite->ray);
 	if (*sprites)
 	{
-		temp = (*sprites)->content;
-		while (sprite->depth > temp->depth)
+		while ((*sprites)->next)
 		{
-			*sprites = (*sprites)->next;
 			temp = (*sprites)->content;
+			if (sprite->depth >= temp->depth)
+				break ;
+			*sprites = (*sprites)->next;
 		}
 		tmplst->next = (*sprites)->next;
 		(*sprites)->next = tmplst;
 		(*sprites) = first;
 	}
 	else
-	{
-		//printf("lol\n");
 		*sprites = tmplst;
-	}
 }
 
 void	find_visible_sprites(t_core *game, t_object *object, t_list **sprites)
@@ -51,9 +48,7 @@ void	find_visible_sprites(t_core *game, t_object *object, t_list **sprites)
 		if (object->pos[temp].ray < 0 || object->pos[temp].ray >= game->params->r[0])
 			continue ;
 		tmplst = ft_lstnew(&object->pos[temp]);
-		//printf("que?\n");
-		add_to_list(sprites, &object->pos[temp], tmplst);
-		//printf("que wa?\n");
+		add_sprite_to_list(sprites, &object->pos[temp], tmplst);
 	}
 }
 
@@ -88,37 +83,92 @@ void	calc_sprites_params(t_core *game, t_object *object)
 	}
 }
 
+void	add_wall_to_list(t_list **walls, t_ray_cast	*wall, t_list *tmplst)
+{
+	t_ray_cast	*temp;
+	t_list		*first;
+
+	first = *walls;
+	if (*walls)
+	{
+		while ((*walls)->next)
+		{
+			temp = (*walls)->content;
+			if (wall->depth >= temp->depth)
+				break ;
+			*walls = (*walls)->next;
+		}
+		tmplst->next = (*walls)->next;
+		(*walls)->next = tmplst;
+		(*walls) = first;
+	}
+	else
+		*walls = tmplst;
+}
+
+void	sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
+{
+	t_list	*tmplst;
+	int		temp;
+
+	temp = game->player.num_rays;
+	while (temp--)
+	{
+		tmplst = ft_lstnew(&(*buffer)[temp]);
+		add_wall_to_list(walls, &(*buffer)[temp], tmplst);
+	}
+}
+
 void	print(void *link)
 {
-	t_sprite *sprite;
-	
-	sprite = link;
-	printf("depth -> %f\n", sprite->depth);
+	t_ray_cast *wall;
+
+	wall = link;
+	printf("depth -> %f\n", wall->depth);
 }
 
 void	make_frame(t_core *game)
 {
-	t_list	*sprites;
-	int		index;
+	t_list		*sprites;
+	t_list		*walls;
+	int			index;	
+	t_ray_cast	*wall;
+	t_sprite	*sprite;
+
+	static	int	t;
 	
 	index = -1;
 	sprites = NULL;
+	walls = NULL;
 	calc_sprites_params(game, &game->basic);
 	find_visible_sprites(game, &game->basic, &sprites);
-	//printf("size -> %d\n", ft_lstsize(sprites));
-	//ft_lstiter(sprites, print);
-	if (sprites)
-		ft_lstclear(&sprites, free);
-	// printf("dx = %f\ndy = %f\n", game->basic.pos[0].dx, game->basic.pos[0].dy);
-	// printf("depth -> %f\n", game->basic.pos[0].depth);
-	// printf("dray = %f\n", game->basic.pos[0].drays);
-	// printf("x = %f\ny = %f\nray = %f\ntheta = %f\ngamma = %f\n", \
-	// 	game->basic.pos[0].x, game->basic.pos[0].y, \
-	// 	game->basic.pos[0].ray, game->basic.pos[0].theta * 180 / M_PI, \
-	// 	game->basic.pos[0].gamma * 180 / M_PI);
-	while (++index < game->player.num_rays)
+	sort_walls(game, &game->buffer, &walls);
+	while (walls)
 	{
-		set_floor_ceiling(game, &game->buffer[index]);
-		texture_wall(game, &game->buffer[index]);
+		wall = walls->content;
+		if (sprites)
+			sprite = sprites->content;
+		if (!sprites || wall->depth > sprite->depth)
+		{
+			set_floor_ceiling(game, wall);
+			texture_wall(game, wall);
+			walls = walls->next;
+			printf("depth -> %f\n", wall->depth);
+		}
+		else
+		{
+			sprites = sprites->next;
+			//set_sprite(game, sprite);
+		}
 	}
+	if (!t)
+		if (getchar() == 'e')
+			t = 1;
+	// while (++index < game->player.num_rays)
+	// {
+	// 	set_floor_ceiling(game, &game->buffer[index]);
+	// 	texture_wall(game, &game->buffer[index]);
+	// }
+	free_lst(&sprites);
+	free_lst(&walls);
 }

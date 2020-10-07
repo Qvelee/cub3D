@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 14:21:20 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/06 19:51:19 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,18 @@ void	load_image(t_core *game, t_tex *texture, char *path)
 	texture->img.img_addr = mlx_get_data_addr(texture->img.image, \
 		&texture->img.bpp, &texture->img.size_line, \
 		&texture->img.endian);
+}
+
+void	free_lst(t_list **lst)
+{
+	t_list *temp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		free(*lst);
+		*lst = temp;
+	}
 }

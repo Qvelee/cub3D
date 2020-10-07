@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 23:54:15 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/06 21:58:22 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	find_sprites(t_object *sprite, char **map, char type)
 			{
 				sprite->pos[++temp].x = (double)x_in_map + 0.5;
 				sprite->pos[temp].y = (double)y_in_map + 0.5;
+				sprite->pos[temp].z = 0.5;
 				sprite->pos[temp].type = type;
 			}
 	}	
@@ -47,7 +48,7 @@ void	find_sprites(t_object *sprite, char **map, char type)
 void	init_basic(t_core *game, char *path)
 {
 	game->basic.tex = (t_tex*)malloc(sizeof(t_tex) * 1);
-	load_image(game, &game->basic.tex[0], ft_strjoin(path, "2.xpm"));
+	load_image(game, &game->basic.tex[0], ft_strjoin(path, "3.xpm"));
 	game->basic.quantity = 0;
 	find_sprites(&game->basic, game->params->map, '2');
 }
