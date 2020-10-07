@@ -60,13 +60,13 @@ PARS_ERRORS_SRC =	free_struct.c \
 
 #OBJ DIRS
 
-OBJ_CORE_DIR =		game/temp/game/core/
+OBJ_CORE_DIR =		./game/temp/game/core/
 
-OBJ_PARS_DIR =		game/temp/game/parser/
+OBJ_PARS_DIR =		./game/temp/game/parser/
 
-OBJ_PARS_UTIL_DIR =	game/temp/game/parser/parser_utils/
+OBJ_PARS_UTIL_DIR =	./game/temp/game/parser/parser_utils/
 
-OBJ_PARS_ERR_DIR =	game/temp/game/parser/errors_managment/
+OBJ_PARS_ERR_DIR =	./game/temp/game/parser/errors_managment/
 
 #OBJ
 
@@ -80,13 +80,17 @@ PARS_ERRORS_OBJ =	$(addprefix $(OBJ_PARS_ERR_DIR), $(PARS_ERRORS_SRC:.c=.o))
 
 ###
 
-LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -lXext -lX11 -lm
+LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -framework OpenGL -framework AppKit
 
 MAIN =				game/main.c
 
-all: libutil minlib $(NAME)
+all: crtmpdirs libutil minlib $(NAME)
 
 #add flags!
+
+crtmpdirs:
+	mkdir -p $(OBJ_CORE_DIR) $(OBJ_PARS_DIR) $(OBJ_PARS_UTIL_DIR) $(OBJ_PARS_ERR_DIR)
+
 libutil:
 	@$(MAKE) -C game/utils/
 

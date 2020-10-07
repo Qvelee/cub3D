@@ -39,7 +39,10 @@ ifdef ADD_BONUS
 OBJECTS += $(BNSRCOBJ)
 endif
 
-all: $(NAME)
+all: crtmpdir $(NAME)
+
+crtmpdir:
+	mkdir -p $(OBJDIR)
 
 $(NAME): $(HEADER) $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
