@@ -27,7 +27,10 @@ OBJDIR = ../temp/get_next_line/
 
 OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
-all: $(NAME)
+all: crtmpdirs $(NAME)
+
+crtmpdirs:
+	mkdir -p $(OBJDIR)
 
 libcomp:
 	@$(MAKE) bonus -C ./libft
