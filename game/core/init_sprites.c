@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/06 21:58:22 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/09 20:58:36 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,37 @@ void	find_sprites(t_object *sprite, char **map, char type)
 	}	
 }
 
-void	init_basic(t_core *game, char *path)
+// void	init_basic(t_core *game, char *path)
+// {
+// 	game->basic.tex = (t_tex*)malloc(sizeof(t_tex) * 1);
+// 	load_image(game, &game->basic.tex[0], ft_strjoin(path, "3.xpm"));
+// 	game->basic.quantity = 0;
+// 	game->basic.condition = 0;
+// 	find_sprites(&game->basic, game->params->map, '2');
+// }
+
+void	init_devil(t_core *game, char *path)
 {
-	game->basic.tex = (t_tex*)malloc(sizeof(t_tex) * 1);
-	load_image(game, &game->basic.tex[0], ft_strjoin(path, "3.xpm"));
-	game->basic.quantity = 0;
+	int			quantity;
+	
+	quantity = -1;
+	game->basic.tex = (t_tex*)malloc(sizeof(t_tex) * 8);
+	while (++quantity < 8)
+		load_image(game, &game->basic.tex[quantity], \
+			ft_strjoin(path, ft_strjoin(ft_itoa(quantity), ".xpm")));
+	game->devil.quantity = 1;
+	game->devil.condition = 1;
 	find_sprites(&game->basic, game->params->map, '2');
+	// game->devil.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
+	// 	game->devil.quantity);
+	// game->devil.pos[0].x = 5.5;
+	// game->devil.pos[0].y = 4.5;
+	// game->devil.pos[0].z = 0.5;
+	// game->devil.pos[0].type = 'd';
 }
 
 void	init_sprites(t_core *game)
 {
-	init_basic(game, "./sprites/2/");
+	//init_basic(game, "./sprites/2/");
+	init_devil(game, "./sprites/devil/");
 }

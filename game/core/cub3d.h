@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/06 22:15:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/09 20:57:16 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,6 @@ typedef	struct	s_sprite
 	double	drays;
 	double	ray;
 	int		status;
-	int		condition;
 }				t_sprite;
 
 typedef	struct	s_object
@@ -165,6 +164,7 @@ typedef	struct	s_object
 	t_tex		*tex;
 	t_sprite	*pos;
 	int			quantity;
+	int			condition;
 }				t_object;
 
 typedef	struct	s_core
@@ -188,6 +188,7 @@ typedef	struct	s_core
 	t_tex		floor;
 	t_tex		face;
 	t_object	basic;
+	t_object	devil;
 }				t_core;
 
 int				cub3d(char *path);
@@ -215,5 +216,8 @@ void			set_sky(t_core *game, t_ray_cast *ray);
 void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
 void			sprite(t_core *game, t_ray_cast *ray);
 void			set_sprite(t_core *game, t_sprite *sprite);
+void			calc_sprites_params(t_core *game, t_object *object);
+void			add_sprite_to_list(t_list **sprites, t_sprite *sprite, t_list *tmplst);
+void			find_visible_sprites(t_core *game, t_object *object, t_list **sprites);
 
 #endif

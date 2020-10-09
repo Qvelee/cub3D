@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 16:59:26 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/04 13:51:17 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/09 21:40:39 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			set_floor_ceiling(t_core *game, t_ray_cast *ray)
 	fc.floor_y = ray->y / game->map.block_size;
 	texture.x_screen = ray->num_rays;
 	fc.dist_to_wall = ray->depth / game->map.block_size;
-	fc.lineheight = (int)(game->params->r[1] / fc.dist_to_wall);
+	fc.lineheight = (int)(game->params->r[1] / fc.dist_to_wall) - 1;
 	if ((texture.y_screen = fc.lineheight / 2 + game->params->r[1] / 2) >= \
 		game->params->r[1])
 		texture.y_screen = game->params->r[1] - 1;
@@ -62,9 +62,12 @@ void			set_sky(t_core *game, t_ray_cast *ray)
 
 	texture = game->sky;
 	texture.step = game->sky.height / (game->params->r[1] / 2);
-	texture.offset = (((game->player.angle + game->player.fov / 2) * 180 / M_PI) / \
-		game->params->r[0] - (int)((game->player.angle + game->player.fov / 2) * \
-		180 / M_PI) / game->params->r[0]);
+	// texture.offset = (((game->player.angle - game->player.fov / 2) * 180 / M_PI) / \
+	// 	game->params->r[0] - (int)((game->player.angle - game->player.fov / 2) * \
+	// 	180 / M_PI) / game->params->r[0]);
+	texture.offset = (game->player.angle) * 180 / M_PI / 360 * 5;
+	if (texture.offset >= 1)
+		texture.offset = texture.offset - (int)texture.offset;
 	texture.x_screen = -1;
 	texture.x_texture = texture.offset * texture.width;
 	texture.x_texture = texture.x_texture < 0 ? texture.width - 1 + \

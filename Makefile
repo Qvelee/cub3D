@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/05 18:38:46 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/07 17:10:53 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ PARS_ERRORS_OBJ =	$(addprefix $(OBJ_PARS_ERR_DIR), $(PARS_ERRORS_SRC:.c=.o))
 
 ###
 
-LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -framework OpenGL -framework AppKit
+LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -lXext -lX11 -lm
 
 MAIN =				game/main.c
 

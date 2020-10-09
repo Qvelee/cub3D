@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/06 19:35:16 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/09 20:50:59 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ static	void	ray_treatment(t_core *game, t_ray_cast *ray)
 	game->buffer[ray->num_rays].wall_height = ray->wall_height;
 	game->buffer[ray->num_rays].num_rays = ray->num_rays;
 	game->buffer[ray->num_rays].type = ray->type;
-	// set_floor_ceiling(game, ray);
-	// texture_wall(game, ray);
 }
 
 static	void	verticals(t_core *game, t_ray_cast *ray)
