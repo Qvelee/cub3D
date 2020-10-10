@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 16:59:26 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/09 21:40:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/10 20:01:25 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ void			set_sky(t_core *game, t_ray_cast *ray)
 
 	texture = game->sky;
 	texture.step = game->sky.height / (game->params->r[1] / 2);
-	// texture.offset = (((game->player.angle - game->player.fov / 2) * 180 / M_PI) / \
-	// 	game->params->r[0] - (int)((game->player.angle - game->player.fov / 2) * \
-	// 	180 / M_PI) / game->params->r[0]);
 	texture.offset = (game->player.angle) * 180 / M_PI / 360 * 5;
 	if (texture.offset >= 1)
 		texture.offset = texture.offset - (int)texture.offset;

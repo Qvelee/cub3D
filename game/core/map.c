@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:32 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 11:52:00 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/10 19:42:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	void	set_pixel(t_core *game, t_tex *texture)
+static	void	set_floor_pixel(t_core *game, t_tex *texture)
 {
 	int	color;
 	
@@ -45,7 +45,7 @@ static	void	draw_block(t_core *game, t_tex *texture, int x, int y)
 		texture->x_texture = 0;
 		while (texture->x_screen < x + game->map.scale)
 		{
-			set_pixel(game, texture);
+			set_floor_pixel(game, texture);
 			texture->x_texture += step_x;
 			texture->x_screen++;
 		}

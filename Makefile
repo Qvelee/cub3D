@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/07 17:10:53 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/10 18:41:28 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ PARS_ERRORS_DIR =	game/parser/errors_managment/
 CORE_SRC =			cub3d.c \
 					inits.c \
 					init_sprites.c \
+					init_basic.c \
 					handler.c \
 					render.c \
 					utils.c \
@@ -42,10 +43,12 @@ CORE_SRC =			cub3d.c \
 					player.c \
 					map.c \
 					make_frame.c \
+					walls_treatment.c \
+					sprites_treatment.c \
 					ray_casting.c \
 					texture.c \
 					background.c \
-					sprites.c
+					draw_sprite.c
 
 PARS_SRC =			parser.c
 

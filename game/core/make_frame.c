@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 18:38:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/09 20:08:12 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/10 20:09:02 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,67 +14,29 @@
 
 //add malloc protect
 
-void	add_wall_to_list(t_list **walls, t_ray_cast	*wall, t_list *tmplst)
+static	void	set_last_sprites(t_core *game, t_list *sprites)
 {
-	t_ray_cast	*temp;
-	t_list		*first;
-	void		*link;
+	t_sprite	*sprite;
 
-	first = *walls;
-	if (*walls)
+	while (sprites)
 	{
-		while ((*walls)->next)
-		{
-			temp = (*walls)->content;
-			if (wall->depth >= temp->depth)
-				break ;
-			*walls = (*walls)->next;
-		}
-		tmplst->next = (*walls)->next;
-		link = (*walls)->content;
-		(*walls)->content = tmplst->content;
-		tmplst->content = link;
-		(*walls)->next = tmplst;
-		*walls = first;
-	}
-	else
-		*walls = tmplst;
-}
-
-void	sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
-{
-	t_list	*tmplst;
-	int		temp;
-
-	temp = 0;
-	while (temp < game->player.num_rays)
-	{
-		tmplst = ft_lstnew(&(*buffer)[temp]);
-		add_wall_to_list(walls, &(*buffer)[temp], tmplst);
-		temp++;
+		sprite = sprites->content;
+		draw_sprite(game, sprite);
+		sprites = sprites->next;
 	}
 }
 
-void	make_frame(t_core *game)
+static	void	z_boofer(t_core *game, t_list *walls, t_list *sprites)
 {
-	t_list		*sprites;
-	t_list		*walls;
-	int			index;	
 	t_ray_cast	*wall;
 	t_sprite	*sprite;
-	
-	sprites = NULL;
-	walls = NULL;
-	calc_sprites_params(game, &game->basic);
-	find_visible_sprites(game, &game->basic, &sprites);
-	sort_walls(game, &game->buffer, &walls);
+
 	while (walls)
 	{
 		wall = walls->content;
-		if (sprites)
-			sprite = sprites->content;
-		if (!sprites || wall->depth >= sprite->depth * cos(game->player.fov / 2 - \
-		 	sprite->ray * game->player.delta_angle))
+		sprite = sprites ? sprites->content : NULL;
+		if (!sprites || wall->depth >= sprite->depth * \
+			cos(game->player.fov / 2 - sprite->ray * game->player.delta_angle))
 		{
 			set_floor_ceiling(game, wall);
 			texture_wall(game, wall);
@@ -83,15 +45,25 @@ void	make_frame(t_core *game)
 		else
 		{
 			sprites = sprites->next;
-			set_sprite(game, sprite);
+			draw_sprite(game, sprite);
 		}
 	}
-	while (sprites)
-	{
-		sprite = sprites->content;
-		set_sprite(game, sprite);
-		sprites = sprites->next;
-	}
+	set_last_sprites(game, sprites);
+}
+
+void			make_frame(t_core *game)
+{
+	t_list		*sprites;
+	t_list		*walls;
+
+	sprites = NULL;
+	walls = NULL;
+	calc_sprites_params(game, &game->basic);
+	calc_sprites_params(game, &game->devil);
+	find_visible_sprites(game, &game->basic, &sprites);
+	find_visible_sprites(game, &game->devil, &sprites);
+	sort_walls(game, &game->buffer, &walls);
+	z_boofer(game, walls, sprites);
 	free_lst(&sprites);
 	free_lst(&walls);
 }

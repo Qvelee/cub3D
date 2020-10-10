@@ -9,7 +9,7 @@ WE ./textures/s.xpm
 
 EA ./textures/w.xpm
 
-S ./path_to_the_sprite_texture
+S ./sprites/2/2.xpm
 
 F 66,100,0
 

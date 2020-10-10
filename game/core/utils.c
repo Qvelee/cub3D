@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/06 19:51:19 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/10 20:03:52 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,21 @@ void	load_image(t_core *game, t_tex *texture, char *path)
 	texture->img.img_addr = mlx_get_data_addr(texture->img.image, \
 		&texture->img.bpp, &texture->img.size_line, \
 		&texture->img.endian);
+}
+
+void	set_pixel(t_core *game, t_tex *texture, double depth)
+{
+	int color;
+
+	color = ((int *)(texture->img.img_addr))\
+			[(int)texture->y_texture * texture->width + \
+			(int)texture->x_texture];
+	if (color != 0)
+		((int *)(game->frame.img_addr))\
+			[(int)texture->y_screen * game->params->r[0] + \
+			(int)texture->x_screen] = make_darker(depth, \
+			(color & 0xFF0000) >> 16, (color & 0x00FF00) >> 8, \
+			color & 0x0000FF);
 }
 
 void	free_lst(t_list **lst)

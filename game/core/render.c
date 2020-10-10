@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/06 00:45:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/10 19:48:54 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ void	esc_pressed(t_core *game)
 	mlx_destroy_window(game->mlx, game->window);
 	free(game->buffer);
 	exit(0);
-}
-
-void	pixel_put(t_img image, int x, int y, int color)
-{
-	char			*dst;
-
-	if (y < 0 || x < 0)
-		return ;
-	dst = image.img_addr + (y * image.size_line + x * (image.bpp / 8));
-	*(unsigned int*)dst = color;
 }
 
 int		render(t_core *game)
