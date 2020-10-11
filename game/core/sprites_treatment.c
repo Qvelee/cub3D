@@ -6,49 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 18:26:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 19:47:20 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/11 14:37:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void			type_of_sprite(t_core *game, t_sprite *sprite, \
-	t_tex *texture, int num)
-{
-	if (sprite->type == '2')
-		*texture = game->basic.tex[num];
-	if (sprite->type == 'd')
-		*texture = game->devil.tex[num];
-}
-
-int				needed_side(t_sprite *sprite)
-{
-	int		num;
-	double	angle;
-
-	num = 0;
-	angle = 360;
-	if (sprite->condition == 1)
-	{
-		if (sprite->theta < 22.5 || sprite->theta > 337.5)
-			num = 0;
-		if (sprite->theta < 67.5 && sprite->theta > 22.5)
-			num = 1;
-		if (sprite->theta < 112.5 && sprite->theta > 67.5)
-			num = 2;
-		if (sprite->theta < 157.5 && sprite->theta > 112.5)
-			num = 3;
-		if (sprite->theta < 202.5 && sprite->theta > 157.5)
-			num = 4;
-		if (sprite->theta < 247.5 && sprite->theta > 202.5)
-			num = 5;
-		if (sprite->theta < 292.5 && sprite->theta > 247.5)
-			num = 6;
-		if (sprite->theta < 337.5 && sprite->theta > 292.5)
-			num = 7;
-	}
-	return (num);
-}
 
 static	void	add_sprite_to_list(t_list **sprites, t_sprite *sprite, \
 	t_list *tmplst)

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 19:48:33 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/11 15:13:58 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,14 +156,18 @@ typedef	struct	s_sprite
 	double	theta;
 	double	drays;
 	double	ray;
-	int		status;
+	int		volume;
 	int		condition;
+	int		a_tmp;
+	int		a_speed;
+	t_list	*a_buff;
 }				t_sprite;
 
 typedef	struct	s_object
 {
 	t_tex		*tex;
 	t_sprite	*pos;
+	t_tex		*anim;
 	int			quantity;
 }				t_object;
 
@@ -189,6 +193,8 @@ typedef	struct	s_core
 	t_tex		face;
 	t_object	basic;
 	t_object	devil;
+	t_object	pin;
+	t_object	**objects;
 }				t_core;
 
 int				cub3d(char *path);
@@ -223,7 +229,7 @@ void			find_visible_sprites(t_core *game, t_object *object, \
 	t_list **sprites);
 int				needed_side(t_sprite *sprite);
 void			type_of_sprite(t_core *game, t_sprite *sprite, \
-	t_tex *texture, int num);
+	t_tex **texture, int num);
 void			draw_sprite(t_core *game, t_sprite *sprite);
 
 #endif
