@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:30:20 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 19:07:48 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 14:09:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 
 int		upd_pars(int type, char *component, t_pars *params);
 int		get_map(int fd, char *last_line, t_pars *params);
+int		error_wrong_filename();
+int		error_open_file();
+int		error_invalid_file(t_pars *params);
 int		error_nswes_malloc(t_pars *params, int error);
 int		error_get_pars(char **line, int fd);
 int		error_read_file_pars(int fd, t_pars *params);

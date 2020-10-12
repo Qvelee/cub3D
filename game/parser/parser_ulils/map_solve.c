@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 16:04:42 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 23:23:53 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:06:22 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,14 @@ static	int		get_lines(int fd, char *last_line, t_list **map)
 	char	*line;
 	int		temp;
 
+	temp = 1;
 	if (!(tmplastl = ft_strdup(last_line)))
 		return (!error_malloc_tmplastl());
 	if (!(*map = ft_lstnew(tmplastl)))
 		return (!error_malloc_map(&tmplastl));
-	while ((temp = get_next_line(fd, &line)))
+	while (temp)
 	{
+		temp = get_next_line(fd, &line);
 		if (temp == -1)
 			return (error_read_file_get_lines(fd, map));
 		if (!(tmpdup = ft_strdup(line)))
@@ -113,7 +115,6 @@ static	int		get_lines(int fd, char *last_line, t_list **map)
 		ft_lstadd_back(map, tmplst);
 		free(line);
 	}
-	free(line);
 	return (0);
 }
 

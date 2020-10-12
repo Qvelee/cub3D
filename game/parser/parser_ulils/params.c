@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:24:55 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 19:14:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:14:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,47 @@ static int	check_color_par_correct(char *component)
 {
 	int index;
 	int point;
+	int digits;
 
 	index = -1;
 	point = 0;
+	digits = 0;
 	while (component[++index] != '\0')
 	{
-		if (!ft_isdigit(component[index]))
+		if (ft_isdigit(component[index]))
 		{
-			if (component[index] == ',')
-			{
-				if (point < 2)
-					point++;
-				else
-					return (1);
-			}
-			else
-				return (1);
+			while (ft_isdigit(component[index]))
+				index++;
+			digits++;
 		}
+		if (component[index] == ',')
+			point++;
+		if (component[index] != ' ' && component[index] != '\0' && \
+			component[index] != ',')
+			return (1);
 	}
-	return (point != 2);
+	return (digits != 3 || point != 2);
 }
 
 static int	check_r_par_correct(char *component)
 {
 	int	index;
-	int space;
+	int	digits;
 
 	index = -1;
-	space = 0;
+	digits = 0;
 	while (component[++index] != '\0')
 	{
-		if (!ft_isdigit(component[index]))
+		if (ft_isdigit(component[index]))
 		{
-			if (component[index] == ' ')
-			{
-				if (space == 0)
-					space = 1;
-				else
-					return (1);
-			}
-			else
-				return (1);
+			while (ft_isdigit(component[index]))
+				index++;
+			digits++;
 		}
+		if (component[index] != ' ' && component[index] != '\0')
+			return (1);
 	}
-	return (space != 1);
+	return (digits != 2);
 }
 
 static int	rfc_pars(int type, char *component, t_pars *params)

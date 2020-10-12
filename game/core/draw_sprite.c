@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:52:06 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/11 15:22:25 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 11:12:36 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,19 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 	if (sprite->type == '2')
 		*texture = &game->basic.tex[num];
 	if (sprite->type == 'd')
-		*texture = &game->devil.tex[num];
+	{
+		if (sprite->depth < game->map.block_size * 5)
+		{
+			*texture = sprite->a_buff->content;
+			if (sprite->a_tmp++ == sprite->a_speed)
+			{
+				sprite->a_buff = sprite->a_buff->next;
+				sprite->a_tmp = 0;
+			}
+		}
+		else
+			*texture = &game->devil.tex[num];
+	}
 	if (sprite->type == 'p')
 	{
 		if (sprite->depth < game->map.block_size * 5)

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:32:37 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/09/06 18:33:23 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 14:25:35 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		error_in_params(t_pars *params)
 		params->f[0] == 666 || params->c[0] == 666)
 	{
 		free_struct(params);
+		ft_putendl_fd("Error", 1);
 		ft_putendl_fd("cub3D: Not all parameters", 1);
 		return (1);
 	}
@@ -29,6 +30,7 @@ int		error_in_params(t_pars *params)
 int		error_invalid_params(t_pars *params)
 {
 	free_struct(params);
+	ft_putendl_fd("Error", 1);
 	ft_putendl_fd("cub3D: Invalid parameters", 1);
 	return (0);
 }
@@ -74,6 +76,7 @@ int		error_read_file_pars(int fd, t_pars *params)
 {
 	close(fd);
 	free_struct(params);
+	ft_putendl_fd("Error", 1);
 	ft_putendl_fd("cub3D: Error while reading from file", 1);
 	return (0);
 }

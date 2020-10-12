@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/10 18:41:28 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/12 12:18:21 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ PARS_SRC =			parser.c
 PARS_UTIL_SRC =		params.c \
 					map_solve.c
 
-PARS_ERRORS_SRC =	free_struct.c \
+PARS_ERRORS_SRC =	errors_utils.c \
 					errors_parser.c \
 					errors_params.c \
 					errors_map_solve.c \

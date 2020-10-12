@@ -6,14 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/07 16:55:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:19:52 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//if last line not space map error why?
-//edd many spaces
 //i can walk through corners!!!!
-//make nickname with username
 
 #include "cub3d.h"
 
