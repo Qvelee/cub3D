@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 19:48:54 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 19:21:21 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	esc_pressed(t_core *game)
+int		esc_pressed(t_core *game)
 {
 	mlx_destroy_image(game->mlx, game->frame.image);
 	mlx_clear_window(game->mlx, game->window);

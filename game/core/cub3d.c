@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 17:19:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 17:30:04 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ int				cub3d(char *path)
 		return (0);
 	game.params = &params;
 	game.mlx = mlx_init();
-	game.window = mlx_new_window(game.mlx, game.params->r[0], \
-		game.params->r[1], "cub3D");
+	init_window(&game);
 	init_game_settings(&game);
 	init_textures(&game);
 	init_sprites(&game);

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 18:38:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/11 13:02:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:39:01 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,6 @@ void			make_frame(t_core *game)
 		calc_sprites_params(game, game->objects[index]);
 		find_visible_sprites(game, game->objects[index], &sprites);
 	}
-	// calc_sprites_params(game, &game->basic);
-	// calc_sprites_params(game, &game->devil);
-	// find_visible_sprites(game, &game->basic, &sprites);
-	// find_visible_sprites(game, &game->devil, &sprites);
 	sort_walls(game, &game->buffer, &walls);
 	z_boofer(game, walls, sprites);
 	free_lst(&sprites);

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 11:17:45 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:43:50 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	init_devil(t_core *game, char *path)
 		game->devil.quantity);
 	game->devil.pos[0].volume = 1;
 	game->devil.pos[0].a_tmp = 0;
-	game->devil.pos[0].a_speed = 5;
+	game->devil.pos[0].a_speed = 1;
 	game->devil.pos[0].condition = 1;
 	game->devil.pos[0].type = 'd';
 	game->devil.pos[0].scale = 1;

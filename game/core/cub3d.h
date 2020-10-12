@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 17:18:45 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:49:51 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ typedef	struct	s_core
 
 int				cub3d(char *path);
 void			load_image(t_core *game, t_tex *texture, char *path);
+void			init_window(t_core *game);
 void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
 void			set_spr(t_sprite *sprite, double x, double y, double z);
@@ -209,7 +210,7 @@ int				free_structer(t_pars *params);
 int				parser(char *path, t_pars *params);
 int				render(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
-void			esc_pressed(t_core *game);
+int				esc_pressed(t_core *game);
 int				handler(t_core *game);
 void			set_pixel(t_core *game, t_tex *texture, double depth);
 void			free_lst(t_list **lst);
@@ -220,6 +221,7 @@ int				object_check(t_core *game, double x, double y, char object);
 void			make_frame(t_core *game);
 void			texture_wall(t_core *game, t_ray_cast *ray);
 int				make_darker(double depth, int r, int g, int b);
+void			set_back_colors(t_core *game);
 void			set_sky(t_core *game, t_ray_cast *ray);
 void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
 void			sprite(t_core *game, t_ray_cast *ray);

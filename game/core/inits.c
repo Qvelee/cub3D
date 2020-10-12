@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/05 18:19:03 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/12 18:09:07 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,25 @@ void	init_map(t_core *game)
 	game->map.sizeX = game->map.scale * game->map.map_colunms;
 	game->map.sizeY = game->map.scale * game->map.map_lines;
 }
-	
+
+void	init_window(t_core *game)
+{
+	int	scr_height;
+	int	scr_width;
+
+	mlx_get_screen_size(game->mlx, &scr_width, &scr_height);
+	game->params->r[0] = game->params->r[0] >= scr_width ? scr_width : \
+		game->params->r[0];
+	game->params->r[1] = game->params->r[1] >= scr_height ? scr_height : \
+		game->params->r[1];
+	if (game->params->r[0] < 2)
+		game->params->r[0] = 2;
+	if (game->params->r[1] < 2)
+		game->params->r[1] = 2;
+	game->window = mlx_new_window(game->mlx, game->params->r[0], \
+		game->params->r[1], "cub3D");
+}
+
 void	init_game_settings(t_core *game)
 {
 	int	temp;
