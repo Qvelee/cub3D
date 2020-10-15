@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/12 18:34:59 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/15 18:24:27 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ CORE_SRC =			cub3d.c \
 					inits.c \
 					init_sprites.c \
 					init_basic.c \
+					init_ghost.c \
+					init_devil.c \
 					handler.c \
 					render.c \
 					utils.c \
@@ -86,14 +88,29 @@ PARS_ERRORS_OBJ =	$(addprefix $(OBJ_PARS_ERR_DIR), $(PARS_ERRORS_SRC:.c=.o))
 
 LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -lXext -lX11 -lm
 
-MAIN =				game/main.c
+MAIN =				./game/main.c
 
-all: crtmpdirs libutil minlib $(NAME)
+BONUS_OFF =			./scripts/bonus_off.sh
+
+BONUS_ON =			./scripts/bonus_on.sh
+
+all: run_script crtmpdirs libutil minlib $(NAME)
 
 #add flags!
 
+ifdef ADD_BONUS
+SCRIPT = $(BONUS_ON)
+endif
+
+ifndef ADD_BONUS
+SCRIPT = $(BONUS_OFF)
+endif
+
+run_script:
+	$(SCRIPT)
+
 crtmpdirs:
-	mkdir -p $(OBJ_CORE_DIR) $(OBJ_PARS_DIR) $(OBJ_PARS_UTIL_DIR) $(OBJ_PARS_ERR_DIR)
+	@mkdir -p $(OBJ_CORE_DIR) $(OBJ_PARS_DIR) $(OBJ_PARS_UTIL_DIR) $(OBJ_PARS_ERR_DIR)
 
 libutil:
 	@$(MAKE) -C game/utils/
@@ -101,20 +118,23 @@ libutil:
 minlib:
 	@$(MAKE) -C minilibx/
 
-$(NAME): $(HEADER) $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
-	@$(COMP) $(^:$(HEADER)=) $(MAIN) $(LIBUTILS) -o $@
+$(NAME): $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
+	$(COMP) $^ $(MAIN) $(LIBUTILS) -o $@
 
-$(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c)
+$(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c) $(HEADER)
 	@$(COMP) -c $< -o $@
 
-$(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c)
+$(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c) $(HEADER)
 	@$(COMP) -c $< -o $@
 
-$(addprefix $(OBJ_PARS_UTIL_DIR), %.o): $(addprefix $(PARS_UTIL_DIR), %.c)
+$(addprefix $(OBJ_PARS_UTIL_DIR), %.o): $(addprefix $(PARS_UTIL_DIR), %.c) $(HEADER)
 	@$(COMP) -c $< -o $@
 
-$(addprefix $(OBJ_PARS_ERR_DIR), %.o): $(addprefix $(PARS_ERRORS_DIR), %.c)
+$(addprefix $(OBJ_PARS_ERR_DIR), %.o): $(addprefix $(PARS_ERRORS_DIR), %.c) $(HEADER)
 	@$(COMP) -c $< -o $@
+
+bonus:
+	@$(MAKE) ADD_BONUS=1 all;
 
 clean:
 	@rm -rf $(OBJ)
@@ -129,3 +149,5 @@ fclean: clean
 	@$(MAKE) fclean -C game/utils/
 
 re: fclean all
+
+.PHONY: all, re, clean, fclean, bonus

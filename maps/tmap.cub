@@ -1,19 +1,19 @@
 
 R 1200 800
 
-NO ./textures/s.xpm
+NO ./textures/basic/north.xpm
 
-SO ./textures/w.xpm
+SO ./textures/basic/south.xpm
 
-WE ./textures/s.xpm
+WE ./textures/basic/west.xpm
 
-EA ./textures/w.xpm
+EA ./textures/basic/east.xpm
 
 S ./sprites/2/2.xpm
 
-F 66,10,0
+F 220,220,220
 
-C 25,30,0
+C 140,140,140
 
 1111111111111111111
 1E00200011100020001

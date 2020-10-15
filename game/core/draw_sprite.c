@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:52:06 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 11:12:36 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/15 18:23:03 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 			}
 		}
 		else
-			*texture = &game->pin.tex[num];
+			*texture = &game->ghost.tex[num];
 	}
 }
 

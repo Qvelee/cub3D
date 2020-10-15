@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 19:21:27 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:50:50 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,16 @@ int				mouse_moved(int x, int y, t_core *game)
 int				handler(t_core *game)
 {
 	init_handler(game);
-	mlx_mouse_hide(game->mlx, game->window);
-	mlx_hook(game->window, 6, 1L << 6, mouse_moved, game);
-	// mlx_hook(game->window, 17, 1L << 17, esc_pressed, game);
-	mlx_hook(game->window, 2, 1L << 0, key_pressed, game);
-	mlx_hook(game->window, 3, 1L << 1, key_realised, game);
+	if (BONUS && game->save == -1)
+	{
+		mlx_mouse_hide(game->mlx, game->window);
+		mlx_hook(game->window, 6, 1L << 6, mouse_moved, game);
+	}
+	if (game->save == -1)
+	{
+		mlx_hook(game->window, 17, 1L << 0, esc_pressed, game);
+		mlx_hook(game->window, 2, 1L << 0, key_pressed, game);
+		mlx_hook(game->window, 3, 1L << 1, key_realised, game);
+	}
 	return (0);
 }

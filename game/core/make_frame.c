@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 18:38:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 18:39:01 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/15 14:40:14 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static	void	z_boofer(t_core *game, t_list *walls, t_list *sprites)
 		if (!sprites || wall->depth >= sprite->depth * \
 			cos(game->player.fov / 2 - sprite->ray * game->player.delta_angle))
 		{
-			set_floor_ceiling(game, wall);
+			if (BONUS)
+				set_floor_ceiling(game, wall);
 			texture_wall(game, wall);
 			walls = walls->next;
 		}

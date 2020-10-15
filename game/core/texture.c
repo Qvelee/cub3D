@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:42:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 20:41:36 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/15 17:42:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,35 @@ static	void	tex_pixels(t_core *game, t_tex *texture, t_ray_cast *ray)
 	texture->x_screen++;
 }
 
+static	void	what_texture(t_core *game, t_ray_cast *ray, t_tex *texture, \
+	double temp)
+{
+	if (!BONUS || BONUS)
+	{
+		if (temp == ray->xh)
+			*texture = object_check(game, ray->x, ray->y + 1, 'W') ? \
+				game->north : game->south;
+		else
+			*texture = object_check(game, ray->x + 1, ray->y, 'W') ? \
+				game->west : game->east;
+	}
+}
+
 void			texture_wall(t_core *game, t_ray_cast *ray)
 {
 	t_tex	texture;
 	double	temp;
 
 	temp = ray->depth_v > ray->depth_h ? ray->xh : ray->yv;
-	if (temp == ray->xh)
-		texture = object_check(game, ray->x, ray->y + 1, 'W') ? \
-			game->north : game->south;
-	else
-		texture = object_check(game, ray->x + 1, ray->y, 'W') ? \
-			game->west : game->east;
+	what_texture(game, ray, &texture, temp);
 	texture.offset = temp / game->map.block_size - (int)temp / \
 		game->map.block_size;
+	if (temp == ray->xh)
+		texture.offset = object_check(game, ray->x, ray->y + 1, 'W') ? \
+			1 - texture.offset : texture.offset;
+	else
+		texture.offset = object_check(game, ray->x + 1, ray->y, 'W') ? \
+			texture.offset : 1 - texture.offset;
 	texture.step = texture.height / ray->wall_height;
 	texture.x_screen = ray->num_rays;
 	texture.x_texture = texture.offset * (texture.width - 1);

@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/25 13:56:56 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 16:06:58 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/14 16:19:45 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJ = $(addprefix $(OBJDIR), $(SRC:.c=.o))
 all: crtmpdirs $(NAME)
 
 crtmpdirs:
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 libcomp:
 	@$(MAKE) bonus -C ./libft

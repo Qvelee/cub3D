@@ -6,12 +6,14 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 18:49:51 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:33:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define BONUS 0
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -174,6 +176,7 @@ typedef	struct	s_object
 typedef	struct	s_core
 {
 	t_pars		*params;
+	int			save;
 	void		*mlx;
 	void		*window;
 	t_ray_cast	*buffer;
@@ -193,19 +196,22 @@ typedef	struct	s_core
 	t_tex		face;
 	t_object	basic;
 	t_object	devil;
-	t_object	pin;
+	t_object	ghost;
 	t_object	**objects;
 }				t_core;
 
-int				cub3d(char *path);
+int				cub3d(char *path, char *flag);
 void			load_image(t_core *game, t_tex *texture, char *path);
 void			init_window(t_core *game);
 void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
+void			create_anim_buff(t_tex *anim, t_list **a_buff, int quant);
 void			set_spr(t_sprite *sprite, double x, double y, double z);
 void			init_basic(t_core *game, char *path);
 void			init_game_settings(t_core *game);
 void			init_map(t_core *game);
+void			init_ghost(t_core *game, char *path);
+void			init_devil(t_core *game, char *path);
 int				free_structer(t_pars *params);
 int				parser(char *path, t_pars *params);
 int				render(t_core *game);

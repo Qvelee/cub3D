@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 18:09:07 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/15 19:44:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ void	init_textures(t_core *game)
 	load_image(game, &game->north, game->params->no);
 	load_image(game, &game->south, game->params->so);
 	load_image(game, &game->east, game->params->ea);
-	load_image(game, &game->sky, "./textures/sky3.xpm");
-	load_image(game, &game->floor, "./textures/w.xpm");
-	load_image(game, &game->face, "./textures/face.xpm");
+	if (BONUS)
+	{
+		load_image(game, &game->sky, "./textures/sky.xpm");
+		load_image(game, &game->floor, "./textures/w.xpm");
+		load_image(game, &game->face, "./textures/face.xpm");
+	}
 }
 
 void	init_map(t_core *game)
@@ -56,8 +59,14 @@ void	init_window(t_core *game)
 		game->params->r[0] = 2;
 	if (game->params->r[1] < 2)
 		game->params->r[1] = 2;
-	game->window = mlx_new_window(game->mlx, game->params->r[0], \
-		game->params->r[1], "cub3D");
+	if (BONUS)
+	{
+		game->params->r[0] = scr_width < 1280 ? scr_width : 1280;
+		game->params->r[1] = scr_height < 720 ? scr_height : 720;
+	}
+	if (game->save == -1)
+		game->window = mlx_new_window(game->mlx, game->params->r[0], \
+			game->params->r[1], "cub3D");
 }
 
 void	init_game_settings(t_core *game)

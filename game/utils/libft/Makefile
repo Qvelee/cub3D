@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/20 23:10:45 by nelisabe          #+#    #+#              #
-#    Updated: 2020/09/03 15:57:23 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/14 16:20:07 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ endif
 all: crtmpdir $(NAME)
 
 crtmpdir:
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 $(NAME): $(HEADER) $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)

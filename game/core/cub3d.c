@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: ngameisabe <ngameisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/06 19:22:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 17:30:04 by nelisabe         ###   ########.fr       */
+/*   Created: 2020/09/06 19:22:50 by ngameisabe          #+#    #+#             */
+/*   Updated: 2020/10/15 19:29:52 by ngameisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,26 @@ static	void	get_player_pos(t_core *game)
 	}
 }
 
-int				cub3d(char *path)
+static	int		check_flag(char *flag)
+{
+	if (!flag)
+		return (-1);
+	if (ft_strncmp(flag, "--save", 6 + ft_strlen(flag)))
+	{
+		ft_putendl_fd("Error", 1);
+		ft_putendl_fd("cub3d: Invalid flag", 1);
+		return (0);
+	}
+	return (1);
+}
+
+int				cub3d(char *path, char *flag)
 {
 	t_pars params;
 	t_core game;
 
+	if (!(game.save = check_flag(flag)))
+		return (0);
 	if (parser(path, &params))
 		return (0);
 	game.params = &params;
