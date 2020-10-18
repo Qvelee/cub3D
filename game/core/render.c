@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 19:51:09 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 20:41:39 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int		esc_pressed(t_core *game)
 		mlx_destroy_window(game->mlx, game->window);
 	}
 	free(game->buffer);
+	free_images(game);
+	free_sprites(game);
+	free_structer(game->params);
 	exit(0);
 }
 

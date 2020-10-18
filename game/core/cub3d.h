@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 19:33:27 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 20:24:51 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,10 @@ typedef	struct	s_flr_ceil
 typedef	struct	s_tex
 {
 	t_img	img;
-	char	*path;
 	int		width;
 	int		height;
 	double	offset;
 	int		proj_copy;
-	char	*frame;
-	char	*tex_image;
 	double	step;
 	double	step_x;
 	double	x_screen;
@@ -203,6 +200,8 @@ typedef	struct	s_core
 int				cub3d(char *path, char *flag);
 void			load_image(t_core *game, t_tex *texture, char *path);
 void			init_window(t_core *game);
+void			init_images(t_core *game);
+void			init_objects(t_core *game);
 void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
 void			create_anim_buff(t_tex *anim, t_list **a_buff, int quant);
@@ -213,6 +212,8 @@ void			init_map(t_core *game);
 void			init_ghost(t_core *game, char *path);
 void			init_devil(t_core *game, char *path);
 int				free_structer(t_pars *params);
+void			free_images(t_core *game);
+void			free_sprites(t_core *game);
 int				parser(char *path, t_pars *params);
 int				render(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
@@ -239,5 +240,10 @@ int				needed_side(t_sprite *sprite);
 void			type_of_sprite(t_core *game, t_sprite *sprite, \
 	t_tex **texture, int num);
 void			draw_sprite(t_core *game, t_sprite *sprite);
+void			error_creation_window(t_core *game);
+void			error_mlx_init(t_core *game);
+void			error_malloc_buffer(t_core *game);
+void			error_creation_frame_image(t_core *game);
+void			error_open_xpm_file(t_core *game, char *path);
 
 #endif

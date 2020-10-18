@@ -6,11 +6,25 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:56:22 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 14:24:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:48:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
+
+int		error_empty_lines(t_list **map, t_pars *params)
+{
+	int		index;
+
+	index = -1;
+	ft_lstclear(map, free);
+	while (params->map[++index])
+		free(params->map[index]);
+	free(params->map);
+	ft_putendl_fd("Error", 1);
+	ft_putendl_fd("cub3D: Empty lines after map", 1);
+	return (0);
+}
 
 int		error_malloc_ltm_mindex(t_list **map, t_pars *params)
 {

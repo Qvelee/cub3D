@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:30:20 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 14:09:26 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 12:47:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		error_read_file_get_lines(int fd, t_list **map);
 int		error_malloc_tmplastl(void);
 int		error_malloc_map(char **tmplastl);
 int		error_malloc_ltm_map(t_list **map);
+int		error_empty_lines(t_list **map, t_pars *params);
 int		error_malloc_ltm_mindex(t_list **map, t_pars *params);
 int		error_not_valid_map(t_pars *params);
 int		check_color_valid(t_pars *params, int type);

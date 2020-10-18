@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/01 16:04:42 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 17:06:22 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 13:10:46 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ static	int		lst_to_matrix(t_pars *params, t_list **map)
 	while (++index < size)
 	{
 		if (!(params->map[index] = ft_strdup((*map)->content)))
-			return (!error_malloc_ltm_mindex(map, params));
+			return (!error_malloc_ltm_mindex(&lst_to_free, params));
+		if (params->map[index][0] == '\0')
+			return (!error_empty_lines(&lst_to_free, params));
 		(*map) = (*map)->next;
 	}
 	params->map[index] = NULL;

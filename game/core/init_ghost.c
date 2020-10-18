@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:18:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 18:34:41 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 20:22:18 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void	init_ghost(t_core *game, char *path)
 	while (++temp < quantity)
 		load_image(game, &game->ghost.tex[temp], \
 			ft_strjoin(path, ft_strjoin(ft_itoa(temp), ".xpm")));
+	game->ghost.tex[temp].img.image = NULL;
 	temp = -1;
 	game->ghost.anim = (t_tex*)malloc(sizeof(t_tex) * 8);
 	while (++temp < 8)
 		load_image(game, &game->ghost.anim[temp], \
 			ft_strjoin(path, ft_strjoin("animation/", \
 			ft_strjoin(ft_itoa(temp), ".xpm"))));
+	game->ghost.anim[temp].img.image = NULL;
 	game->ghost.quantity = 1;
 	game->ghost.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		game->ghost.quantity);

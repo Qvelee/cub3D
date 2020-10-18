@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 20:03:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 16:06:35 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int				make_darker(double depth, int r, int g, int b)
 
 void	load_image(t_core *game, t_tex *texture, char *path)
 {
-	texture->img.image = mlx_xpm_file_to_image(game->mlx, \
-		path, &texture->width, &texture->height);
+	if (!(texture->img.image = mlx_xpm_file_to_image(game->mlx, \
+		path, &texture->width, &texture->height)))
+		error_open_xpm_file(game, path);
 	texture->img.img_addr = mlx_get_data_addr(texture->img.image, \
 		&texture->img.bpp, &texture->img.size_line, \
 		&texture->img.endian);

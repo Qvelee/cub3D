@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:18:03 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 18:29:14 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/18 20:20:28 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ void	init_devil(t_core *game, char *path)
 	while (++temp < quantity)
 		load_image(game, &game->devil.tex[temp], \
 			ft_strjoin(path, ft_strjoin(ft_itoa(temp), ".xpm")));
+	game->devil.tex[temp].img.image = NULL;
 	temp = -1;
 	game->devil.anim = (t_tex*)malloc(sizeof(t_tex) * 8);
 	while (++temp < 8)
 		load_image(game, &game->devil.anim[temp], \
 			ft_strjoin(path, ft_strjoin("animation/", \
 			ft_strjoin(ft_itoa(temp), ".xpm"))));
+	game->devil.anim[8].img.image = NULL;
 	game->devil.quantity = 3;
 	game->devil.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		game->devil.quantity);

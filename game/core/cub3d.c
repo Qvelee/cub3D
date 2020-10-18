@@ -76,9 +76,12 @@ int				cub3d(char *path, char *flag)
 	if (parser(path, &params))
 		return (0);
 	game.params = &params;
-	game.mlx = mlx_init();
+	if (!(game.mlx = mlx_init()))
+		error_mlx_init(&game);
 	init_window(&game);
 	init_game_settings(&game);
+	init_images(&game);
+	init_objects(&game);
 	init_textures(&game);
 	init_sprites(&game);
 	init_map(&game);
@@ -86,6 +89,7 @@ int				cub3d(char *path, char *flag)
 	handler(&game);
 	mlx_loop_hook(game.mlx, render, &game);
 	mlx_loop(game.mlx);
+	free(game.mlx);
 	free_structer(&params);
 	return (0);
 }
