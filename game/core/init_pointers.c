@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_images.c                                      :+:      :+:    :+:   */
+/*   init_pointers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:41:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 14:59:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 20:28:30 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	init_images(t_core *game)
 	game->north.img.image = NULL;
 	game->south.img.image = NULL;
 	game->east.img.image = NULL;
+	game->wall.img.image = NULL;
+	game->wall_dirty.img.image = NULL;
 	game->sky.img.image = NULL;
 	game->floor.img.image = NULL;
 	game->face.img.image = NULL;

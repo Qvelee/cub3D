@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/19 17:11:36 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/19 19:28:23 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ CORE_SRC =			cub3d.c \
 					utils.c \
 					errors_managment.c \
 					player.c \
-					map.c \
+					minimap.c \
+					map_treatment.c \
 					make_frame.c \
 					walls_treatment.c \
 					sprites_treatment.c \

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 16:59:26 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 20:01:25 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 19:56:51 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static	void	tex_pixels(t_core *game, t_tex *texture, t_flr_ceil *fc)
 		((int *)(game->frame.img_addr))\
 			[(int)texture->y_screen * game->params->r[0] + \
 			(int)texture->x_screen] = make_darker(fc->screen_dist * \
-			game->map.block_size, (game->color & 0xFF0000) >> 16, \
-			(game->color & 0x00FF00) >> 8, game->color & 0x0000FF);
+			game->map.block_size * game->shadow, \
+			(game->color & 0xFF0000) >> 16, (game->color & 0x00FF00) >> 8, \
+			game->color & 0x0000FF);
 	}
 }
 

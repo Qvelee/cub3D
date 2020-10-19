@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 15:02:20 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 20:29:39 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,21 @@ static void	init_frame_image(t_core *game)
 void		init_textures(t_core *game)
 {
 	init_frame_image(game);
-	// if (!BONUS)
-	// {
+	if (!BONUS)
+	{
 		load_image(game, &game->west, game->params->we);
 		load_image(game, &game->north, game->params->no);
 		load_image(game, &game->south, game->params->so);
 		load_image(game, &game->east, game->params->ea);
-	// }
-	// else
-	// {
+	}
+	else
+	{
+		load_image(game, &game->wall, "./textures/wall.xpm");
+		load_image(game, &game->wall_dirty, "./textures/wall_dirty.xpm");
 		load_image(game, &game->sky, "./textures/sky.xpm");
-		load_image(game, &game->floor, "./textures/w.xpm");
+		load_image(game, &game->floor, "./textures/floor.xpm");
 		load_image(game, &game->face, "./textures/face.xpm");
-	// }
+	}
 }
 
 void		init_map(t_core *game)
@@ -81,12 +83,11 @@ void		init_window(t_core *game)
 
 void		init_game_settings(t_core *game)
 {
-	int	temp;
-
 	game->centerX = game->params->r[0] / 2;
 	game->centerY = game->params->r[1] / 2;
 	game->player.x = 0;
 	game->player.y = 0;
+	game->shadow = 1.5;
 	game->map.block_size = 50;
 	game->player.angle = 3 * M_PI / 2;
 	game->player.speed = game->map.block_size * 0.06;
@@ -95,7 +96,7 @@ void		init_game_settings(t_core *game)
 	game->player.mouse_angle_speed = 0.005;
 	game->player.radius = game->map.block_size * 0.2;
 	game->player.fov = M_PI / 3;
-	game->player.num_rays = game->params->r[0]; // 2;
+	game->player.num_rays = game->params->r[0];
 	if (!(game->buffer = (t_ray_cast*)malloc(sizeof(t_ray_cast) * \
 		game->player.num_rays)))
 		error_malloc_buffer(game);
@@ -103,7 +104,8 @@ void		init_game_settings(t_core *game)
 	game->map.map_lines = -1;
 	game->map.map_colunms = 0;
 	while (game->params->map[++game->map.map_lines])
-		if ((temp = ft_strlen(game->params->map[game->map.map_lines])) > \
+		if (ft_strlen(game->params->map[game->map.map_lines]) > \
 			game->map.map_colunms)
-			game->map.map_colunms = temp;
+			game->map.map_colunms = \
+				ft_strlen(game->params->map[game->map.map_lines]);
 }

@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 17:07:43 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 20:27:59 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 0
+# define BONUS 1
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -180,6 +180,7 @@ typedef	struct	s_core
 	int			centerX;
 	int			centerY;
 	int			color;
+	double		shadow;
 	t_buttons	button;
 	t_map		map;
 	t_player	player;
@@ -188,6 +189,8 @@ typedef	struct	s_core
 	t_tex		north;
 	t_tex		south;
 	t_tex		east;
+	t_tex		wall;
+	t_tex		wall_dirty;
 	t_tex		sky;
 	t_tex		floor;
 	t_tex		face;
@@ -223,6 +226,7 @@ int				map(t_core *game);
 int				player(t_core *game);
 int				ray_casting(t_core *game);
 int				object_check(t_core *game, double x, double y, char object);
+int				check_wall_type(t_core *game, double x, double y, char object);
 void			make_frame(t_core *game);
 void			texture_wall(t_core *game, t_ray_cast *ray);
 int				make_darker(double depth, int r, int g, int b);
