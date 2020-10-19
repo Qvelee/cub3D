@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 18:26:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/11 14:37:48 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:32:08 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void			find_visible_sprites(t_core *game, t_object *object, \
 		if (object->pos[temp].ray < -1 * width / 2 || \
 			object->pos[temp].ray >= game->params->r[0] + width / 2)
 			continue ;
-		tmplst = ft_lstnew(&object->pos[temp]);
+		if (!(tmplst = ft_lstnew(&object->pos[temp])))
+			error_newlst(game, sprites);
 		add_sprite_to_list(sprites, &object->pos[temp], tmplst);
 	}
 }

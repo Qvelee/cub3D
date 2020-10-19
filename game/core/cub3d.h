@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:24:51 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:07:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,9 +199,8 @@ typedef	struct	s_core
 
 int				cub3d(char *path, char *flag);
 void			load_image(t_core *game, t_tex *texture, char *path);
+void			init_pointers(t_core *game);
 void			init_window(t_core *game);
-void			init_images(t_core *game);
-void			init_objects(t_core *game);
 void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
 void			create_anim_buff(t_tex *anim, t_list **a_buff, int quant);
@@ -217,7 +216,6 @@ void			free_sprites(t_core *game);
 int				parser(char *path, t_pars *params);
 int				render(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
-int				esc_pressed(t_core *game);
 int				handler(t_core *game);
 void			set_pixel(t_core *game, t_tex *texture, double depth);
 void			free_lst(t_list **lst);
@@ -232,7 +230,7 @@ void			set_back_colors(t_core *game);
 void			set_sky(t_core *game, t_ray_cast *ray);
 void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
 void			sprite(t_core *game, t_ray_cast *ray);
-void			sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls);
+int				sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls);
 void			calc_sprites_params(t_core *game, t_object *object);
 void			find_visible_sprites(t_core *game, t_object *object, \
 	t_list **sprites);
@@ -245,5 +243,10 @@ void			error_mlx_init(t_core *game);
 void			error_malloc_buffer(t_core *game);
 void			error_creation_frame_image(t_core *game);
 void			error_open_xpm_file(t_core *game, char *path);
+void			error_malloc(t_core *game);
+void			error_newlst(t_core *game, t_list **list);
+void			error_newlsts(t_core *game, t_list **list_1, t_list **list_2);
+void			error_creating_file(t_core *game, unsigned char **memory);
+int				exit_cub3d(t_core *game);
 
 #endif

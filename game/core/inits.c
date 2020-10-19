@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:59:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:02:20 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,4 @@ void		init_game_settings(t_core *game)
 		if ((temp = ft_strlen(game->params->map[game->map.map_lines])) > \
 			game->map.map_colunms)
 			game->map.map_colunms = temp;
-	game->frame.image = NULL;
 }

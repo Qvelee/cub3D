@@ -6,13 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 18:26:17 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/10 18:31:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:49:05 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//add malloc protect
 
 static	void	add_wall_to_list(t_list **walls, t_ray_cast *wall, \
 	t_list *tmplst)
@@ -42,7 +40,7 @@ static	void	add_wall_to_list(t_list **walls, t_ray_cast *wall, \
 		*walls = tmplst;
 }
 
-void			sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
+int			sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
 {
 	t_list	*tmplst;
 	int		temp;
@@ -50,8 +48,10 @@ void			sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
 	temp = 0;
 	while (temp < game->player.num_rays)
 	{
-		tmplst = ft_lstnew(&(*buffer)[temp]);
+		if (!(tmplst = ft_lstnew(&(*buffer)[temp])))
+			return (1);
 		add_wall_to_list(walls, &(*buffer)[temp], tmplst);
 		temp++;
 	}
+	return (0);
 }

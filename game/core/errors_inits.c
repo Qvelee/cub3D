@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 13:44:46 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:32:33 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:04:44 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	error_creation_frame_image(t_core *game)
 {
 	free_structer(game->params);
-	mlx_destroy_window(game->mlx, game->window);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
 	free(game->mlx);
 	free(game->buffer);
 	ft_putendl_fd("Error", 1);
@@ -25,8 +26,9 @@ void	error_creation_frame_image(t_core *game)
 
 void	error_malloc_buffer(t_core *game)
 {
-	free_structer(game->params);	
-	mlx_destroy_window(game->mlx, game->window);
+	free_structer(game->params);
+	if (game->window)
+		mlx_destroy_window(game->mlx, game->window);
 	free(game->mlx);
 	ft_putendl_fd("Error", 1);
 	ft_putendl_fd("cub3D: Memory allocation fail", 1);

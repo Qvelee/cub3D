@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:41:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 19:22:53 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 14:59:56 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_objects(t_core *game)
+static void	init_objects(t_core *game)
 {
 	game->basic.tex = NULL;
 	game->basic.pos = NULL;
@@ -26,7 +26,7 @@ void	init_objects(t_core *game)
 	game->objects = NULL;
 }
 
-void	init_images(t_core *game)
+static void	init_images(t_core *game)
 {
 	game->west.img.image = NULL;
 	game->north.img.image = NULL;
@@ -35,4 +35,13 @@ void	init_images(t_core *game)
 	game->sky.img.image = NULL;
 	game->floor.img.image = NULL;
 	game->face.img.image = NULL;
+}
+
+void	init_pointers(t_core *game)
+{
+	game->mlx = NULL;
+	game->frame.image = NULL;
+	game->window = NULL;
+	init_images(game);
+	init_objects(game);
 }

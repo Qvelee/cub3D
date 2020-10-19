@@ -66,6 +66,11 @@ static	int		check_flag(char *flag)
 	return (1);
 }
 
+int			test(t_core *game)
+{
+	exit(0);
+}
+
 int				cub3d(char *path, char *flag)
 {
 	t_pars params;
@@ -76,12 +81,11 @@ int				cub3d(char *path, char *flag)
 	if (parser(path, &params))
 		return (0);
 	game.params = &params;
+	init_pointers(&game);
 	if (!(game.mlx = mlx_init()))
 		error_mlx_init(&game);
 	init_window(&game);
 	init_game_settings(&game);
-	init_images(&game);
-	init_objects(&game);
 	init_textures(&game);
 	init_sprites(&game);
 	init_map(&game);

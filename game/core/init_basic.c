@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:51:37 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:37:34 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 14:30:39 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static	void	find_qantity(t_object *sprite, char **map, char type)
 	}
 }
 
-static	void	find_sprites(t_object *sprite, char **map, char type)
+static	void	find_sprites(t_core *game, t_object *sprite, \
+	char **map, char type)
 {
 	int	x_in_map;
 	int	y_in_map;
@@ -36,7 +37,9 @@ static	void	find_sprites(t_object *sprite, char **map, char type)
 
 	find_qantity(sprite, map, type);
 	y_in_map = -1;
-	sprite->pos = (t_sprite*)malloc(sizeof(t_sprite) * sprite->quantity);
+	if (!(sprite->pos = (t_sprite*)malloc(sizeof(t_sprite) * \
+		sprite->quantity)))
+		error_malloc(game);
 	temp = -1;
 	while (map[++y_in_map])
 	{
@@ -56,9 +59,10 @@ static	void	find_sprites(t_object *sprite, char **map, char type)
 
 void			init_basic(t_core *game, char *path)
 {
-	game->basic.tex = (t_tex*)malloc(sizeof(t_tex) * 2);
+	if (!(game->basic.tex = (t_tex*)malloc(sizeof(t_tex) * 2)))
+		error_malloc(game);
 	game->basic.tex[1].img.image = NULL;
 	load_image(game, &game->basic.tex[0], path);
 	game->basic.quantity = 0;
-	find_sprites(&game->basic, game->params->map, '2');
+	find_sprites(game, &game->basic, game->params->map, '2');
 }

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:42:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 14:25:11 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:31:07 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int		check_color_valid(t_pars *params, int type)
 {
 	if (type == 6 && \
-		(params->f[0] > 255 || params->f[1] > 255 || params->f[2] > 255))
+		(params->f[0] > 255 || params->f[1] > 255 || params->f[2] > 255 ||
+			params->f[0] < 0 || params->f[1] < 0 || params->f[2] < 0))
 	{
 		free_struct(params);
 		ft_putendl_fd("Error", 1);
@@ -23,7 +24,8 @@ int		check_color_valid(t_pars *params, int type)
 		return (1);
 	}
 	if (type == 7 && \
-		(params->c[0] > 255 || params->c[1] > 255 || params->c[2] > 255))
+		(params->c[0] > 255 || params->c[1] > 255 || params->c[2] > 255 || 
+			params->c[0] < 0 || params->c[1] < 0 || params->c[2] < 0))
 	{
 		free_struct(params);
 		ft_putendl_fd("Error", 1);

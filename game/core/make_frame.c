@@ -6,13 +6,11 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 18:38:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 14:40:14 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 15:40:56 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//add malloc protect
 
 static	void	set_last_sprites(t_core *game, t_list *sprites)
 {
@@ -66,7 +64,8 @@ void			make_frame(t_core *game)
 		calc_sprites_params(game, game->objects[index]);
 		find_visible_sprites(game, game->objects[index], &sprites);
 	}
-	sort_walls(game, &game->buffer, &walls);
+	if (sort_walls(game, &game->buffer, &walls))
+		error_newlsts(game, &walls, &sprites);
 	z_boofer(game, walls, sprites);
 	free_lst(&sprites);
 	free_lst(&walls);

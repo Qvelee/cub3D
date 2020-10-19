@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 18:38:28 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 14:51:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	init_sprites(t_core *game)
 	if (!BONUS)
 	{
 		init_basic(game, game->params->s);
-		game->objects = (t_object**)malloc(sizeof(t_object*) * 2);
+		if (!(game->objects = (t_object**)malloc(sizeof(t_object*) * 2)))
+			error_malloc(game);
 		game->objects[0] = &game->basic;
 		game->objects[1] = NULL;
 	}
@@ -55,7 +56,8 @@ void	init_sprites(t_core *game)
 	{
 		init_ghost(game, "./sprites/ghost/");
 		init_devil(game, "./sprites/devil/");
-		game->objects = (t_object**)malloc(sizeof(t_object*) * 3);
+		if (!(game->objects = (t_object**)malloc(sizeof(t_object*) * 3)))
+			error_malloc(game);
 		game->objects[0] = &game->devil;
 		game->objects[1] = &game->ghost;
 		game->objects[2] = NULL;

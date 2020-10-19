@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/18 15:55:17 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/19 17:11:36 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ PARS_ERRORS_DIR =	game/parser/errors_managment/
 
 CORE_SRC =			cub3d.c \
 					inits.c \
-					init_images.c \
+					init_pointers.c \
 					init_sprites.c \
 					init_basic.c \
 					init_ghost.c \
@@ -54,7 +54,7 @@ CORE_SRC =			cub3d.c \
 					standart_background.c \
 					draw_sprite.c \
 					errors_inits.c \
-					errors_load_images.c
+					errors_memory.c
 
 PARS_SRC =			parser.c
 
@@ -144,6 +144,7 @@ clean:
 	@rm -rf $(PARS_OBJ)
 	@rm -rf $(PARS_UTIL_OBJ)
 	@rm -rf $(PARS_ERRORS_OBJ)
+	@rm	-rf sshot.bmp
 	@$(MAKE) clean -C minilibx/
 	@$(MAKE) clean -C game/utils/
 

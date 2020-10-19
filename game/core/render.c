@@ -6,52 +6,56 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:41:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/19 17:34:20 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		esc_pressed(t_core *game)
+int		exit_cub3d(t_core *game)
 {
-	mlx_destroy_image(game->mlx, game->frame.image);
-	if (game->save == -1)
-	{
-		mlx_clear_window(game->mlx, game->window);
-		mlx_destroy_window(game->mlx, game->window);
-	}
 	free(game->buffer);
 	free_images(game);
 	free_sprites(game);
 	free_structer(game->params);
+	if (game->frame.image)
+		mlx_destroy_image(game->mlx, game->frame.image);
+	if (game->window)
+	{
+		mlx_clear_window(game->mlx, game->window);
+		mlx_destroy_window(game->mlx, game->window);
+	}
+	free(game->mlx);
 	exit(0);
 }
 
 static void  make_screenshot(t_core *game)
 {
 	unsigned char	*bmp;
-	int				fd;
-	int				size;
+	int				tmp;
+	int				s;
 
-	size = game->params->r[0] * game->params->r[1] * (game->frame.bpp / 8) + 54;
-	bmp = (unsigned char *)malloc(sizeof(char) * size);
-	ft_bzero(bmp, size);
+	s = game->params->r[0] * game->params->r[1] * (game->frame.bpp / 8) + 54;
+	if (!(bmp = (unsigned char *)malloc(sizeof(char) * s)))
+		error_malloc(game);
+	ft_bzero(bmp, s);
 	ft_memcpy(&bmp[0], "BM", 2);
-	fd = 54;
-	ft_memcpy(&bmp[10], &fd, 4);
-	fd = 40;
-	ft_memcpy(&bmp[14], &fd, 4);
+	tmp = 54;
+	ft_memcpy(&bmp[10], &tmp, 4);
+	tmp = 40;
+	ft_memcpy(&bmp[14], &tmp, 4);
 	ft_memcpy(&bmp[18], &game->params->r[0], 4);
-	fd = -game->params->r[1];
-	ft_memcpy(&bmp[22], &fd, 4);
-	fd = 1;
-	ft_memcpy(&bmp[26], &fd, 2);
+	tmp = -game->params->r[1];
+	ft_memcpy(&bmp[22], &tmp, 4);
+	tmp = 1;
+	ft_memcpy(&bmp[26], &tmp, 2);
 	ft_memcpy(&bmp[28], &game->frame.bpp, 2);
-	ft_memcpy(&bmp[54], game->frame.img_addr, size - 54);
-	fd = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	size = write(fd, bmp, size);
+	ft_memcpy(&bmp[54], game->frame.img_addr, s - 54);
+	if ((tmp = open("sshot.bmp", O_CREAT | O_WRONLY | O_TRUNC, 0644)) == -1)
+		error_creating_file(game, &bmp);
+	s = write(tmp, bmp, s);
 	free(bmp);
-	close(fd);
+	close(tmp);
 }
 
 int		render(t_core *game)
@@ -66,13 +70,13 @@ int		render(t_core *game)
 	make_frame(game);
 	if (BONUS)
 		map(game);
-	if (game->save == -1)
+	if (game->window)
 		mlx_put_image_to_window(game->mlx, game->window, \
 			game->frame.image, 0, 0);
 	else
 	{
 		make_screenshot(game);
-		esc_pressed(game);
+		exit_cub3d(game);
 	}
 	mlx_do_sync(game->mlx);
 	return (0);
