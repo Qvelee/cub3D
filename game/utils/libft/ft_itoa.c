@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 19:32:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/05/22 19:29:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 21:21:17 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char			*ft_itoa(int num)
 	number = (long)num;
 	sindex = -1;
 	ff_lines(&sindex, &number, &copy);
-	str = (char*)malloc(sizeof(char) * sindex + 2);
+	if (!(str = (char*)malloc(sizeof(char) * sindex + 2)))
+		return (NULL);
 	if (!(str))
 		return (NULL);
 	if (number < 0)

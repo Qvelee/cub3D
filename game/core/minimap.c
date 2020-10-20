@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:32 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 19:57:30 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 16:05:52 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		map(t_core *game)
 		{
 			if (game->params->map[index][sindex] == '1')
 				draw_block(game, &game->wall, x_pos, y_pos);
-			else
+			else if (game->params->map[index][sindex] != ' ')
 				draw_block(game, &game->floor, x_pos, y_pos);
 			x_pos += game->map.scale;
 		}

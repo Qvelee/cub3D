@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 17:34:20 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:25:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		render(t_core *game)
 {
 	static int	temp;
 
+	mlx_do_sync(game->mlx);
 	if (BONUS && game->save == -1)
 		mlx_mouse_move(game->mlx, game->window, game->centerX, \
 			game->centerY);
@@ -78,6 +79,5 @@ int		render(t_core *game)
 		make_screenshot(game);
 		exit_cub3d(game);
 	}
-	mlx_do_sync(game->mlx);
 	return (0);
 }

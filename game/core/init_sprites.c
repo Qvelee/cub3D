@@ -6,20 +6,13 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 14:51:43 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 22:49:32 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //add malloc protect
-
-void	set_spr(t_sprite *sprite, double x, double y, double z)
-{
-	sprite->x = x;
-	sprite->y = y;
-	sprite->z = z;
-}
 
 void	create_anim_buff(t_tex *anim, t_list **a_buff, int quant)
 {
@@ -38,8 +31,19 @@ void	create_anim_buff(t_tex *anim, t_list **a_buff, int quant)
 			last->next = tmp;
 		}
 		else
+		{
 			ft_lstadd_back(a_buff, tmp);
+		}
 	}
+}
+
+void	init_a_buff(t_object *sprite, int quant)
+{
+	int index;
+
+	index = -1;
+	while (++index < quant)
+		sprite->pos[index].a_buff = NULL;
 }
 
 void	init_sprites(t_core *game)
@@ -54,12 +58,15 @@ void	init_sprites(t_core *game)
 	}
 	else
 	{
+		init_fire(game, "./sprites/fire/");
 		init_ghost(game, "./sprites/ghost/");
 		init_devil(game, "./sprites/devil/");
-		if (!(game->objects = (t_object**)malloc(sizeof(t_object*) * 3)))
+		if (!(game->objects = (t_object**)malloc(sizeof(t_object*) * 4)))
 			error_malloc(game);
 		game->objects[0] = &game->devil;
 		game->objects[1] = &game->ghost;
-		game->objects[2] = NULL;
+		game->objects[2] = &game->fire;
+		// game->objects[2] = NULL;
+		game->objects[3] = NULL;
 	}
 }

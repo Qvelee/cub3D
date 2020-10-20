@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:41:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 20:28:30 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 19:05:50 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ static void	init_objects(t_core *game)
 	game->ghost.tex = NULL;
 	game->ghost.pos = NULL;
 	game->ghost.anim = NULL;
+	game->fire.tex = NULL;
+	game->fire.pos = NULL;
+	game->fire.anim = NULL;
 	game->objects = NULL;
 }
 

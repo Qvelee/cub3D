@@ -6,40 +6,86 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:18:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:22:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 22:49:57 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	set_more_ghosts(t_core *game, t_object *ghost)
+{
+	ghost->pos[3].volume = 0;
+	ghost->pos[3].a_tmp = 0;
+	ghost->pos[3].a_speed = 2;
+	ghost->pos[3].type = 'g';
+	ghost->pos[3].scale = 1;
+	set_spr(&ghost->pos[3], 4.6, 8.6, 0.5);
+	place_on_map(game, 4.6, 8.6, ghost->pos[3].type);
+	create_anim_buff(ghost->anim, &ghost->pos[3].a_buff, 14);
+	ghost->pos[4].volume = 0;
+	ghost->pos[4].a_tmp = 0;
+	ghost->pos[4].a_speed = 2;
+	ghost->pos[4].type = 'g';
+	ghost->pos[4].scale = 0.5;
+	set_spr(&ghost->pos[4], 2.6, 9.6, 0.5);
+	place_on_map(game, 2.6, 9.6, ghost->pos[4].type);
+	create_anim_buff(ghost->anim, &ghost->pos[4].a_buff, 14);
+}
+
+void	set_ghosts(t_core *game, t_object *ghost)
+{
+	ghost->pos[0].volume = 0;
+	ghost->pos[0].a_tmp = 0;
+	ghost->pos[0].a_speed = 3;
+	ghost->pos[0].type = 'g';
+	ghost->pos[0].scale = 1;
+	set_spr(&ghost->pos[0], 2.6, 8.6, 0.5);
+	place_on_map(game, 2.6, 8.6, ghost->pos[0].type);
+	create_anim_buff(ghost->anim, &ghost->pos[0].a_buff, 14);
+	ghost->pos[1].volume = 0;
+	ghost->pos[1].a_tmp = 0;
+	ghost->pos[1].a_speed = 1;
+	ghost->pos[1].type = 'g';
+	ghost->pos[1].scale = 1.1;
+	set_spr(&ghost->pos[1], 3.6, 8.6, 0.5);
+	place_on_map(game, 3.6, 8.6, ghost->pos[1].type);
+	create_anim_buff(ghost->anim, &ghost->pos[1].a_buff, 14);
+	ghost->pos[2].volume = 0;
+	ghost->pos[2].a_tmp = 0;
+	ghost->pos[2].a_speed = 2;
+	ghost->pos[2].type = 'g';
+	ghost->pos[2].scale = 1.2;
+	set_spr(&ghost->pos[2], 2.6, 10.6, 0.5);
+	place_on_map(game, 2.6, 10.6, ghost->pos[2].type);
+	create_anim_buff(ghost->anim, &ghost->pos[2].a_buff, 14);
+	set_more_ghosts(game, ghost);
+}
+
 void	init_ghost(t_core *game, char *path)
 {
-	int		quantity;
- 	int		temp;
+	int			quantity;
+	int			temp;
 
-	quantity = 1;
 	temp = -1;
-	game->ghost.tex = (t_tex*)malloc(sizeof(t_tex) * quantity);
+	quantity = 1;
+	if (!(game->ghost.tex = (t_tex*)malloc(sizeof(t_tex) * (quantity + 1))))
+		error_malloc(game);
 	while (++temp < quantity)
 		load_image(game, &game->ghost.tex[temp], \
 			ft_strjoin(path, ft_strjoin(ft_itoa(temp), ".xpm")));
 	game->ghost.tex[temp].img.image = NULL;
 	temp = -1;
-	game->ghost.anim = (t_tex*)malloc(sizeof(t_tex) * 8);
-	while (++temp < 8)
+	if (!(game->ghost.anim = (t_tex*)malloc(sizeof(t_tex) * 15)))
+		error_malloc(game);
+	while (++temp < 14)
 		load_image(game, &game->ghost.anim[temp], \
 			ft_strjoin(path, ft_strjoin("animation/", \
 			ft_strjoin(ft_itoa(temp), ".xpm"))));
-	game->ghost.anim[temp].img.image = NULL;
-	game->ghost.quantity = 1;
-	game->ghost.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
-		game->ghost.quantity);
-	game->ghost.pos[0].condition = 1;
-	game->ghost.pos[0].volume = 0;
-	game->ghost.pos[0].a_tmp = 0;
-	game->ghost.pos[0].a_speed = 5;
-	game->ghost.pos[0].type = 'p';
-	game->ghost.pos[0].scale = 1;
-	set_spr(&game->ghost.pos[0], 7.5, 3.5, 0.5);
-	create_anim_buff(game->ghost.anim, &game->ghost.pos[0].a_buff, 8);
+	game->ghost.anim[14].img.image = NULL;
+	game->ghost.quantity = 5;
+	if (!(game->ghost.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
+		game->ghost.quantity)))
+		error_malloc(game);
+	init_a_buff(&game->ghost, game->ghost.quantity);
+	set_ghosts(game, &game->ghost);
 }

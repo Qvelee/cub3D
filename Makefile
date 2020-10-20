@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/19 19:28:23 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/20 22:18:04 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ CORE_SRC =			cub3d.c \
 					init_basic.c \
 					init_ghost.c \
 					init_devil.c \
+					init_fire.c \
 					handler.c \
 					render.c \
 					utils.c \
@@ -123,7 +124,7 @@ minlib:
 	@$(MAKE) -C minilibx/
 
 $(NAME): $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
-	$(COMP) $^ $(MAIN) $(LIBUTILS) -o $@
+	$(COMP) $^ $(MAIN) $(LIBUTILS) -g -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c) $(HEADER)
 	@$(COMP) -c $< -o $@

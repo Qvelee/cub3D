@@ -66,11 +66,6 @@ static	int		check_flag(char *flag)
 	return (1);
 }
 
-int			test(t_core *game)
-{
-	exit(0);
-}
-
 int				cub3d(char *path, char *flag)
 {
 	t_pars params;
@@ -93,7 +88,5 @@ int				cub3d(char *path, char *flag)
 	handler(&game);
 	mlx_loop_hook(game.mlx, render, &game);
 	mlx_loop(game.mlx);
-	free(game.mlx);
-	free_structer(&params);
 	return (0);
 }

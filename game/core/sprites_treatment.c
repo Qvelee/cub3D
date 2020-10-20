@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 18:26:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 15:32:08 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 22:07:40 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void			find_visible_sprites(t_core *game, t_object *object, \
 		width = (int)game->params->r[1] / (object->pos[temp].depth /
 			game->map.block_size) * object->pos[temp].scale;
 		if (object->pos[temp].ray < -1 * width / 2 || \
-			object->pos[temp].ray >= game->params->r[0] + width / 2)
+			object->pos[temp].ray >= game->params->r[0] + width / 2 || \
+			object->pos[temp].depth <= 1)
 			continue ;
 		if (!(tmplst = ft_lstnew(&object->pos[temp])))
 			error_newlst(game, sprites);

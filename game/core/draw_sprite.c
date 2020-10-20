@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:52:06 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 18:23:03 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 18:42:12 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				needed_side(t_sprite *sprite)
 
 	num = 0;
 	angle = 360;
-	if (sprite->condition == 1 && sprite->volume == 1)
+	if (sprite->volume == 1)
 	{
 		if (sprite->theta < 22.5 || sprite->theta > 337.5)
 			num = 0;
@@ -48,8 +48,7 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 
 	if (sprite->type == '2')
 		*texture = &game->basic.tex[num];
-	if (sprite->type == 'd')
-	{
+	else
 		if (sprite->depth < game->map.block_size * 5)
 		{
 			*texture = sprite->a_buff->content;
@@ -60,22 +59,14 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 			}
 		}
 		else
-			*texture = &game->devil.tex[num];
-	}
-	if (sprite->type == 'p')
-	{
-		if (sprite->depth < game->map.block_size * 5)
 		{
-			*texture = sprite->a_buff->content;
-			if (sprite->a_tmp++ == sprite->a_speed)
-			{
-				sprite->a_buff = sprite->a_buff->next;
-				sprite->a_tmp = 0;
-			}
+			if (sprite->type == 'd')
+				*texture = &game->devil.tex[num];
+			if (sprite->type == 'g')
+				*texture = &game->ghost.tex[num];
+			if (sprite->type == 'f')
+				*texture = &game->fire.tex[num];
 		}
-		else
-			*texture = &game->ghost.tex[num];
-	}
 }
 
 static	void	calc_properties(t_core *game, t_sprite *sprite, t_tex **texture)
@@ -94,7 +85,7 @@ static	void	calc_properties(t_core *game, t_sprite *sprite, t_tex **texture)
 		game->params->r[1] - 1 : (int)sprite->heigth;
 	sprite->cw = sprite->width >= game->params->r[0] ? \
 		game->params->r[0] - 1 : (int)sprite->width;
-	(*texture)->x_screen = sprite->ray - sprite->cw / 2;
+	(*texture)->x_screen = sprite->ray - sprite->width / 2;
 	(*texture)->x_texture = 0;
 	if ((*texture)->x_screen < 0)
 	{

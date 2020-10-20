@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 20:27:59 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 22:49:10 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 1
+# define BONUS 0
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -156,7 +156,6 @@ typedef	struct	s_sprite
 	double	drays;
 	double	ray;
 	int		volume;
-	int		condition;
 	int		a_tmp;
 	int		a_speed;
 	t_list	*a_buff;
@@ -197,6 +196,7 @@ typedef	struct	s_core
 	t_object	basic;
 	t_object	devil;
 	t_object	ghost;
+	t_object	fire;
 	t_object	**objects;
 }				t_core;
 
@@ -208,11 +208,14 @@ void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
 void			create_anim_buff(t_tex *anim, t_list **a_buff, int quant);
 void			set_spr(t_sprite *sprite, double x, double y, double z);
+void			place_on_map(t_core *game, double x, double y, char object);
 void			init_basic(t_core *game, char *path);
 void			init_game_settings(t_core *game);
 void			init_map(t_core *game);
 void			init_ghost(t_core *game, char *path);
 void			init_devil(t_core *game, char *path);
+void			init_a_buff(t_object *sprite, int quant);
+void			init_fire(t_core *game, char *path);
 int				free_structer(t_pars *params);
 void			free_images(t_core *game);
 void			free_sprites(t_core *game);

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 17:12:03 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 13:18:56 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int				handler(t_core *game)
 	}
 	if (game->save == -1)
 	{
+		mlx_hook(game->window, 17, 1L << 17, exit_cub3d, game);
 		mlx_hook(game->window, 2, 1L << 0, key_pressed, game);
 		mlx_hook(game->window, 3, 1L << 1, key_realised, game);
 	}

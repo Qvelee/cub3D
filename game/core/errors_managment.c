@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 16:59:36 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/18 20:37:58 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/20 21:57:49 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_a_buff(t_list **a_buff)
 	free(*a_buff);
 }
 
+//fix a_buff clr
 void	free_object(t_core *game, t_object *object)
 {
 	int index;
@@ -39,6 +40,7 @@ void	free_object(t_core *game, t_object *object)
 				mlx_destroy_image(game->mlx, object->tex[index].img.image);
 		free(object->tex);
 	}
+	index = -1;
 	if (object->pos)
 	{
 		if (object->pos->a_buff)
