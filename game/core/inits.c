@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:29:02 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:48:47 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void		init_game_settings(t_core *game)
 	game->map.map_lines = -1;
 	game->map.map_colunms = 0;
 	while (game->params->map[++game->map.map_lines])
-		if (ft_strlen(game->params->map[game->map.map_lines]) > \
+		if ((int)ft_strlen(game->params->map[game->map.map_lines]) > \
 			game->map.map_colunms)
 			game->map.map_colunms = \
 				ft_strlen(game->params->map[game->map.map_lines]);

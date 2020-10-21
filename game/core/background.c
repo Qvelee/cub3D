@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 16:59:26 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:10:26 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:52:29 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			set_floor_ceiling(t_core *game, t_ray_cast *ray)
 	tex_pixels(game, &texture, &fc);
 }
 
-static void		calc_sky_prop(t_core *game, t_ray_cast *ray, t_tex *texture)
+static void		calc_sky_prop(t_core *game, t_tex *texture)
 {
 	*texture = game->sky;
 	texture->step = game->sky.height / (game->params->r[1] / 2);
@@ -70,11 +70,11 @@ static void		calc_sky_prop(t_core *game, t_ray_cast *ray, t_tex *texture)
 		texture->x_texture : texture->x_texture;
 }
 
-void			set_sky(t_core *game, t_ray_cast *ray)
+void			set_sky(t_core *game)
 {
 	t_tex	texture;
 
-	calc_sky_prop(game, ray, &texture);
+	calc_sky_prop(game, &texture);
 	while (++texture.x_screen < game->params->r[0])
 	{
 		texture.y_screen = -1;

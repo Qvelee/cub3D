@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:43:17 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:52:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 0
+# define BONUS 1
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -244,7 +244,7 @@ void			make_frame(t_core *game);
 void			texture_wall(t_core *game, t_ray_cast *ray);
 int				make_darker(double depth, int r, int g, int b);
 void			set_back_colors(t_core *game);
-void			set_sky(t_core *game, t_ray_cast *ray);
+void			set_sky(t_core *game);
 void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
 void			sprite(t_core *game, t_ray_cast *ray);
 int				sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls);

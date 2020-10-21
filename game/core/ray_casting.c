@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:17:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:53:25 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				ray_casting(t_core *game)
 	ray.xm = (int)game->player.x / game->map.block_size * game->map.block_size;
 	ray.ym = (int)game->player.y / game->map.block_size * game->map.block_size;
 	if (BONUS)
-		set_sky(game, &ray);
+		set_sky(game);
 	else
 		set_back_colors(game);
 	while (++ray.num_rays < game->player.num_rays)

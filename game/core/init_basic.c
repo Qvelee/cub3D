@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:51:37 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:38:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:49:20 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static	void	find_quantity(t_object *sprite, char **map, char type)
 {
 	int	x_in_map;
 	int	y_in_map;
-	int	temp;
 
 	y_in_map = -1;
 	while (map[++y_in_map])

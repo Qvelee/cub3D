@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 19:59:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:51:02 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int				key_realised(int keycode, t_core *game)
 
 int				mouse_moved(int x, int y, t_core *game)
 {
+	y = 1;
 	if (x > game->center_x)
 		game->player.angle += game->player.mouse_angle_speed;
 	if (x < game->center_x)

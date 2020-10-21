@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/21 23:45:14 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/21 23:47:22 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,19 +128,19 @@ minlib:
 	@$(MAKE) -C mlx/
 
 $(NAME): $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
-	$(COMP) $^ $(MAIN) $(LIBUTILS) -g -o $@
+	$(COMP) $^ $(MAIN) $(LIBUTILS) -g $(FLAGS) -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c) $(HEADER)
-	@$(COMP) -c $< -o $@
+	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c) $(HEADER)
-	@$(COMP) -c $< -o $@
+	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_UTIL_DIR), %.o): $(addprefix $(PARS_UTIL_DIR), %.c) $(HEADER)
-	@$(COMP) -c $< -o $@
+	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_ERR_DIR), %.o): $(addprefix $(PARS_ERRORS_DIR), %.c) $(HEADER)
-	@$(COMP) -c $< -o $@
+	@$(COMP) $(FLAGS) -c $< -o $@
 
 bonus:
 	@$(MAKE) ADD_BONUS=1 all;

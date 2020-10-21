@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:12:34 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:51:19 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ int			exit_cub3d(t_core *game)
 
 int			render(t_core *game)
 {
-	static int	temp;
-
 	mlx_do_sync(game->mlx);
 	if (BONUS && game->save == -1)
 		mlx_mouse_move(game->mlx, game->window, game->center_x, \

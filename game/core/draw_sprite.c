@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:52:06 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:16:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:54:12 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int				needed_side(t_sprite *sprite)
 void			type_of_sprite(t_core *game, t_sprite *sprite, \
 	t_tex **texture, int num)
 {
-	t_tex	temp;
-
 	if (sprite->type != '2')
 		if ((sprite->depth < game->map.block_size * 5 || \
 			sprite->type == 'b' || sprite->type == 'f' || \
