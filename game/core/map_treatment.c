@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_treatment.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:17:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 17:25:18 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:54:03 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ int		object_check(t_core *game, double x, double y, char object)
 			result = 1;
 	if ((object == 'S' || object == 'A') && !result)
 		if (game->params->map[y_in_map][x_in_map] == 'd' || \
-			game->params->map[y_in_map][x_in_map] == 'k' || \
-			game->params->map[y_in_map][x_in_map] == '2')
+			game->params->map[y_in_map][x_in_map] == 'b' || \
+			game->params->map[y_in_map][x_in_map] == '2' || \
+			game->params->map[y_in_map][x_in_map] == 'p' || \
+			game->params->map[y_in_map][x_in_map] == 's')
 			result = 1;
 	return (result);
 }

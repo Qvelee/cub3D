@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_treatment.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 18:26:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 22:07:40 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 15:53:11 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			find_visible_sprites(t_core *game, t_object *object, \
 	while (++temp < object->quantity)
 	{
 		width = (int)game->params->r[1] / (object->pos[temp].depth /
-			game->map.block_size) * object->pos[temp].scale;
+			game->map.block_size) * object->pos[temp].scale_x;
 		if (object->pos[temp].ray < -1 * width / 2 || \
 			object->pos[temp].ray >= game->params->r[0] + width / 2 || \
 			object->pos[temp].depth <= 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sprites.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 22:49:32 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:17:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,17 @@ void	init_sprites(t_core *game)
 		init_fire(game, "./sprites/fire/");
 		init_ghost(game, "./sprites/ghost/");
 		init_devil(game, "./sprites/devil/");
-		if (!(game->objects = (t_object**)malloc(sizeof(t_object*) * 4)))
+		init_barrel(game, "./sprites/barrel/");
+		init_pedestal(game, "./sprites/pedestal/");
+		init_skull(game, "./sprites/skull/");
+		if (!(game->objects = (t_object**)malloc(sizeof(t_object*) * 7)))
 			error_malloc(game);
 		game->objects[0] = &game->devil;
 		game->objects[1] = &game->ghost;
 		game->objects[2] = &game->fire;
-		// game->objects[2] = NULL;
-		game->objects[3] = NULL;
+		game->objects[3] = &game->barrel;
+		game->objects[4] = &game->pedestal;
+		game->objects[5] = &game->skull;
+		game->objects[6] = NULL;
 	}
 }

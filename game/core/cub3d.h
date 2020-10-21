@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 22:49:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:13:33 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 0
+# define BONUS 1
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -147,7 +147,8 @@ typedef	struct	s_sprite
 	double	width;
 	double	ch;
 	double	cw;
-	double	scale;
+	double	scale_x;
+	double	scale_y;
 	double	angle;
 	double	dx;
 	double	dy;
@@ -197,6 +198,9 @@ typedef	struct	s_core
 	t_object	devil;
 	t_object	ghost;
 	t_object	fire;
+	t_object	barrel;
+	t_object	pedestal;
+	t_object	skull;
 	t_object	**objects;
 }				t_core;
 
@@ -216,6 +220,9 @@ void			init_ghost(t_core *game, char *path);
 void			init_devil(t_core *game, char *path);
 void			init_a_buff(t_object *sprite, int quant);
 void			init_fire(t_core *game, char *path);
+void			init_barrel(t_core *game, char *path);
+void			init_pedestal(t_core *game, char *path);
+void			init_skull(t_core *game, char *path);
 int				free_structer(t_pars *params);
 void			free_images(t_core *game);
 void			free_sprites(t_core *game);

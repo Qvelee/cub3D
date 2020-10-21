@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inits.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 20:29:39 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 17:09:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		init_textures(t_core *game)
 	{
 		load_image(game, &game->wall, "./textures/wall.xpm");
 		load_image(game, &game->wall_dirty, "./textures/wall_dirty.xpm");
-		load_image(game, &game->sky, "./textures/sky.xpm");
+		load_image(game, &game->sky, "./textures/sky_3.xpm");
 		load_image(game, &game->floor, "./textures/floor.xpm");
 		load_image(game, &game->face, "./textures/face.xpm");
 	}

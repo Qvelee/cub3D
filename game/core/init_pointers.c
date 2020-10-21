@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pointers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:41:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 19:05:50 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 16:48:23 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ static void	init_objects(t_core *game)
 	game->fire.tex = NULL;
 	game->fire.pos = NULL;
 	game->fire.anim = NULL;
+	game->barrel.tex = NULL;
+	game->barrel.pos = NULL;
+	game->barrel.anim = NULL;
+	game->pedestal.tex = NULL;
+	game->pedestal.pos = NULL;
+	game->pedestal.anim = NULL;
 	game->objects = NULL;
 }
 

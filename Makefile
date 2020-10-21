@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
+#    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/20 22:18:04 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/21 17:16:49 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,9 @@ CORE_SRC =			cub3d.c \
 					init_ghost.c \
 					init_devil.c \
 					init_fire.c \
+					init_barrel.c \
+					init_pedestal.c \
+					init_skull.c \
 					handler.c \
 					render.c \
 					utils.c \
