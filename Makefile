@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/21 22:25:11 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/21 23:45:14 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ PARS_ERRORS_OBJ =	$(addprefix $(OBJ_PARS_ERR_DIR), $(PARS_ERRORS_SRC:.c=.o))
 
 ###
 
-LIBUTILS =			-Lgame/utils/ -lutils -Lminilibx/ -lmlx -lXext -lX11 -lm
+LIBUTILS =			-Lgame/utils/ -lutils -Lmlx/ -lmlx -lXext -lX11 -lm
 
 MAIN =				./game/main.c
 
@@ -125,7 +125,7 @@ libutil:
 	@$(MAKE) -C game/utils/
 
 minlib:
-	@$(MAKE) -C minilibx/
+	@$(MAKE) -C mlx/
 
 $(NAME): $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
 	$(COMP) $^ $(MAIN) $(LIBUTILS) -g -o $@
@@ -151,7 +151,7 @@ clean:
 	@rm -rf $(PARS_UTIL_OBJ)
 	@rm -rf $(PARS_ERRORS_OBJ)
 	@rm	-rf sshot.bmp
-	@$(MAKE) clean -C minilibx/
+	@$(MAKE) clean -C mlx/
 	@$(MAKE) clean -C game/utils/
 
 fclean: clean

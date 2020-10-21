@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:24:17 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:43:17 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
-# include "../../minilibx/mlx.h"
+# include "../../mlx/mlx.h"
 # include <math.h>
 # include <fcntl.h>
 # include <string.h>
