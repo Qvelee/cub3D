@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:17:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 17:54:03 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:21:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		check_wall_type(t_core *game, double x, double y, char object)
 		return (1);
 	if (game->params->map[y_in_map][x_in_map] == object || \
 		game->params->map[y_in_map][x_in_map] == '\0')
-			result = 1;
+		result = 1;
 	return (result);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:41:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 16:48:23 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:02:46 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ static void	init_objects(t_core *game)
 	game->pedestal.tex = NULL;
 	game->pedestal.pos = NULL;
 	game->pedestal.anim = NULL;
+	game->skull.tex = NULL;
+	game->skull.pos = NULL;
+	game->skull.anim = NULL;
 	game->objects = NULL;
 }
 
@@ -48,7 +51,7 @@ static void	init_images(t_core *game)
 	game->face.img.image = NULL;
 }
 
-void	init_pointers(t_core *game)
+void		init_pointers(t_core *game)
 {
 	game->mlx = NULL;
 	game->frame.image = NULL;

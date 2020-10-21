@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/21 17:16:49 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/21 22:25:11 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ CORE_SRC =			cub3d.c \
 					inits.c \
 					init_pointers.c \
 					init_sprites.c \
+					init_utils.c \
 					init_basic.c \
 					init_ghost.c \
 					init_devil.c \

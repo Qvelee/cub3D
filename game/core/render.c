@@ -3,33 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 13:25:26 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:12:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		exit_cub3d(t_core *game)
-{
-	free(game->buffer);
-	free_images(game);
-	free_sprites(game);
-	free_structer(game->params);
-	if (game->frame.image)
-		mlx_destroy_image(game->mlx, game->frame.image);
-	if (game->window)
-	{
-		mlx_clear_window(game->mlx, game->window);
-		mlx_destroy_window(game->mlx, game->window);
-	}
-	free(game->mlx);
-	exit(0);
-}
-
-static void  make_screenshot(t_core *game)
+static void	make_screenshot(t_core *game)
 {
 	unsigned char	*bmp;
 	int				tmp;
@@ -58,14 +41,31 @@ static void  make_screenshot(t_core *game)
 	close(tmp);
 }
 
-int		render(t_core *game)
+int			exit_cub3d(t_core *game)
+{
+	free(game->buffer);
+	free_images(game);
+	free_sprites(game);
+	free_structer(game->params);
+	if (game->frame.image)
+		mlx_destroy_image(game->mlx, game->frame.image);
+	if (game->window)
+	{
+		mlx_clear_window(game->mlx, game->window);
+		mlx_destroy_window(game->mlx, game->window);
+	}
+	free(game->mlx);
+	exit(0);
+}
+
+int			render(t_core *game)
 {
 	static int	temp;
 
 	mlx_do_sync(game->mlx);
 	if (BONUS && game->save == -1)
-		mlx_mouse_move(game->mlx, game->window, game->centerX, \
-			game->centerY);
+		mlx_mouse_move(game->mlx, game->window, game->center_x, \
+			game->center_y);
 	player(game);
 	ray_casting(game);
 	make_frame(game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_memory.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:05:16 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 17:33:22 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:44:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	error_malloc(t_core *game)
 {
 	ft_putendl_fd("Error", 1);
 	ft_putendl_fd("cub3D: Memory allocation fail", 1);
-	exit_cub3d(game);	
+	exit_cub3d(game);
 }
 
 void	error_newlst(t_core *game, t_list **list)

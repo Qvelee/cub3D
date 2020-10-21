@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:32 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 16:05:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:19:15 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static	void	set_floor_pixel(t_core *game, t_tex *texture)
 {
 	int	color;
-	
+
 	color = ((int *)(texture->img.img_addr))\
 			[(int)texture->y_texture * texture->width + \
 			(int)texture->x_texture];
@@ -66,13 +66,13 @@ static	void	draw_player(t_core *game)
 	draw_block(game, &game->face, pl_x, pl_y);
 }
 
-int		map(t_core *game)
+int				map(t_core *game)
 {
 	int index;
 	int sindex;
 	int	x_pos;
 	int	y_pos;
-	
+
 	index = -1;
 	x_pos = game->map.x_pos;
 	y_pos = game->map.y_pos;

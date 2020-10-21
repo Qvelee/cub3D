@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:51:37 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 15:52:56 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:38:56 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	void	find_qantity(t_object *sprite, char **map, char type)
+static	void	find_quantity(t_object *sprite, char **map, char type)
 {
 	int	x_in_map;
 	int	y_in_map;
@@ -35,7 +35,7 @@ static	void	find_sprites(t_core *game, t_object *sprite, \
 	int	y_in_map;
 	int	temp;
 
-	find_qantity(sprite, map, type);
+	find_quantity(sprite, map, type);
 	y_in_map = -1;
 	if (!(sprite->pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		sprite->quantity)))
@@ -54,7 +54,7 @@ static	void	find_sprites(t_core *game, t_object *sprite, \
 				sprite->pos[temp].type = type;
 				sprite->pos[temp].a_buff = NULL;
 			}
-	}	
+	}
 }
 
 void			init_basic(t_core *game, char *path)

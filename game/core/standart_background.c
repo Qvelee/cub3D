@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   standart_background.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/12 18:14:48 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 18:31:24 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:20:48 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	set_back_colors(t_core *game)
 		x = -1;
 		while (++x < game->params->r[0])
 			((int *)(game->frame.img_addr))[(int)y * game->params->r[0] + \
-				(int)x] = floor_color;		
+				(int)x] = floor_color;
 	}
 }

@@ -6,13 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 17:09:27 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:29:02 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//malloc protect
 
 static void	init_frame_image(t_core *game)
 {
@@ -52,8 +50,6 @@ void		init_map(t_core *game)
 	game->map.x_scale = game->params->r[0] / 3 / game->map.map_colunms;
 	game->map.scale = game->map.y_scale < game->map.x_scale ? \
 		game->map.y_scale : game->map.x_scale;
-	game->map.sizeX = game->map.scale * game->map.map_colunms;
-	game->map.sizeY = game->map.scale * game->map.map_lines;
 }
 
 void		init_window(t_core *game)
@@ -83,8 +79,8 @@ void		init_window(t_core *game)
 
 void		init_game_settings(t_core *game)
 {
-	game->centerX = game->params->r[0] / 2;
-	game->centerY = game->params->r[1] / 2;
+	game->center_x = game->params->r[0] / 2;
+	game->center_y = game->params->r[1] / 2;
 	game->player.x = 0;
 	game->player.y = 0;
 	game->shadow = 1.5;

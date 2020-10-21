@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 19:42:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 20:56:17 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:32:19 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static	void	what_texture(t_core *game, t_ray_cast *ray, t_tex *texture, \
 				game->west : game->east;
 	}
 	else
-				*texture = game->wall;
+		*texture = game->wall;
 }
 
 void			texture_wall(t_core *game, t_ray_cast *ray)

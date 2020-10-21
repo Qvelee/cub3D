@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:13:57 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 17:54:19 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:09:28 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,17 @@ void	set_skull(t_core *game, t_object *skull)
 	skull->pos[0].scale_y = 1;
 	set_spr(&skull->pos[0], 14.9, 1.6, 0.8);
 	place_on_map(game, 14.9, 1.6, skull->pos[0].type);
-	create_anim_buff(skull->anim, &skull->pos[0].a_buff, 2);
+	create_anim_buff(game, skull->anim, &skull->pos[0].a_buff, 2);
 }
 
 void	init_skull(t_core *game, char *path)
 {
-	int		temp;
+	const int	anim_img_quant = 2;
 
-	temp = -1;
-	if (!(game->skull.anim = (t_tex*)malloc(sizeof(t_tex) * 3)))
+	if (!(game->skull.anim = (t_tex*)malloc(sizeof(t_tex) * \
+		(anim_img_quant + 1))))
 		error_malloc(game);
-		while (++temp < 2)
-			load_image(game, &game->skull.anim[temp], \
-				ft_strjoin(path, ft_strjoin("animation/", \
-				ft_strjoin(ft_itoa(temp), ".xpm"))));
-	game->skull.anim[2].img.image = NULL;
+	init_load_anim_images(game, &game->skull, path, anim_img_quant);
 	game->skull.quantity = 1;
 	if (!(game->skull.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		game->skull.quantity)))

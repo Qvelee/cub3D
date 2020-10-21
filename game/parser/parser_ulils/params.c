@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:24:55 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 22:57:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:23:35 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	check_color_par_correct(char *component)
 		if (component[index] != ' ' && component[index] != '\0' && \
 			component[index] != ',')
 			return (1);
+		if (component[index] == '\0')
+			break ;
 	}
 	return (digits != 3 || point != 2);
 }

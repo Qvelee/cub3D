@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_b_pedestal.c                                    :+:      :+:    :+:   */
+/*   init_pedestal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 16:13:05 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 16:13:10 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 22:58:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,12 @@ void	set_pedestal(t_core *game, t_object *pedestal)
 
 void	init_pedestal(t_core *game, char *path)
 {
-	int		temp;
-	int		quantity;
+	const int	base_img_quant = 1;
 
-	temp = -1;
-	quantity = 1;
-	if (!(game->pedestal.tex = (t_tex*)malloc(sizeof(t_tex) * (quantity + 1))))
+	if (!(game->pedestal.tex = (t_tex*)malloc(sizeof(t_tex) * \
+		(base_img_quant + 1))))
 		error_malloc(game);
-	while (++temp < quantity)
-		load_image(game, &game->pedestal.tex[temp], \
-			ft_strjoin(path, ft_strjoin(ft_itoa(temp), ".xpm")));
-	game->pedestal.tex[temp].img.image = NULL;
+	init_load_tex_images(game, &game->pedestal, path, base_img_quant);
 	game->pedestal.quantity = 2;
 	if (!(game->pedestal.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		game->pedestal.quantity)))

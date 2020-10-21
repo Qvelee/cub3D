@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 21:07:13 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 22:26:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:41:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		main(int argc, char **argv)
 	}
 	if (argc == 2)
 		cub3d(argv[1], NULL);
-	if (argc == 3)		
+	if (argc == 3)
 		cub3d(argv[1], argv[2]);
 	return (0);
 }

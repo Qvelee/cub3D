@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:18:09 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 18:06:28 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:07:59 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	set_more_ghosts(t_core *game, t_object *ghost)
 	ghost->pos[3].scale_x = 1;
 	ghost->pos[3].scale_y = 1;
 	set_spr(&ghost->pos[3], 4.6, 8.6, 0.5);
-	create_anim_buff(ghost->anim, &ghost->pos[3].a_buff, 14);
+	create_anim_buff(game, ghost->anim, &ghost->pos[3].a_buff, 14);
 	ghost->pos[4].volume = 0;
 	ghost->pos[4].a_tmp = 0;
 	ghost->pos[4].a_speed = 5;
@@ -29,7 +29,7 @@ void	set_more_ghosts(t_core *game, t_object *ghost)
 	ghost->pos[4].scale_x = 0.5;
 	ghost->pos[4].scale_y = 0.5;
 	set_spr(&ghost->pos[4], 17.6, 10.6, 0.5);
-	create_anim_buff(ghost->anim, &ghost->pos[4].a_buff, 14);
+	create_anim_buff(game, ghost->anim, &ghost->pos[4].a_buff, 14);
 }
 
 void	set_ghosts(t_core *game, t_object *ghost)
@@ -41,7 +41,7 @@ void	set_ghosts(t_core *game, t_object *ghost)
 	ghost->pos[0].scale_x = 1;
 	ghost->pos[0].scale_y = 1;
 	set_spr(&ghost->pos[0], 2.6, 8.6, 0.5);
-	create_anim_buff(ghost->anim, &ghost->pos[0].a_buff, 14);
+	create_anim_buff(game, ghost->anim, &ghost->pos[0].a_buff, 14);
 	ghost->pos[1].volume = 0;
 	ghost->pos[1].a_tmp = 0;
 	ghost->pos[1].a_speed = 1;
@@ -49,7 +49,7 @@ void	set_ghosts(t_core *game, t_object *ghost)
 	ghost->pos[1].scale_x = 1.1;
 	ghost->pos[1].scale_y = 1.1;
 	set_spr(&ghost->pos[1], 3.6, 8.6, 0.5);
-	create_anim_buff(ghost->anim, &ghost->pos[1].a_buff, 14);
+	create_anim_buff(game, ghost->anim, &ghost->pos[1].a_buff, 14);
 	ghost->pos[2].volume = 0;
 	ghost->pos[2].a_tmp = 0;
 	ghost->pos[2].a_speed = 2;
@@ -57,31 +57,23 @@ void	set_ghosts(t_core *game, t_object *ghost)
 	ghost->pos[2].scale_x = 1.5;
 	ghost->pos[2].scale_y = 1.5;
 	set_spr(&ghost->pos[2], 14.5, 11.5, 0.7);
-	create_anim_buff(ghost->anim, &ghost->pos[2].a_buff, 14);
+	create_anim_buff(game, ghost->anim, &ghost->pos[2].a_buff, 14);
 	set_more_ghosts(game, ghost);
 }
 
 void	init_ghost(t_core *game, char *path)
 {
-	int			quantity;
-	int			temp;
+	const int	base_img_quant = 1;
+	const int	anim_img_quant = 14;
 
-	temp = -1;
-	quantity = 1;
-	if (!(game->ghost.tex = (t_tex*)malloc(sizeof(t_tex) * (quantity + 1))))
+	if (!(game->ghost.tex = (t_tex*)malloc(sizeof(t_tex) * \
+		(base_img_quant + 1))))
 		error_malloc(game);
-	while (++temp < quantity)
-		load_image(game, &game->ghost.tex[temp], \
-			ft_strjoin(path, ft_strjoin(ft_itoa(temp), ".xpm")));
-	game->ghost.tex[temp].img.image = NULL;
-	temp = -1;
-	if (!(game->ghost.anim = (t_tex*)malloc(sizeof(t_tex) * 15)))
+	init_load_tex_images(game, &game->ghost, path, base_img_quant);
+	if (!(game->ghost.anim = (t_tex*)malloc(sizeof(t_tex) * \
+		(anim_img_quant + 1))))
 		error_malloc(game);
-	while (++temp < 14)
-		load_image(game, &game->ghost.anim[temp], \
-			ft_strjoin(path, ft_strjoin("animation/", \
-			ft_strjoin(ft_itoa(temp), ".xpm"))));
-	game->ghost.anim[14].img.image = NULL;
+	init_load_anim_images(game, &game->ghost, path, anim_img_quant);
 	game->ghost.quantity = 5;
 	if (!(game->ghost.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		game->ghost.quantity)))

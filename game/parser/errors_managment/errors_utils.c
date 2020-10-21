@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 18:32:45 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/12 14:22:52 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:30:12 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int		error_invalid_file(t_pars *params)
 	return (0);
 }
 
-int		error_open_file()
+int		error_open_file(void)
 {
 	ft_putendl_fd("Error", 1);
 	perror("cub3D");
 	return (0);
 }
 
-int		error_wrong_filename()
+int		error_wrong_filename(void)
 {
 	ft_putendl_fd("Error", 1);
 	ft_putendl_fd("cub3D: File extension not .cub", 1);

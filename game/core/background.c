@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   background.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 16:59:26 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 19:56:51 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:10:26 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,24 @@ void			set_floor_ceiling(t_core *game, t_ray_cast *ray)
 	tex_pixels(game, &texture, &fc);
 }
 
+static void		calc_sky_prop(t_core *game, t_ray_cast *ray, t_tex *texture)
+{
+	*texture = game->sky;
+	texture->step = game->sky.height / (game->params->r[1] / 2);
+	texture->offset = (game->player.angle) * 180 / M_PI / 360 * 5;
+	if (texture->offset >= 1)
+		texture->offset = texture->offset - (int)texture->offset;
+	texture->x_screen = -1;
+	texture->x_texture = texture->offset * texture->width;
+	texture->x_texture = texture->x_texture < 0 ? texture->width - 1 + \
+		texture->x_texture : texture->x_texture;
+}
+
 void			set_sky(t_core *game, t_ray_cast *ray)
 {
 	t_tex	texture;
 
-	texture = game->sky;
-	texture.step = game->sky.height / (game->params->r[1] / 2);
-	texture.offset = (game->player.angle) * 180 / M_PI / 360 * 5;
-	if (texture.offset >= 1)
-		texture.offset = texture.offset - (int)texture.offset;
-	texture.x_screen = -1;
-	texture.x_texture = texture.offset * texture.width;
-	texture.x_texture = texture.x_texture < 0 ? texture.width - 1 + \
-		texture.x_texture : texture.x_texture;
+	calc_sky_prop(game, ray, &texture);
 	while (++texture.x_screen < game->params->r[0])
 	{
 		texture.y_screen = -1;

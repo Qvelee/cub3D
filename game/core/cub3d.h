@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 17:13:33 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:24:17 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 1
+# define BONUS 0
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -107,8 +107,6 @@ typedef	struct	s_map
 {
 	int	x_scale;
 	int	y_scale;
-	int	sizeX;
-	int	sizeY;
 	int	scale;
 	int	x_pos;
 	int	y_pos;
@@ -177,8 +175,8 @@ typedef	struct	s_core
 	void		*mlx;
 	void		*window;
 	t_ray_cast	*buffer;
-	int			centerX;
-	int			centerY;
+	int			center_x;
+	int			center_y;
 	int			color;
 	double		shadow;
 	t_buttons	button;
@@ -210,7 +208,12 @@ void			init_pointers(t_core *game);
 void			init_window(t_core *game);
 void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
-void			create_anim_buff(t_tex *anim, t_list **a_buff, int quant);
+void			init_load_tex_images(t_core *game, t_object *object, \
+	char *path, int quantity);
+void			init_load_anim_images(t_core *game, t_object *object, \
+	char *path, int quantity);
+void			create_anim_buff(t_core *game, t_tex *anim, t_list **a_buff, \
+	int quant);
 void			set_spr(t_sprite *sprite, double x, double y, double z);
 void			place_on_map(t_core *game, double x, double y, char object);
 void			init_basic(t_core *game, char *path);

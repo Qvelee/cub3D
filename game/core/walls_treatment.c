@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls_treatment.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 18:26:17 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 15:49:05 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:23:57 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static	void	add_wall_to_list(t_list **walls, t_ray_cast *wall, \
 		*walls = tmplst;
 }
 
-int			sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
+int				sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls)
 {
 	t_list	*tmplst;
 	int		temp;

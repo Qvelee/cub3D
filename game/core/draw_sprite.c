@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:52:06 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 18:24:28 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:16:37 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 {
 	t_tex	temp;
 
-	if (sprite->type == '2')
-		*texture = &game->basic.tex[num];
-	else
+	if (sprite->type != '2')
 		if ((sprite->depth < game->map.block_size * 5 || \
 			sprite->type == 'b' || sprite->type == 'f' || \
 			sprite->type == 's') && sprite->a_buff)
@@ -69,6 +67,8 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 			if (sprite->type == 'p')
 				*texture = &game->pedestal.tex[num];
 		}
+	else
+		*texture = &game->basic.tex[num];
 }
 
 static	void	calc_properties(t_core *game, t_sprite *sprite, t_tex **texture)
@@ -83,8 +83,6 @@ static	void	calc_properties(t_core *game, t_sprite *sprite, t_tex **texture)
 		game->map.block_size) * sprite->scale_x;
 	(*texture)->step = (*texture)->height / sprite->heigth;
 	(*texture)->step_x = (*texture)->width / sprite->width;
-	// sprite->ch = sprite->heigth >= game->params->r[1] ? \
-	// 	game->params->r[1] - 1 : (int)sprite->heigth;
 	sprite->cw = sprite->width >= game->params->r[0] ? \
 		game->params->r[0] - 1 : (int)sprite->width;
 	sprite->ch = (int)sprite->heigth;
@@ -114,7 +112,8 @@ void			draw_sprite(t_core *game, t_sprite *sprite)
 			2 + sprite->heigth * sprite->z) * texture->step;
 		while (cch--)
 		{
-			if (texture->y_screen >= 0 && texture->y_screen < game->params->r[1])
+			if (texture->y_screen >= 0 && texture->y_screen < \
+				game->params->r[1])
 				set_pixel(game, texture, sprite->depth);
 			texture->y_screen++;
 			texture->y_texture += texture->step;

@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngameisabe <ngameisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/06 19:22:50 by ngameisabe          #+#    #+#             */
-/*   Updated: 2020/10/15 19:29:52 by ngameisabe         ###   ########.fr       */
+/*   Created: 2020/09/06 19:22:50 by ngameisabe        #+#    #+#             */
+/*   Updated: 2020/10/21 23:23:19 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//i can walk through corners!!!!
 
 #include "cub3d.h"
 

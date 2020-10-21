@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:44:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 21:10:12 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:22:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		make_darker(double depth, int r, int g, int b)
 {
-	int		result;
-	
+	int	result;
+
 	r /= (1 + depth * depth * 0.000005);
 	g /= (1 + depth * depth * 0.000005);
 	b /= (1 + depth * depth * 0.000005);

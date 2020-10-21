@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 13:07:15 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 20:17:18 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static	void	horisontals(t_core *game, t_ray_cast *ray)
 			break ;
 		ray->y += ray->dy * game->map.block_size;
 		blocks--;
-	}	
+	}
 }
 
 int				ray_casting(t_core *game)

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:26:00 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 16:09:47 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 23:08:36 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	set_barrels(t_core *game, t_object *barrel)
 	barrel->pos[0].scale_y = 0.7;
 	set_spr(&barrel->pos[0], 2.6, 11.6, 0.25);
 	place_on_map(game, 2.6, 11.6, barrel->pos[0].type);
-	create_anim_buff(barrel->anim, &barrel->pos[0].a_buff, 13);
+	create_anim_buff(game, barrel->anim, &barrel->pos[0].a_buff, 13);
 	barrel->pos[1].volume = 0;
 	barrel->pos[1].a_tmp = 0;
 	barrel->pos[1].a_speed = 11;
@@ -31,21 +31,17 @@ void	set_barrels(t_core *game, t_object *barrel)
 	barrel->pos[1].scale_y = 0.6;
 	set_spr(&barrel->pos[1], 2.6, 11.2, 0.15);
 	place_on_map(game, 2.2, 11.2, barrel->pos[1].type);
-	create_anim_buff(barrel->anim, &barrel->pos[1].a_buff, 13);
+	create_anim_buff(game, barrel->anim, &barrel->pos[1].a_buff, 13);
 }
 
 void	init_barrel(t_core *game, char *path)
 {
-	int			temp;
+	const int	anim_img_quant = 13;
 
-	temp = -1;
-	if (!(game->barrel.anim = (t_tex*)malloc(sizeof(t_tex) * 14)))
+	if (!(game->barrel.anim = (t_tex*)malloc(sizeof(t_tex) * \
+		(anim_img_quant + 1))))
 		error_malloc(game);
-	while (++temp < 13)
-		load_image(game, &game->barrel.anim[temp], \
-			ft_strjoin(path, ft_strjoin("animation/", \
-			ft_strjoin(ft_itoa(temp), ".xpm"))));
-	game->barrel.anim[13].img.image = NULL;
+	init_load_anim_images(game, &game->barrel, path, anim_img_quant);
 	game->barrel.quantity = 2;
 	if (!(game->barrel.pos = (t_sprite*)malloc(sizeof(t_sprite) * \
 		game->barrel.quantity)))

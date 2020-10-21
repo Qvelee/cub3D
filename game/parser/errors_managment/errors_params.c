@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_params.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 14:42:23 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/19 17:31:07 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/21 19:30:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		check_color_valid(t_pars *params, int type)
 		return (1);
 	}
 	if (type == 7 && \
-		(params->c[0] > 255 || params->c[1] > 255 || params->c[2] > 255 || 
+		(params->c[0] > 255 || params->c[1] > 255 || params->c[2] > 255 || \
 			params->c[0] < 0 || params->c[1] < 0 || params->c[2] < 0))
 	{
 		free_struct(params);
