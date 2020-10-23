@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:48:47 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:32:02 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		init_textures(t_core *game)
 	}
 }
 
-void		init_map(t_core *game)
+void		init_minimap(t_core *game)
 {
 	game->map.x_pos = 0;
 	game->map.y_pos = 0;

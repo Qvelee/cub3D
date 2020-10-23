@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:51:02 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 16:30:29 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int				mouse_moved(int x, int y, t_core *game)
 	return (0);
 }
 
-int				handler(t_core *game)
+void			handler(t_core *game)
 {
 	init_handler(game);
 	if (BONUS && game->save == -1)
@@ -88,5 +88,4 @@ int				handler(t_core *game)
 		mlx_hook(game->window, 2, 1L << 0, key_pressed, game);
 		mlx_hook(game->window, 3, 1L << 1, key_realised, game);
 	}
-	return (0);
 }

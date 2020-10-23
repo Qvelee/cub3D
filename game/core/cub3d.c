@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:22:50 by ngameisabe        #+#    #+#             */
-/*   Updated: 2020/10/21 23:23:19 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 15:31:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				cub3d(char *path, char *flag)
 	init_game_settings(&game);
 	init_textures(&game);
 	init_sprites(&game);
-	init_map(&game);
+	init_minimap(&game);
 	get_player_pos(&game);
 	handler(&game);
 	mlx_loop_hook(game.mlx, render, &game);

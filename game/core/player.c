@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:17:43 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 16:31:20 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ static	void	movement(t_core *game)
 			-game->player.speed * sin(game->player.angle));
 }
 
-int				player(t_core *game)
+void			player(t_core *game)
 {
 	game->player.cur_speed = game->button.shift ? \
 		game->player.fast_speed : game->player.speed;
 	movement(game);
-	return (0);
 }

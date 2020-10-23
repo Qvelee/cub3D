@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:51:19 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 16:43:55 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ int			render(t_core *game)
 		mlx_mouse_move(game->mlx, game->window, game->center_x, \
 			game->center_y);
 	player(game);
+	if (BONUS)
+		set_sky(game);
+	else
+		set_back_colors(game);
 	ray_casting(game);
 	make_frame(game);
 	if (BONUS)

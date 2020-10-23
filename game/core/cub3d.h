@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:52:43 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 16:46:24 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 1
+# define BONUS 0
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -24,19 +24,6 @@
 # include <stdio.h>
 # include <errno.h>
 
-typedef	struct	s_pars
-{
-	int		r[2];
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	char	*s;
-	int		f[3];
-	int		c[3];
-	char	**map;
-}				t_pars;
-
 typedef	struct	s_img
 {
 	void	*image;
@@ -45,29 +32,6 @@ typedef	struct	s_img
 	int		size_line;
 	int		endian;
 }				t_img;
-
-typedef	struct	s_buttons
-{
-	int a;
-	int s;
-	int d;
-	int w;
-	int left;
-	int right;
-	int	shift;
-}				t_buttons;
-
-typedef	struct	s_flr_ceil
-{
-	double	floor_x;
-	double	floor_y;
-	double	dist_to_wall;
-	double	screen_dist;
-	int		lineheight;
-	double	weight;
-	double	screen_floor_x;
-	double	screen_floor_y;
-}				t_flr_ceil;
 
 typedef	struct	s_tex
 {
@@ -84,25 +48,6 @@ typedef	struct	s_tex
 	double	y_texture;
 }				t_tex;
 
-typedef	struct	s_ray_cast
-{
-	char	type;
-	double	current_angle;
-	int		num_rays;
-	double	wall_height;
-	double	x;
-	double	y;
-	double	xh;
-	double	yv;
-	double	dx;
-	double	dy;
-	double	xm;
-	double	ym;
-	double	depth;
-	double	depth_v;
-	double	depth_h;
-}				t_ray_cast;
-
 typedef	struct	s_map
 {
 	int	x_scale;
@@ -117,22 +62,6 @@ typedef	struct	s_map
 	int	space_color;
 	int	player_color;
 }				t_map;
-
-typedef	struct	s_player
-{
-	double	angle;
-	double	speed;
-	double	cur_speed;
-	double	fast_speed;
-	double	button_angle_speed;
-	double	mouse_angle_speed;
-	double	radius;
-	double	fov;
-	int		num_rays;
-	double	delta_angle;
-	double	x;
-	double	y;
-}				t_player;
 
 typedef	struct	s_sprite
 {
@@ -167,6 +96,77 @@ typedef	struct	s_object
 	t_tex		*anim;
 	int			quantity;
 }				t_object;
+
+typedef	struct	s_flr_ceil
+{
+	double	floor_x;
+	double	floor_y;
+	double	dist_to_wall;
+	double	screen_dist;
+	int		lineheight;
+	double	weight;
+	double	screen_floor_x;
+	double	screen_floor_y;
+}				t_flr_ceil;
+
+typedef	struct	s_ray_cast
+{
+	char	type;
+	double	current_angle;
+	int		num_rays;
+	double	wall_height;
+	double	x;
+	double	y;
+	double	xh;
+	double	yv;
+	double	dx;
+	double	dy;
+	double	xm;
+	double	ym;
+	double	depth;
+	double	depth_v;
+	double	depth_h;
+}				t_ray_cast;
+
+typedef	struct	s_buttons
+{
+	int a;
+	int s;
+	int d;
+	int w;
+	int left;
+	int right;
+	int	shift;
+}				t_buttons;
+
+typedef	struct	s_player
+{
+	double	angle;
+	double	speed;
+	double	cur_speed;
+	double	fast_speed;
+	double	button_angle_speed;
+	double	mouse_angle_speed;
+	double	radius;
+	double	fov;
+	int		num_rays;
+	double	delta_angle;
+	double	x;
+	double	y;
+}				t_player;
+
+typedef	struct	s_pars
+{
+	int		r[2];
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	char	*s;
+	int		f[3];
+	int		c[3];
+	char	**map;
+}				t_pars;
 
 typedef	struct	s_core
 {
@@ -203,11 +203,100 @@ typedef	struct	s_core
 }				t_core;
 
 int				cub3d(char *path, char *flag);
-void			load_image(t_core *game, t_tex *texture, char *path);
+
+/*
+**	Parser function.
+**	This function checks given file for errors in parameters and creates
+**		a structer with given game parameters and map.
+*/
+
+int				parser(char *path, t_pars *params);
+
+/*
+**	Initialization functions.
+**	This functions are only called at the beggining of program execution.
+*/
+/*
+**		init_pointers		- initializes all pointers used by program as NULL.
+**		init_window			- calculates window parameters and creates the
+**								system window.
+**		init_game_settings	- calculates and set all needed game parameters,
+**								like:
+**								* player's coordinates, angle, speed, FOV, etc;
+**								* map block's size, quntity of map's colums
+**									and lines;
+**								* creates an array of structers, which will
+**									contain parameters of every ray.
+**		init_textures		- creates main frame image and load needed
+**								texture images, like wall, sky and floor
+**								textures, etc.
+**		init_sprites		- calls the sprites initialization
+**								functions (see below) and creates an array of
+**								structers, containing links to all sprites.
+*/
+
 void			init_pointers(t_core *game);
 void			init_window(t_core *game);
+void			init_game_settings(t_core *game);
 void			init_textures(t_core *game);
 void			init_sprites(t_core *game);
+
+/*
+**		Seven functions below initialize all sprites, used by game, depending
+**			on game mode.
+**		Every function load images needed by each sprite, depending on
+**			it's type and parameters, like standart view, animation, etc.
+**		Also, this functions creates some arrays, depending on sprite needs:
+**			* array of sprite basic view images, it can ba only one image,
+**				or more, if sprite has a different view from several sides;
+**			* array of spite animation images, if sprite has animation;
+**			* array of sprites, containing sprite's parameters like sprite's
+**				coordinates, size scale, animation speed, etc. Each element of
+**				this array is one sprite;
+**		Eventually, this functions set all sprite parameters.
+*/
+
+void			init_basic(t_core *game, char *path);
+void			init_ghost(t_core *game, char *path);
+void			init_devil(t_core *game, char *path);
+void			init_fire(t_core *game, char *path);
+void			init_barrel(t_core *game, char *path);
+void			init_pedestal(t_core *game, char *path);
+void			init_skull(t_core *game, char *path);
+
+/*
+**		init_minimap	- initialize minimap parameters, like position
+**							on screen and scale.
+*/
+
+void			init_minimap(t_core *game);
+
+/*
+**		Functions below is secondary functions for init_ functions.
+**
+**		load_image				- load .xpm image from file system, set image
+**									parameters and creates an array with it's
+**									pixels.
+**		init_a_buff				- initialize sprite's animation list's pointers
+**									as NULL.
+**		init_load_tex_images	- used for memory leak free loading and
+**									initialization of many images. Using when
+**									basic view images need to load.
+**		init_load_anim_images	- same as previous function, but using when
+**									animation images need to load.
+**		create_anim_buff		- creates list of pointers to sprite's
+**									animation images, which will be used
+**									in animation drawing machanism. It is
+**									some kind of queue, representing the
+**									sequence of images, which are animation.
+**		set_spr					- small function, that's set's one sprite
+**									coordinates. Created for code reducrion.
+**		place_on_map			- changes map's block type to another, setting
+**									sprite on map by that.
+*/
+
+void			load_image(t_core *game, t_tex *texture, char *path);
+void			init_a_buff(t_object *sprite, int quant);
 void			init_load_tex_images(t_core *game, t_object *object, \
 	char *path, int quantity);
 void			init_load_anim_images(t_core *game, t_object *object, \
@@ -216,31 +305,60 @@ void			create_anim_buff(t_core *game, t_tex *anim, t_list **a_buff, \
 	int quant);
 void			set_spr(t_sprite *sprite, double x, double y, double z);
 void			place_on_map(t_core *game, double x, double y, char object);
-void			init_basic(t_core *game, char *path);
-void			init_game_settings(t_core *game);
-void			init_map(t_core *game);
-void			init_ghost(t_core *game, char *path);
-void			init_devil(t_core *game, char *path);
-void			init_a_buff(t_object *sprite, int quant);
-void			init_fire(t_core *game, char *path);
-void			init_barrel(t_core *game, char *path);
-void			init_pedestal(t_core *game, char *path);
-void			init_skull(t_core *game, char *path);
+
+/*
+**	Handler function.
+**	This function processes key presses and mouse moves.
+*/
+
+void			handler(t_core *game);
+
+/*
+**	Render function.
+**	This function is colling in a loop and responsible for permanently
+**		frame rendering and appearing of frame on the screen.
+**	If needed, this function will not put any image to window, instead of this,
+**		it will call a screenshot creating function and exit after.
+**	This function contains some volume and complex functions, which will be
+**		describe below.
+*/
+
+int				render(t_core *game);
+
+/*
+**	Player function, subfunction on Render function.
+**	This function is responsible for player movement and collision with walls
+**		and sprites.
+*/
+
+void			player(t_core *game);
+
+/*
+**	Ray casting function, subfunction of Render function.
+**	This function includes realization of DDA algoritm, counting the distance
+**		to walls' stripes.
+**	It creates a stucter element for each ray with all it's parameters and adds
+**		it to the array with rays, created in the init_game_setting function
+**		before.
+*/
+
+void			ray_casting(t_core *game);
+
+/*
+**
+*/
+
+void			make_frame(t_core *game);
+
 int				free_structer(t_pars *params);
 void			free_images(t_core *game);
 void			free_sprites(t_core *game);
-int				parser(char *path, t_pars *params);
-int				render(t_core *game);
 void			pixel_put(t_img image, int x, int y, int color);
-int				handler(t_core *game);
 void			set_pixel(t_core *game, t_tex *texture, double depth);
 void			free_lst(t_list **lst);
 int				map(t_core *game);
-int				player(t_core *game);
-int				ray_casting(t_core *game);
 int				object_check(t_core *game, double x, double y, char object);
 int				check_wall_type(t_core *game, double x, double y, char object);
-void			make_frame(t_core *game);
 void			texture_wall(t_core *game, t_ray_cast *ray);
 int				make_darker(double depth, int r, int g, int b);
 void			set_back_colors(t_core *game);

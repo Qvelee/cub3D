@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/19 14:20:51 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:53:25 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 16:43:36 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	void	horisontals(t_core *game, t_ray_cast *ray)
 	}
 }
 
-int				ray_casting(t_core *game)
+void			ray_casting(t_core *game)
 {
 	t_ray_cast	ray;
 
@@ -76,10 +76,6 @@ int				ray_casting(t_core *game)
 	ray.current_angle = game->player.angle - game->player.fov / 2;
 	ray.xm = (int)game->player.x / game->map.block_size * game->map.block_size;
 	ray.ym = (int)game->player.y / game->map.block_size * game->map.block_size;
-	if (BONUS)
-		set_sky(game);
-	else
-		set_back_colors(game);
 	while (++ray.num_rays < game->player.num_rays)
 	{
 		ray.type = '1';
@@ -91,5 +87,4 @@ int				ray_casting(t_core *game)
 		ray_treatment(game, &ray);
 		ray.current_angle += game->player.delta_angle;
 	}
-	return (0);
 }
