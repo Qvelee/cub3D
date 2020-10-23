@@ -6,13 +6,13 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 12:52:06 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:54:12 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:32:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int				needed_side(t_sprite *sprite)
+static int		needed_side(t_sprite *sprite)
 {
 	int		num;
 	double	angle;
@@ -41,7 +41,7 @@ int				needed_side(t_sprite *sprite)
 	return (num);
 }
 
-void			type_of_sprite(t_core *game, t_sprite *sprite, \
+static void		type_of_sprite(t_core *game, t_sprite *sprite, \
 	t_tex **texture, int num)
 {
 	if (sprite->type != '2')
@@ -69,7 +69,7 @@ void			type_of_sprite(t_core *game, t_sprite *sprite, \
 		*texture = &game->basic.tex[num];
 }
 
-static	void	calc_properties(t_core *game, t_sprite *sprite, t_tex **texture)
+static void		calc_properties(t_core *game, t_sprite *sprite, t_tex **texture)
 {
 	if (sprite->theta < 0)
 		sprite->theta += 2 * M_PI;

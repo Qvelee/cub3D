@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 17:02:12 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/23 16:43:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:32:46 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int			render(t_core *game)
 	ray_casting(game);
 	make_frame(game);
 	if (BONUS)
-		map(game);
+		minimap(game);
 	if (game->window)
 		mlx_put_image_to_window(game->mlx, game->window, \
 			game->frame.image, 0, 0);

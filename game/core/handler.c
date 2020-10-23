@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:36:39 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/23 16:30:29 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:41:59 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static	int		init_handler(t_core *game)
 	game->button.left = 0;
 	game->button.right = 0;
 	game->button.shift = 0;
+	game->button.up = 0;
+	game->button.down = 0;
+	game->button.m = 0;
 	return (0);
 }
 
@@ -42,6 +45,12 @@ int				key_pressed(int keycode, t_core *game)
 		game->button.s = 1;
 	if (keycode == 0xffe1)
 		game->button.shift = 1;
+	if (keycode == 0xff52)
+		game->button.up = 1;
+	if (keycode == 0xff54)
+		game->button.down = 1;
+	if (keycode == 0x006d)
+		game->button.m = 1;
 	return (0);
 }
 
@@ -61,6 +70,12 @@ int				key_realised(int keycode, t_core *game)
 		game->button.s = 0;
 	if (keycode == 0xffe1)
 		game->button.shift = 0;
+	if (keycode == 0xff52)
+		game->button.up = 0;
+	if (keycode == 0xff54)
+		game->button.down = 0;
+	if (keycode == 0x006d)
+		game->button.m = 0;
 	return (0);
 }
 

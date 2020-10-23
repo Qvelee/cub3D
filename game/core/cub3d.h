@@ -6,14 +6,14 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/23 16:46:24 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:38:24 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define BONUS 0
+# define BONUS 1
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"
@@ -136,6 +136,9 @@ typedef	struct	s_buttons
 	int w;
 	int left;
 	int right;
+	int up;
+	int down;
+	int m;
 	int	shift;
 }				t_buttons;
 
@@ -221,7 +224,7 @@ int				parser(char *path, t_pars *params);
 **		init_window			- calculates window parameters and creates the
 **								system window.
 **		init_game_settings	- calculates and set all needed game parameters,
-**								like:
+**								such as:
 **								* player's coordinates, angle, speed, FOV, etc;
 **								* map block's size, quntity of map's colums
 **									and lines;
@@ -272,8 +275,7 @@ void			init_skull(t_core *game, char *path);
 void			init_minimap(t_core *game);
 
 /*
-**		Functions below is secondary functions for init_ functions.
-**
+**		Functions below are secondary functions for init_ functions.
 **		load_image				- load .xpm image from file system, set image
 **									parameters and creates an array with it's
 **									pixels.
@@ -334,6 +336,17 @@ int				render(t_core *game);
 void			player(t_core *game);
 
 /*
+**	Back ground functions, subfunctions of Render function.
+**	This functions draws background, depending on game mod.
+**	set_back_colors - draw sky and groung using given color, gave in
+**		parameters.
+**	set_sky			- draw sky box using loaded seamless image.
+*/
+
+void			set_back_colors(t_core *game);
+void			set_sky(t_core *game);
+
+/*
 **	Ray casting function, subfunction of Render function.
 **	This function includes realization of DDA algoritm, counting the distance
 **		to walls' stripes.
@@ -345,34 +358,75 @@ void			player(t_core *game);
 void			ray_casting(t_core *game);
 
 /*
-**
+**	Make frame function, subfunction of Render function.
+**	This function is responsible for creating frame. There several things going
+**		on here, in turn:
+**		1. creating two lists, first is list of walls, second is list of
+**			sprites. These lists will be used to create queue of drawing.
+**		2. calculating some parameters for all sprites.
+**		3. finding visiable sprites for current player position and FOV.
+**		4. using "z_boofer" algoritm draw walls and sprites.
+**	Here is functions, used by make_frame function:
+**		calc_sprites_params		- calculate sprite parameters, such as:
+**			* distance to sprite;
+**			* angle relative player to sprite;
+**			* angle relative sprite to player;
+**			* current postition of the sprite on the screen, which means ray.
+**		find_visible_sprites	- determines if player can see sprite in his
+**			position. If yes, function will add a link to this sprite to list
+**			of sprites in descending order by distance to sprite.
+**		sort_walls				- takes the array of walls, created in ray
+**			casting function and adds links to list of walls in descending
+**			order by distance to wall.
+**	Next, the z_boofer function, which is not prototyped here, calling some
+**		functions (see below) to draw walls and sprites in order of their
+**		approach to the player, from most distant to most near objects.
+**	Here is functions, used by z_boofer function:
+**		set_floor_ceiling		- draws textured floor.
+**		texture_wall			- draws textured wall stripe.
+**		draw_sprite				- draws	needed sprite.
 */
 
 void			make_frame(t_core *game);
-
-int				free_structer(t_pars *params);
-void			free_images(t_core *game);
-void			free_sprites(t_core *game);
-void			pixel_put(t_img image, int x, int y, int color);
-void			set_pixel(t_core *game, t_tex *texture, double depth);
-void			free_lst(t_list **lst);
-int				map(t_core *game);
-int				object_check(t_core *game, double x, double y, char object);
-int				check_wall_type(t_core *game, double x, double y, char object);
-void			texture_wall(t_core *game, t_ray_cast *ray);
-int				make_darker(double depth, int r, int g, int b);
-void			set_back_colors(t_core *game);
-void			set_sky(t_core *game);
-void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
-void			sprite(t_core *game, t_ray_cast *ray);
-int				sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls);
 void			calc_sprites_params(t_core *game, t_object *object);
 void			find_visible_sprites(t_core *game, t_object *object, \
 	t_list **sprites);
-int				needed_side(t_sprite *sprite);
-void			type_of_sprite(t_core *game, t_sprite *sprite, \
-	t_tex **texture, int num);
+int				sort_walls(t_core *game, t_ray_cast **buffer, t_list **walls);
+void			set_floor_ceiling(t_core *game, t_ray_cast *ray);
+void			texture_wall(t_core *game, t_ray_cast *ray);
 void			draw_sprite(t_core *game, t_sprite *sprite);
+
+/*
+**	Minimap function, subfunction of Render function.
+**	This function draws minimap with player on his current position.
+*/
+
+int				minimap(t_core *game);
+
+/*
+**	Functions below are using by different functions in the project.
+**	set_pixel		- changes needed pixel of frame, using color of needed
+**						pixel in given image. This function use function
+**						make_darker (see below) to make color darker
+**						depending on distance to drawing object.
+**	make_darker		- takes the color in RGB format and returns it's
+**						darker version depending on depth parameter.
+**	object_check	- trying to find an object of the specified type on the
+**						specified coordinates of map. If object was found
+**						on these coordinates, function returns 1, else 0.
+*/
+
+void			set_pixel(t_core *game, t_tex *texture, double depth);
+int				make_darker(double depth, int r, int g, int b);
+int				object_check(t_core *game, double x, double y, char object);
+
+/*
+**	Functions below are using by many different functions to treat errors.
+**	There will be no detailed description for this functions. All of them
+**		prints error massage on the terminal and exit the program safely,
+**		without memory leaks.
+*/
+
 void			error_creation_window(t_core *game);
 void			error_mlx_init(t_core *game);
 void			error_malloc_buffer(t_core *game);
@@ -382,6 +436,26 @@ void			error_malloc(t_core *game);
 void			error_newlst(t_core *game, t_list **list);
 void			error_newlsts(t_core *game, t_list **list_1, t_list **list_2);
 void			error_creating_file(t_core *game, unsigned char **memory);
+
+/*
+**	Functions below are using by error functions and some else in project
+**	free_lst		- apply free function to every element of given list.
+**						NOTE: this function frees ONLY list's elemnts, not
+**						their content.
+**	free_structer	- frees structer with game parameters, created by parser
+**						function.
+**	free_images		- frees memory used to contain frame and texture's images.
+**	free_sprites	- frees memory used to contain all sprites, including
+**						sprites' animation buffers, etc.
+**	exit_cub3d		- realize clean exit from program, without memory leaks.
+*/
+
+void			free_lst(t_list **lst);
+int				free_structer(t_pars *params);
+void			free_images(t_core *game);
+void			free_sprites(t_core *game);
 int				exit_cub3d(t_core *game);
+
+int				check_wall_type(t_core *game, double x, double y, char object);
 
 #endif

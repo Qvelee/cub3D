@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:34 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/23 16:31:20 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:53:24 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,26 @@ static	void	movement(t_core *game)
 			-game->player.speed * sin(game->player.angle));
 }
 
+static	void	change_angle_speed(t_core *game)
+{
+	if (game->button.up && game->button.m)
+		game->player.mouse_angle_speed += 0.001;
+	if (game->button.down && game->button.m)
+		game->player.mouse_angle_speed -= 0.001;
+	if (game->button.up && !game->button.m)
+		game->player.button_angle_speed += 0.001;
+	if (game->button.down && !game->button.m)
+		game->player.button_angle_speed -= 0.001;
+	if (game->player.mouse_angle_speed <= 0)
+		game->player.mouse_angle_speed = 0.001;
+	if (game->player.button_angle_speed <= 0)
+		game->player.button_angle_speed = 0.001;
+}
+
 void			player(t_core *game)
 {
 	game->player.cur_speed = game->button.shift ? \
 		game->player.fast_speed : game->player.speed;
+	change_angle_speed(game);
 	movement(game);
 }

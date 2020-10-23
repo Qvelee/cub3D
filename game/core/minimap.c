@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 15:34:32 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:19:15 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/23 19:01:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static	void	draw_player(t_core *game)
 	draw_block(game, &game->face, pl_x, pl_y);
 }
 
-int				map(t_core *game)
+int				minimap(t_core *game)
 {
 	int index;
 	int sindex;
