@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/24 13:49:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 15:49:41 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define CUB3D_H
 
 /*
-**	BONUS define
+**	BONUS define.
 **	Set game mode.
 **	Without bonuses mode	- 0;
 **	With bonuses mode		- 1;
 */
 
-# define BONUS 0
+# define BONUS 1
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"

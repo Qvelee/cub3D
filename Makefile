@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/24 14:37:08 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/24 16:07:46 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ COMP =				clang
 
 FLAGS =				-Wall -Wextra -Werror
 
-HEADER = 			game/core/cub3d.h
+HEADER = 			./game/core/cub3d.h
 
 PARS_HEADER = 		parser.h
 
@@ -142,29 +142,37 @@ minlib:
 
 $(NAME): $(OBJ) $(INIT_OBJ) $(ERR_OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ) $(MAIN)
 	@$(COMP) $^ $(LIBUTILS) -g $(FLAGS) -o $@
+	@echo "\033[1m\033[32m$(NAME) created!\033[0m"
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c) $(HEADER)
+	@echo "\033[36mCompiling $< ..."
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_CORE_INIT_DIR), %.o): $(addprefix $(CORE_INIT_DIR), %.c) $(HEADER)
+	@echo "\033[36mCompiling $< ..."
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_CORE_ERR_DIR), %.o): $(addprefix $(CORE_ERR_DIR), %.c) $(HEADER)
+	@echo "\033[36mCompiling $< ..."
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c) $(HEADER)
+	@echo "\033[36mCompiling $< ..."
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_UTIL_DIR), %.o): $(addprefix $(PARS_UTIL_DIR), %.c) $(HEADER)
+	@echo "\033[36mCompiling $< ..."
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_ERR_DIR), %.o): $(addprefix $(PARS_ERRORS_DIR), %.c) $(HEADER)
+	@echo "\033[36mCompiling $< ..."
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 bonus:
 	@$(MAKE) ADD_BONUS=1 all;
 
 clean:
+	@echo "\033[31mDeleting...\033[0m"
 	@rm -rf $(OBJ)
 	@rm -rf $(PARS_OBJ)
 	@rm -rf $(PARS_UTIL_OBJ)
@@ -174,10 +182,12 @@ clean:
 	@rm	-rf sshot.bmp
 	@$(MAKE) clean -C mlx/
 	@$(MAKE) clean -C game/utils/
+	@echo "\033[31m\033[1mObject files deleted!\033[0m\033[31m\033[0m"
 
 fclean: clean
 	@rm -rf $(NAME)
 	@$(MAKE) fclean -C game/utils/
+	@echo "\033[31m\033[1m$(NAME), libutils.a, etc. files deleted!\033[0m"
 
 re: fclean all
 

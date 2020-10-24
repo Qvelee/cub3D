@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    bonus_off.sh                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nelisabe <nelisabe@student.21-school.ru    +#+  +:+       +#+         #
+#    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/14 14:45:14 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/15 14:31:10 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/24 16:09:12 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,3 +14,4 @@ way="./game/core/cub3d.h"
 if grep -q "BONUS 1" $way
     then sed -i 's/BONUS 1/BONUS 0/' $way
 fi
+echo "\033[31m\033[34mBASIC MODE\033[0m"
