@@ -20,7 +20,7 @@
 **	With bonuses mode		- 1;
 */
 
-# define BONUS 1
+# define BONUS 0
 
 # include "../utils/libft/libft.h"
 # include "../utils/get_next_line/get_next_line.h"

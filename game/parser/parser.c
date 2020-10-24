@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 13:57:04 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/20 23:22:19 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 15:20:15 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,19 @@ static int		get_pars(char *line, t_pars *params)
 	const char	*vpars[8] = {"R ", "NO ", "SO ", \
 				"WE ", "EA ", "S ", "F ", "C "};
 	int			index;
+	int			temp;
 
 	index = -1;
 	while (++index < 8)
-		if (ft_strnstr(line, vpars[index], 3))
-		{
+	{
+		if (index == 0 || index == 5 || index == 6 || index == 7)
+			temp = 2;
+		else
+			temp = 3;
+		if (ft_strnstr(line, vpars[index], temp))
 			return (upd_pars(index, ft_strchr(line, ' ') + \
 				spaces_quant(line), params));
-		}
+	}
 	if (*line == '\0')
 		return (1);
 	if (*line == '1' || *line == ' ')

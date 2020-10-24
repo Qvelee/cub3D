@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:51:37 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/24 14:21:41 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:57:34 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static	void	find_sprites(t_core *game, t_object *sprite, \
 			{
 				set_spr(&sprite->pos[++temp], (double)x_in_map + 0.5, \
 					(double)y_in_map + 0.5, 0.5);
+				sprite->pos[temp].volume = 0;
 				sprite->pos[temp].scale_x = 1;
 				sprite->pos[temp].scale_y = 1;
 				sprite->pos[temp].type = type;
