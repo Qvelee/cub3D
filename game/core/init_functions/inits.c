@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:52:41 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/23 15:32:02 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:21:38 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static void	init_frame_image(t_core *game)
 {

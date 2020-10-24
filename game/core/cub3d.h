@@ -6,12 +6,19 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 19:05:07 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/23 19:38:24 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 13:49:55 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+/*
+**	BONUS define
+**	Set game mode.
+**	Without bonuses mode	- 0;
+**	With bonuses mode		- 1;
+*/
 
 # define BONUS 1
 
@@ -24,6 +31,11 @@
 # include <stdio.h>
 # include <errno.h>
 
+/*
+**	Image structer.
+**	Is used to contain information about one loaded image.
+*/
+
 typedef	struct	s_img
 {
 	void	*image;
@@ -32,6 +44,11 @@ typedef	struct	s_img
 	int		size_line;
 	int		endian;
 }				t_img;
+
+/*
+**	Texture structer.
+**	IS used in work with image.
+*/
 
 typedef	struct	s_tex
 {
@@ -48,6 +65,12 @@ typedef	struct	s_tex
 	double	y_texture;
 }				t_tex;
 
+/*
+**	Map structer.
+**	Is used to contain all information about map. Also contains minimap
+**		parameters.
+*/
+
 typedef	struct	s_map
 {
 	int	x_scale;
@@ -58,10 +81,12 @@ typedef	struct	s_map
 	int	map_lines;
 	int	map_colunms;
 	int	block_size;
-	int	walls_color;
-	int	space_color;
-	int	player_color;
 }				t_map;
+
+/*
+**	Sprite structer.
+**	Is used to contain all information and parameters about one single sprite.
+*/
 
 typedef	struct	s_sprite
 {
@@ -89,6 +114,12 @@ typedef	struct	s_sprite
 	t_list	*a_buff;
 }				t_sprite;
 
+/*
+**	Object structer.
+**	Is used to contain all needed images and parameters about one object, what
+**		means sprites of one type.
+*/
+
 typedef	struct	s_object
 {
 	t_tex		*tex;
@@ -96,6 +127,11 @@ typedef	struct	s_object
 	t_tex		*anim;
 	int			quantity;
 }				t_object;
+
+/*
+**	Background structer.
+**	Is used to fit a large number of variables, used by floor drowing function.
+*/
 
 typedef	struct	s_flr_ceil
 {
@@ -108,6 +144,11 @@ typedef	struct	s_flr_ceil
 	double	screen_floor_x;
 	double	screen_floor_y;
 }				t_flr_ceil;
+
+/*
+**	Ray cast structer.
+**	Is used to contain all needed parameters about one ray.
+*/
 
 typedef	struct	s_ray_cast
 {
@@ -128,6 +169,11 @@ typedef	struct	s_ray_cast
 	double	depth_h;
 }				t_ray_cast;
 
+/*
+**	Buttons structer.
+**	Is used to contain state off all used keys.
+*/
+
 typedef	struct	s_buttons
 {
 	int a;
@@ -141,6 +187,11 @@ typedef	struct	s_buttons
 	int m;
 	int	shift;
 }				t_buttons;
+
+/*
+**	Player structer.
+**	Is used to contain all player settings and parameters.
+*/
 
 typedef	struct	s_player
 {
@@ -158,6 +209,11 @@ typedef	struct	s_player
 	double	y;
 }				t_player;
 
+/*
+**	Parser structer.
+**	Is used by parser to contain all readed parameters from file.
+*/
+
 typedef	struct	s_pars
 {
 	int		r[2];
@@ -170,6 +226,13 @@ typedef	struct	s_pars
 	int		c[3];
 	char	**map;
 }				t_pars;
+
+/*
+**	Main structer.
+**	All global parameters, like mlx pointers, game parameters, textures,
+**		sprites, etc. are defined here. This structer is used almost
+**		everywhere in program.
+*/
 
 typedef	struct	s_core
 {
@@ -204,6 +267,10 @@ typedef	struct	s_core
 	t_object	skull;
 	t_object	**objects;
 }				t_core;
+
+/*
+**	Main function - cub3d.
+*/
 
 int				cub3d(char *path, char *flag);
 
@@ -455,7 +522,5 @@ int				free_structer(t_pars *params);
 void			free_images(t_core *game);
 void			free_sprites(t_core *game);
 int				exit_cub3d(t_core *game);
-
-int				check_wall_type(t_core *game, double x, double y, char object);
 
 #endif

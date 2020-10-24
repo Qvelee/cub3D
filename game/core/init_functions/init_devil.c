@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 18:18:03 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:07:35 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:21:27 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	set_more_devils_3(t_core *game, t_object *devil)
 {

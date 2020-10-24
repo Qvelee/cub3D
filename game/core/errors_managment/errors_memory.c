@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 15:05:16 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 19:44:27 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:22:25 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	error_creating_file(t_core *game, unsigned char **memory)
 {

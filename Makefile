@@ -6,7 +6,7 @@
 #    By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/27 16:48:02 by nelisabe          #+#    #+#              #
-#    Updated: 2020/10/21 23:47:22 by nelisabe         ###   ########.fr        #
+#    Updated: 2020/10/24 14:37:08 by nelisabe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,32 +22,24 @@ PARS_HEADER = 		parser.h
 
 #SRC DIRS
 
-CORE_SRC_DIR =		game/core/
+CORE_SRC_DIR =		./game/core/
 
-PARS_DIR =			game/parser/
+CORE_INIT_DIR =		./game/core/init_functions/
 
-PARS_UTIL_DIR =		game/parser/parser_ulils/
+CORE_ERR_DIR =		./game/core/errors_managment/
 
-PARS_ERRORS_DIR =	game/parser/errors_managment/
+PARS_DIR =			./game/parser/
+
+PARS_UTIL_DIR =		./game/parser/parser_ulils/
+
+PARS_ERRORS_DIR =	./game/parser/errors_managment/
 
 #SRC
 
 CORE_SRC =			cub3d.c \
-					inits.c \
-					init_pointers.c \
-					init_sprites.c \
-					init_utils.c \
-					init_basic.c \
-					init_ghost.c \
-					init_devil.c \
-					init_fire.c \
-					init_barrel.c \
-					init_pedestal.c \
-					init_skull.c \
 					handler.c \
 					render.c \
 					utils.c \
-					errors_managment.c \
 					player.c \
 					minimap.c \
 					map_treatment.c \
@@ -58,7 +50,21 @@ CORE_SRC =			cub3d.c \
 					texture.c \
 					background.c \
 					standart_background.c \
-					draw_sprite.c \
+					draw_sprite.c
+
+CORE_INIT =			inits.c \
+					init_pointers.c \
+					init_sprites.c \
+					init_utils.c \
+					init_basic.c \
+					init_ghost.c \
+					init_devil.c \
+					init_fire.c \
+					init_barrel.c \
+					init_pedestal.c \
+					init_skull.c
+
+CORE_ERR =			errors_managment.c \
 					errors_inits.c \
 					errors_memory.c
 
@@ -77,6 +83,10 @@ PARS_ERRORS_SRC =	errors_utils.c \
 
 OBJ_CORE_DIR =		./game/temp/game/core/
 
+OBJ_CORE_INIT_DIR =	./game/temp/game/core/init_functions/
+
+OBJ_CORE_ERR_DIR =	./game/temp/game/core/errors_managment/
+
 OBJ_PARS_DIR =		./game/temp/game/parser/
 
 OBJ_PARS_UTIL_DIR =	./game/temp/game/parser/parser_utils/
@@ -86,6 +96,10 @@ OBJ_PARS_ERR_DIR =	./game/temp/game/parser/errors_managment/
 #OBJ
 
 OBJ =				$(addprefix $(OBJ_CORE_DIR), $(CORE_SRC:.c=.o))
+
+INIT_OBJ =			$(addprefix $(OBJ_CORE_INIT_DIR), $(CORE_INIT:.c=.o))
+
+ERR_OBJ =			$(addprefix $(OBJ_CORE_ERR_DIR), $(CORE_ERR:.c=.o))
 
 PARS_OBJ =			$(addprefix $(OBJ_PARS_DIR), $(PARS_SRC:.c=.o))
 
@@ -105,8 +119,6 @@ BONUS_ON =			./scripts/bonus_on.sh
 
 all: run_script crtmpdirs libutil minlib $(NAME)
 
-#add flags!
-
 ifdef ADD_BONUS
 SCRIPT = $(BONUS_ON)
 endif
@@ -116,10 +128,11 @@ SCRIPT = $(BONUS_OFF)
 endif
 
 run_script:
-	$(SCRIPT)
+	@$(SCRIPT)
 
 crtmpdirs:
-	@mkdir -p $(OBJ_CORE_DIR) $(OBJ_PARS_DIR) $(OBJ_PARS_UTIL_DIR) $(OBJ_PARS_ERR_DIR)
+	@mkdir -p $(OBJ_CORE_DIR) $(OBJ_PARS_DIR) $(OBJ_PARS_UTIL_DIR) $(OBJ_PARS_ERR_DIR) \
+		$(OBJ_CORE_INIT_DIR) $(OBJ_CORE_ERR_DIR)
 
 libutil:
 	@$(MAKE) -C game/utils/
@@ -127,10 +140,16 @@ libutil:
 minlib:
 	@$(MAKE) -C mlx/
 
-$(NAME): $(OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ)
-	$(COMP) $^ $(MAIN) $(LIBUTILS) -g $(FLAGS) -o $@
+$(NAME): $(OBJ) $(INIT_OBJ) $(ERR_OBJ) $(PARS_ERRORS_OBJ) $(PARS_UTIL_OBJ) $(PARS_OBJ) $(MAIN)
+	@$(COMP) $^ $(LIBUTILS) -g $(FLAGS) -o $@
 
 $(addprefix $(OBJ_CORE_DIR), %.o): $(addprefix $(CORE_SRC_DIR), %.c) $(HEADER)
+	@$(COMP) $(FLAGS) -c $< -o $@
+
+$(addprefix $(OBJ_CORE_INIT_DIR), %.o): $(addprefix $(CORE_INIT_DIR), %.c) $(HEADER)
+	@$(COMP) $(FLAGS) -c $< -o $@
+
+$(addprefix $(OBJ_CORE_ERR_DIR), %.o): $(addprefix $(CORE_ERR_DIR), %.c) $(HEADER)
 	@$(COMP) $(FLAGS) -c $< -o $@
 
 $(addprefix $(OBJ_PARS_DIR), %.o): $(addprefix $(PARS_DIR), %.c) $(HEADER)
@@ -150,6 +169,8 @@ clean:
 	@rm -rf $(PARS_OBJ)
 	@rm -rf $(PARS_UTIL_OBJ)
 	@rm -rf $(PARS_ERRORS_OBJ)
+	@rm -rf $(INIT_OBJ)	
+	@rm -rf $(ERR_OBJ)
 	@rm	-rf sshot.bmp
 	@$(MAKE) clean -C mlx/
 	@$(MAKE) clean -C game/utils/
@@ -160,4 +181,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, re, clean, fclean, bonus
+.PHONY: all, re, clean, fclean, bonus, run_script, crtmpdirs, libutil, minlib
+	

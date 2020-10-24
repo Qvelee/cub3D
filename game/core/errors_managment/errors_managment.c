@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/20 16:59:36 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:13:36 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:22:16 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	free_a_buff(t_list **a_buff)
 {

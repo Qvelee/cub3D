@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 14:00:56 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 22:25:55 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:21:20 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static void	init_bonus_sprites(t_core *game)
 {

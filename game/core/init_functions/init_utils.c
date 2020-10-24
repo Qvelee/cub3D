@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 22:24:16 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:24:02 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:21:14 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void		init_load_tex_images(t_core *game, t_object *object, char *path, \
 	int quantity)

@@ -6,7 +6,7 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 19:17:50 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 20:21:48 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 13:48:43 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,12 @@ void	place_on_map(t_core *game, double x, double y, char object)
 
 	x_in_map = (int)x;
 	y_in_map = (int)y;
-	game->params->map[y_in_map][x_in_map] = object;
-}
-
-int		check_wall_type(t_core *game, double x, double y, char object)
-{
-	int x_in_map;
-	int	y_in_map;
-	int	result;
-
-	x_in_map = x / game->map.block_size;
-	y_in_map = y / game->map.block_size;
-	result = 0;
 	if (y_in_map > game->map.map_lines - 1 || \
 		x_in_map > game->map.map_colunms - 1)
-		return (1);
+		return ;
 	if (y_in_map < 0 || x_in_map < 0)
-		return (1);
-	if (game->params->map[y_in_map][x_in_map] == object || \
-		game->params->map[y_in_map][x_in_map] == '\0')
-		result = 1;
-	return (result);
+		return ;
+	game->params->map[y_in_map][x_in_map] = object;
 }
 
 int		object_check(t_core *game, double x, double y, char object)

@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 17:13:57 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 23:09:28 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:21:30 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	set_skull(t_core *game, t_object *skull)
 {

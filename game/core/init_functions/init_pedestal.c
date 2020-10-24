@@ -6,11 +6,11 @@
 /*   By: nelisabe <nelisabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 16:13:05 by nelisabe          #+#    #+#             */
-/*   Updated: 2020/10/21 22:58:37 by nelisabe         ###   ########.fr       */
+/*   Updated: 2020/10/24 14:21:47 by nelisabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	set_pedestal(t_core *game, t_object *pedestal)
 {
