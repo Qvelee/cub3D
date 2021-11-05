@@ -93,22 +93,22 @@ static int	rfc_pars(int type, char *component, t_pars *params)
 
 static int	nswes_pars(int type, char *component, t_pars *params)
 {
-	int error;
+	void *error;
 
-	error = 0;
-	if (type == 1 && !(error = (int)params->no))
+	error = NULL;
+	if (type == 1 && !(error = params->no))
 		if (!(params->no = ft_strdup(component)))
 			return (error_nswes_malloc(params, 0));
-	if (type == 2 && !(error = (int)params->so))
+	if (type == 2 && !(error = params->so))
 		if (!(params->so = ft_strdup(component)))
 			return (error_nswes_malloc(params, 0));
-	if (type == 3 && !(error = (int)params->we))
+	if (type == 3 && !(error = params->we))
 		if (!(params->we = ft_strdup(component)))
 			return (error_nswes_malloc(params, 0));
-	if (type == 4 && !(error = (int)params->ea))
+	if (type == 4 && !(error = params->ea))
 		if (!(params->ea = ft_strdup(component)))
 			return (error_nswes_malloc(params, 0));
-	if (type == 5 && !(error = (int)params->s))
+	if (type == 5 && !(error = params->s))
 		if (!(params->s = ft_strdup(component)))
 			return (error_nswes_malloc(params, 0));
 	if (error)
