@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+MAKEFLAGS =	--no-print-directory
+
 NAME = libutils.a
 
 COMP = clang
