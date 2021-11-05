@@ -2,7 +2,7 @@
 static char *e08053ca4a4a45999472c1541b52d5cdYEmyEZ6yxmEPAjgu[] = {
 /* columns rows colors chars-per-pixel */
 "992 1072 233 2 ",
-"   c None",
+"   c #000000",
 ".  c #2B0000",
 "X  c #250000",
 "o  c #340000",
