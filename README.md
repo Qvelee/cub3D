@@ -21,7 +21,7 @@ Use `W`, `A`, `S`, `D` to move across the map and mouse or numpad arrows to move
 `Esc` to exit.
 
 
-### Basic mode:
+### Basic mode
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/36854467/140530507-add7d1f6-7a54-4c4b-9347-3cf077d49d59.gif)
 
 ### Bonus mode
