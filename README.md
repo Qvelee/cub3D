@@ -2,7 +2,7 @@
 
 ### Description
 
-
+This project is implementation of simple ray-casting engine.
  
 ### Build
 
@@ -15,4 +15,8 @@
  
 ### Usage
 
- Use W, A, S, D to move across the map and mouse or numpad arrows to move camera.
+Program requires 1 argument - map file. For example, for test mode run `cub3d maps/basic_map.cub`.
+
+ Program in 1 mode will use file `maps/basic_map.cub` as map and in 2 mode `maps/bonus_map.cub`/
+
+Use W, A, S, D to move across the map and mouse or numpad arrows to move camera.
