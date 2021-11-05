@@ -42,7 +42,7 @@ void	set_pixel(t_core *game, t_tex *texture, double depth)
 	color = ((int *)(texture->img.img_addr))\
 			[(int)texture->y_texture * texture->width + \
 			(int)texture->x_texture];
-	if (color != 0)
+	if (color != 0x000000)
 		((int *)(game->frame.img_addr))\
 			[(int)texture->y_screen * game->params->r[0] + \
 			(int)texture->x_screen] = make_darker(depth, \
