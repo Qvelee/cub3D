@@ -14,4 +14,4 @@ way="./game/core/cub3d.h"
 if grep -q "BONUS 0" $way
     then sed -i 's/BONUS 0/BONUS 1/' $way
 fi
-echo "\033[31m\033[33mBONUS MODE\033[0m"
+echo -e "\033[31m\033[33mBONUS MODE\033[0m"
