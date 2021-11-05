@@ -23,3 +23,6 @@ Use `W`, `A`, `S`, `D` to move across the map and mouse or numpad arrows to move
 
 ### Basic mode:
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/36854467/140530507-add7d1f6-7a54-4c4b-9347-3cf077d49d59.gif)
+
+### Bonus mode
+![ezgif com-gif-maker(3)](https://user-images.githubusercontent.com/36854467/140532601-8c27d90d-d783-499a-a61c-dfcc3729b5fd.gif)
