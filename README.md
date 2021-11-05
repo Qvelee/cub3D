@@ -15,4 +15,4 @@ To remove all files created by program run `make fclean`, or `make clean` to rem
  
 ### Usage
 
-Use W, A, S, D and mouse or numpad arrows to move camera.
+Use W, A, S, D to move across the map and mouse or numpad arrows to move camera.
