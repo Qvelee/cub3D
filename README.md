@@ -15,7 +15,7 @@ This project is implementation of simple ray-casting engine.
  
 ### Usage
 
-Program requires 1 argument - map file. For example, for test mode run `cub3d maps/basic_map.cub`.
+Program requires 1 argument - map file. For example, for basic mode run `cub3d maps/basic_map.cub`.
 
 Use `W`, `A`, `S`, `D` to move across the map and mouse or numpad arrows to move camera.
 `Esc` to exit.
